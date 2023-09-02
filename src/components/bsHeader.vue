@@ -42,9 +42,8 @@
                 <li><a href="#">注册</a></li>
                 <li><a href="#">登录</a></li>
             </ul>
-            <!-- <el-button type="primary" >发布</el-button>   -->
+            <!-- <el-button  @click="test">发布</el-button>   -->
         </div>
-
       </div>
       <!-- <login v-if="loginFlag" />
       <register v-if="registerFlag" /> -->
@@ -52,13 +51,16 @@
   </template>
   
   <script>
-//   import login from '@/components/login/login'
+  import { ElButton,ElContainer } from '@/../node_modules/element-plus'
+//   import login from '@/components/lSogin/login'
 //   import register from '@/components/login/register'
   export default {
-    name: 'Headers',
+    name: 'bsHeader',
     components: {
     //   login,
-    //   register
+    //   registerS
+    ElButton,
+    ElContainer
     },
     data() {
       return {

@@ -15,4 +15,9 @@ import App from './App.vue'
 // })
 // app.mount('#app')
 
-createApp(App).mount('#app')
+// import ElementPlus from '@/../node_modules/element-plus'
+import '@/../node_modules/element-plus/dist/index.css'
+
+const app = createApp(App).mount('#app')
+
+// app.use(ElementPlus)

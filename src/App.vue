@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <Header />
+    <bsHeader />
     <router-view />
   </div>
 </template>
 
 <script>
-import Header from './components/Header.vue'
+import bsHeader from './components/bsHeader.vue'
+
 export default {
   name: 'App',
   components: {
-    Header
+    bsHeader,
   }
 }
 </script>
