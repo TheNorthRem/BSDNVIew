@@ -18,6 +18,8 @@ import App from './App.vue'
 // import ElementPlus from '@/../node_modules/element-plus'
 import '@/../node_modules/element-plus/dist/index.css'
 
-const app = createApp(App).mount('#app')
+import router from './router/router'
+
+createApp(App).use(router).mount('#app')
 
 // app.use(ElementPlus)

@@ -1,5 +1,6 @@
 
 <template>
+  <router-link to="/editorPassage">test</router-link>
     <div>
       <div class="topBar">
         <div class="iconBox">

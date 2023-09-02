@@ -2,16 +2,19 @@
   <div id="app">
     <bsHeader />
     <router-view />
+    <editorPassageVue></editorPassageVue>
   </div>
 </template>
 
 <script>
 import bsHeader from './components/bsHeader.vue'
+import editorPassageVue from './views/editorPassage'
 
 export default {
   name: 'App',
   components: {
     bsHeader,
+    editorPassageVue
   }
 }
 </script>
