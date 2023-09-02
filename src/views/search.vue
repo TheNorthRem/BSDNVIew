@@ -6,20 +6,23 @@
                 <section class="block">
                     <span v-for="(article, index) in articles" :key="index">
                         <div class="blockInside">
+                            <!-- 文章作者的相关信息 -->
                             <header class="blockHeader" >
-                                <!-- 分类上面的小图标 -->
+                                <!-- 文章作者的头像 -->
                                 <div class="avatar">
                                         <img src="../assets/avatar/avatar0.png" class="avatarImg"/>
                                 </div>
-                                <!-- 每个分类的标题 -->
+                                <!-- 文章作者的昵称 -->
                                 <span class="username">
                                     {{ article.author.name }}
                                 </span>
                             </header>
+                            <!-- 简略展示文章信息 -->
                             <div class="showContent">
                                 {{ article.content }}
                             </div>
-                        </div>  
+                        </div>
+                        <!-- 文章标题   -->
                         <div class="passageTitle">
                             {{ article.title }}
                         </div>
@@ -27,13 +30,17 @@
                 </section>
                 <!-- 右侧放置用户简介 -->
                 <section class="profile">
+                    <!-- 用户头像 -->
                     <div class="avatarBox">
                         <img class="avatarImgInProfile" src="../assets/avatar/avatar0.png" />
                     </div>
+                    <!-- 用户信息的简略展示 -->
                     <div class="profileBox">
+                        <!-- 用户名 -->
                         <span class="userProfileName">
                             {{ user.name }}
                         </span>
+                        <!-- 点赞数 -->
                         <span class="Likes">
                             Likes:{{ user.likes }}
                         </span>
@@ -55,32 +62,31 @@
                 likes:10,
             },
             articles: [
-        {
-          title: '文章标题1',
-          content: '文章内容1...',
-          author: {
-            name: '作者1姓名'
-          },
-          link: '链接1'
-        },
-        {
-          title: '文章标题2',
-          content: '文章内容2...',
-          author: {
-            name: '作者2姓名'
-          },
-          link: '链接2'
-        },
-        {
-          title: '文章标题3',
-          content: '文章内容3...',
-          author: {
-            name: '作者3姓名'
-          },
-          link: '链接3'
-        },
-       
-      ]
+                {
+                title: '文章标题1',
+                content: '文章内容1...',
+                author: {
+                    name: '作者1姓名'
+                },
+                link: '链接1'
+                },
+                {
+                title: '文章标题2',
+                content: '文章内容2...',
+                author: {
+                    name: '作者2姓名'
+                },
+                link: '链接2'
+                },
+                {
+                title: '文章标题3',
+                content: '文章内容3...',
+                author: {
+                    name: '作者3姓名'
+                },
+                link: '链接3'
+                },
+            ]
         };
       }
     }
@@ -121,6 +127,7 @@
         flex-direction: column;
         gap: 8px;
         padding-top: 15px;
+        padding-bottom: 15px;
         padding-left:15px;
         break-inside: avoid-column;
         cursor: auto;
@@ -138,6 +145,7 @@
         margin-bottom: 26px;
     }
     .showContent{
+        height:100%;
         padding:15px;
         width:870px;
         word-wrap: break-word;
