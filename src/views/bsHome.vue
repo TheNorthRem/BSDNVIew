@@ -145,7 +145,7 @@ export default {
     padding-right: 90%;
 }
 .topPeekiBox img{
-    z-index: 2; 
+    /* z-index: 2;  */
     position: absolute;
     top:10px;
 }
