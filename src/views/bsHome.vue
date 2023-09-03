@@ -116,12 +116,9 @@ export default {
     background-color: #FBFBFA;
 }
 .homeBox{
+    /* background: #c0c0b7; */
     min-width: 1400px;
-    /* height: auto;
-    width: 100%; */
     display: flex; 
-    /* position: relative; */
-    /* align-items: center; */
     justify-content: space-between;/* 两端对齐 */
     flex-direction: row;/* 水平排列 */
     padding:2% 0%;
