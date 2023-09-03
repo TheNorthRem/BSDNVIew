@@ -63,7 +63,7 @@ export default{
         // }, 1500)
 
     },
-    beforeDestroy() {
+    beforeUnmount() {
         const editor = this.editor
         if (editor == null) return
         editor.destroy() // 组件销毁时，及时销毁编辑器
