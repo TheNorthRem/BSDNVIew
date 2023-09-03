@@ -6,12 +6,12 @@
         <!-- </div> -->
         <div class="menuBox">
           <ul>
-            <li><a href="#" @click="toHome">主页</a></li>
+            <li><a href="#/">主页</a></li>
             <li><a href="#">button1</a></li>
             <li><a href="#">button2</a></li>
             <li><a href="#">button3</a></li>
             <div class="dropdown">
-              <a href="#" class="dropbtn"  @click="toCategory">文章分类</a>
+              <a href="#/category" class="dropbtn">文章分类</a>
               <div class="dropdown-content">
                 <a href="#">分类1</a>
                 <a href="#">分类2</a>
@@ -31,7 +31,7 @@
           <el-button  size="large" link @click="changeRegister">注册</el-button>
           <el-divider direction="vertical" />
           <el-button  link @click="changeLogin">登录</el-button>
-          <el-button type="primary" color="#000">
+          <el-button type="primary" color="#000" @click="toEditorPassage">
             Upload<el-icon class="el-icon--right"><Upload /></el-icon>
           </el-button> 
         </div>
@@ -84,6 +84,9 @@
       changeRegister() {
         this.registerFlag = !this.registerFlag
         this.loginFlag = false
+      },
+      toEditorPassage(){
+        this.$router.push({ path: '/editorPassage' })
       }
     }
   }

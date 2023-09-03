@@ -2,9 +2,7 @@
   
     <div>
         <el-backtop :right="100" :bottom="100" />
-         <!-- 导航栏预留空间 -->
-        <div class = "headerSpace"></div>   
-        <!-- 整个主页盒子 --> 
+                <!-- 整个主页盒子 --> 
         <div class = "homeBox"> 
             <!-- 主体部分 -->    
             <div class = "mainBox">
@@ -47,7 +45,7 @@
             <div class = "asideBox"> 
                 <!-- 头像 -->
                 <div class = "iconBox">
-                    <img src="../assets/avatar/avatar0.png" style="height:auto;width: 50%;">
+                    <img src="../assets/avatar/avatar0.png" style="height:100%; width: 200%;">
                 </div>
                 <!-- 个人信息 -->
                 <div class = "infoBox">
