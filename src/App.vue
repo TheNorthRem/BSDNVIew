@@ -7,11 +7,13 @@
 
 <script>
 import bsHeader from './components/bsHeader.vue'
+import login from '@/components/login.vue'
 
 export default {
   name: 'App',
   components: {
     bsHeader,
+    login
   }
 }
 </script>

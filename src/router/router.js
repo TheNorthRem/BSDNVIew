@@ -12,7 +12,11 @@ const routes = [
     {
         path: '/category',
         component: () => import('../views/category')
-    }
+    },
+    {
+        path: '/passageDetail',
+        component: () => import('../views/passageDetail')
+    },
 ]
 
 const router = createRouter({

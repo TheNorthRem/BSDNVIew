@@ -1,11 +1,11 @@
 <template>
-    <div style="border: 1px solid #ccc;">
-        <div>
+    <div style="border: 1px solid #ccc; width: 50%;">
+        <div style=" top: 50%;
+             left: 50%;">
             <Toolbar style="border-bottom: 1px solid #ccc" :editor="editor" :defaultConfig="toolbarConfig" :mode="mode" />
-        <Editor style="height: 500px; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
+            <Editor style="height: 500px; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
             @onCreated="onCreated" />
         </div>
-        
         <el-button type="primary" round="true" class="right" @click="submitPassage">提交</el-button>
     </div>
     
@@ -14,9 +14,10 @@
 <script>
 // import Vue from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+import {ElButton} from "@/../node_modules/element-plus"
 
 export default{
-    components: { Editor, Toolbar },
+    components: { Editor, Toolbar,ElButton },
     data() {
         return {
             editor: null,

@@ -74,12 +74,12 @@ export default {
     padding-right: 90%;
 }
 .topPeekiBox img{
-    z-index: 2; 
+    /* z-index: 2;  */
     position: absolute;
     top:40px;
 }
 .pictureBox{
-    z-index: 1;
+    /* z-index: 1; */
     width: 100%;
     height: 400px;
     /* background-color: rgb(230, 230, 225); */

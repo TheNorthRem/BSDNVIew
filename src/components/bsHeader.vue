@@ -1,6 +1,6 @@
 
 <template>
-  <router-link to="/editorPassage">test</router-link>
+  <!-- <router-link to="/passageDetail">test</router-link> -->
     <div>
       <div class="topBar">
         <div class="iconBox">
@@ -9,12 +9,12 @@
         </div>
         <div class="menuBox">
           <ul>
-            <li><a href="#">主页</a></li>
+            <li><a href="#" @click="toHome">主页</a></li>
             <li><a href="#">button1</a></li>
             <li><a href="#">button2</a></li>
             <li><a href="#">button3</a></li>
             <div class="dropdown">
-              <a href="#" class="dropbtn">文章分类</a>
+              <a href="#" class="dropbtn"  @click="toCategory">文章分类</a>
               <div class="dropdown-content">
                 <a href="#">分类1</a>
                 <a href="#">分类2</a>
@@ -41,9 +41,11 @@
             <!-- <el-button type="" @click="changeRegister" link>注册</el-button>| -->
             <ul>
                 <li><a href="#">注册</a></li>
-                <li><a href="#">登录</a></li>
+                <li><a href="#" @click="changeLogin">登录</a></li>
+                <login v-if="loginFlag"></login>
+                
             </ul>
-            <el-button type="primary" >发布</el-button>  
+            <!-- <el-button type="primary" >发布</el-button>   -->
         </div>
 
       </div>
@@ -54,14 +56,15 @@
   
   <script>
   import { ElButton } from '@/../node_modules/element-plus'
-//   import login from '@/components/login/login'
-//   import register from '@/components/login/register'
+  import login from '@/components/login'
+  import register from '@/components/register'
+
   export default {
     name: 'bsHeader',
     components: {
-      ElButton
-    //   login,
-    //   register
+      ElButton,
+      login,
+      register,
     },
     data() {
       return {
@@ -75,20 +78,20 @@
       }
     },
     methods: {
-    //   head() {
-    //     this.$router.push({ path: '/' })
-    //   },
-    //   category() {
-    //     this.$router.push({ path: '/category' })
-    //   },
-    //   changeLogin() {
-    //     this.loginFlag = !this.loginFlag
-    //     this.registerFlag = false
-    //   },
-    //   changeRegister() {
-    //     this.registerFlag = !this.registerFlag
-    //     this.loginFlag = false
-    //   }
+      toHome(){
+        this.$router.push({ path: '/' })
+      },
+      toCategory() {
+        this.$router.push({ path: '/category' })
+      },
+      changeLogin() {
+        this.loginFlag = !this.loginFlag
+        this.registerFlag = false
+      },
+      changeRegister() {
+        this.registerFlag = !this.registerFlag
+        this.loginFlag = false
+      }
     }
   }
   
