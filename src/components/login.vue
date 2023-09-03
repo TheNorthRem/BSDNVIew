@@ -1,32 +1,32 @@
 <template>
   <!-- <div v-if="showLogin"> -->
-    <el-dialog v-model="dialogVisible" width="30%" align-center="true" style="height:30%;">
-      <template #footer>
-        <span class="dialog-footer">
-          <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-            <el-form-item prop="pass">
-              <el-input placeholder="账号" type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item prop="checkPass">
-              <el-input placeholder="密码" type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-            </el-form-item>
-          </el-form>
-        </span>
-      </template>
-    </el-dialog>
+  <el-dialog v-model="dialogVisible" width="30%" align-center="true" style="height:30%;">
+    <template #footer>
+      <span class="dialog-footer">
+        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+          <el-form-item prop="pass">
+            <el-input placeholder="账号" type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item prop="checkPass">
+            <el-input placeholder="密码" type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+          </el-form-item>
+        </el-form>
+      </span>
+    </template>
+  </el-dialog>
   <!-- </div> -->
 </template>
 
 <script>
 import { login } from '@/http/api';
-import {ElDialog,ElForm,ElFormItem,ElButton,ElInput} from '@/../node_modules/element-plus'
+import { ElDialog, ElForm, ElFormItem, ElButton, ElInput, ElMessage } from '@/../node_modules/element-plus'
 
 export default {
   components: {
-    ElDialog,ElForm,ElFormItem,ElButton,ElInput
+    ElDialog, ElForm, ElFormItem, ElButton, ElInput
   },
   data() {
     var username = (rule, value, callback) => {
@@ -47,7 +47,7 @@ export default {
       }
     };
     return {
-      dialogVisible:true,
+      dialogVisible: true,
       showLogin: true,
       success: false,
       ruleForm: {
@@ -72,17 +72,30 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           login(this.ruleForm).then(res => {
-            localStorage.setItem('token', res.data.data.token)
-            localStorage.setItem('UserID',this.ruleForm.username)
-            console.log("token " + localStorage.getItem('token'))
-            console.log("UserId " + localStorage.getItem('UserID'))
-            console.log("登陆成功")
-            this.dialogVisible = false;
-          }
-          )
-        } else {
-          console.log('error submit!!');
-          return false;
+            if (res.data.code == 200) {
+              localStorage.setItem('token', res.data.data.token)
+              localStorage.setItem('UserID', this.ruleForm.username)
+              console.log("token: " + localStorage.getItem('token'))
+              console.log("UserId: " + localStorage.getItem('UserID'))
+              this.dialogVisible = false
+              ElMessage({
+                showClose: true,
+                message: '登陆成功！',
+                type: 'success',
+              })
+            } else if (res.data.code == 500) {
+              console.log("登录失败")
+              console.log(res.data.message)
+              ElMessage({
+                showClose: true,
+                message: '账号或密码错误，请重新输入',
+                type: 'error',
+              })
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          });
         }
       });
     },

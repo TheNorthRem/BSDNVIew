@@ -26,7 +26,11 @@ export default{
             toolbarConfig: {},
             editorConfig: {
                 placeholder: '请输入内容...',
-                MENU_CONF: {},
+                MENU_CONF: {
+                    uploadImage:{
+                        server: "http://localhost:8081/uploadImage"
+                    }
+                },
             },
             mode: 'default', // or 'simple',
             uploadData:{
@@ -37,9 +41,6 @@ export default{
     methods: {
         onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
-            this.editorConfig.MENU_CONF['uploadImage'] = {
-                server: 'http://localhost:8081/uploadImage',
-            }
         },
         submitPassage(){
             uploadPassage(this.html).then(
