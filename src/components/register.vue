@@ -71,7 +71,7 @@ export default {
         if (valid) {
           register(this.ruleForm).then(res => {
             // localStorage.setItem('token', res.data.token)
-            console.log("注册成功")
+            console.log("注册成功，请登录")
             this.dialogVisible = false;
           }
           )

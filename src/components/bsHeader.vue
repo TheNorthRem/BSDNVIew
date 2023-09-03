@@ -6,12 +6,12 @@
         <!-- </div> -->
         <div class="menuBox">
           <ul>
-            <li><a href="#" @click="toHome">主页</a></li>
+            <li><a href="#/">主页</a></li>
             <li><a href="#">button1</a></li>
             <li><a href="#">button2</a></li>
             <li><a href="#">button3</a></li>
             <div class="dropdown">
-              <a href="#" class="dropbtn"  @click="toCategory">文章分类</a>
+              <a href="#/category" class="dropbtn">文章分类</a>
               <div class="dropdown-content">
                 <a href="#">分类1</a>
                 <a href="#">分类2</a>
@@ -31,8 +31,8 @@
           <el-button  size="large" link @click="changeRegister">注册</el-button>
           <el-divider direction="vertical" />
           <el-button  link @click="changeLogin">登录</el-button>
-          <el-button type="primary" color="#000">
-            Upload<el-icon class="el-icon--right"><Upload /></el-icon>
+          <el-button type="primary" color="#000" @click="toEditorPassage">
+            发布<el-icon class="el-icon--right"><Upload /></el-icon>
           </el-button> 
         </div>
 
@@ -84,6 +84,9 @@
       changeRegister() {
         this.registerFlag = !this.registerFlag
         this.loginFlag = false
+      },
+      toEditorPassage(){
+        this.$router.push({ path: '/editorPassage' })
       }
     }
   }
@@ -95,11 +98,13 @@
       width: 100%;
       min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
       display: flex; /* 块级元素转换为行内元素 */
-      background-color: rgba(251, 251, 250, 1);
+      background: #FBFBFA;
       align-items: center;/* 垂直居中 */
       justify-content: space-between;/* 两端对齐 */
-      /* padding: 0 10% 0 0;  */
-      /* margin-left: 5%; */
+      /* border-radius: 30px; */
+      border-bottom-right-radius:1em;
+      border-bottom-left-radius:1em;
+      border-bottom: 10px solid rgb(235, 235, 227);
   }
   .iconBox{
       /* z-index: 2; */

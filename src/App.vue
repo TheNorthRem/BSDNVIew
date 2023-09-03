@@ -1,22 +1,22 @@
 <template>
   <div id="app">
-    <search />
     <!-- <router-view /> -->
+    <bsHeader />
+    <router-view />
   </div>
 </template>
 
 <script>
 import bsHome from './views/bsHome.vue'
-import search from './views/search.vue'
 import login from '@/components/login.vue'
+import bsHeader from '@/components/bsHeader.vue'
 
 export default {
   name: 'App',
   components: {
-    // bsHeader,
+    bsHeader,
     // Login,
-    bsHome,
-    search
+    bsHome
   }
 }
 </script>
@@ -25,5 +25,6 @@ export default {
 body{
       width:100%;
         margin: 0;
+        background: #e8e8de;
     }
 </style>

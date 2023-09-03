@@ -26,3 +26,12 @@ export function uploadPassage(data){
         data
     })
 }
+
+//上传文章照片
+export function ImageUpload(data){
+    return request({
+        url: "/ImageUpload",
+        method: 'get',
+        data
+    })
+}
