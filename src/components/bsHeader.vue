@@ -1,6 +1,4 @@
-
 <template>
-  <router-link to="/editorPassage">test</router-link>
     <div>
       <div class="topBar">
         <div class="iconBox">
@@ -23,27 +21,24 @@
             </div>
           </ul>
         </div>
-        <div class="searchBox">
+        <!-- <div class="searchBox">
           <a href="#"><img src="" width="25px"></a>
           <input type="text" class="input" placeholder="热搜">
-        </div>
-        <div class="rightBox">
-          <!-- <el-button type="text" class="register" @click="changeRegister">注册</el-button>|
-          <el-button type="text" class="login" @click="changeLogin">登录</el-button>
-          <el-button plain size="mini" class="post">发布</el-button> -->
-          <!-- <el-button
-            v-for="button in buttons"
-            :key="button.text"
-            :type="button.type"
-            link
-            >{{ button.text }}
-            </el-button> -->
-            <!-- <el-button type="" @click="changeRegister" link>注册</el-button>| -->
-            <ul>
-                <li><a href="#">注册</a></li>
-                <li><a href="#">登录</a></li>
-            </ul>
-            <el-button type="primary" >发布</el-button>  
+        </div> -->
+        <el-input
+          v-model="input"
+          class="w-20 m-2"
+          style="width: 35%" 
+          placeholder="Please Input"
+          :prefix-icon="Search"
+        />
+        <div class="rightMenu">
+          <el-button  size="large" link>注册</el-button>
+          <el-divider direction="vertical" />
+          <el-button  link>登录</el-button>
+          <el-button type="primary" color="#000">
+            Upload<el-icon class="el-icon--right"><Upload /></el-icon>
+          </el-button> 
         </div>
 
       </div>
@@ -53,13 +48,20 @@
   </template>
   
   <script>
-  import { ElButton } from '@/../node_modules/element-plus'
+  import { ElButton, ElDivider, ElIcon, ElInput } from '@/../node_modules/element-plus'
+  import { Upload,Search } from '@element-plus/icons-vue'
+
 //   import login from '@/components/login/login'
 //   import register from '@/components/login/register'
   export default {
     name: 'bsHeader',
     components: {
-      ElButton
+      ElButton,
+      ElDivider,
+      ElIcon,
+      ElInput,
+      Upload,
+      Search
     //   login,
     //   register
     },
@@ -67,28 +69,11 @@
       return {
         loginFlag: false,
         registerFlag: false,
-        input1: '',
-        // buttons: [
-        //   { text: '注册', type: 'plain', link: '/register' },
-        //   { text: '登录', type: 'plain', link: '/login' }
-        // ]
+        input: '',
+
       }
     },
     methods: {
-    //   head() {
-    //     this.$router.push({ path: '/' })
-    //   },
-    //   category() {
-    //     this.$router.push({ path: '/category' })
-    //   },
-    //   changeLogin() {
-    //     this.loginFlag = !this.loginFlag
-    //     this.registerFlag = false
-    //   },
-    //   changeRegister() {
-    //     this.registerFlag = !this.registerFlag
-    //     this.loginFlag = false
-    //   }
     }
   }
   
@@ -161,23 +146,8 @@
     align-items: center;
     justify-content: space-between;
     /* margin-right: 10%; */
-    padding-right: 50%;
+    padding-right: 2%;
     
-  }
-  .register{
-    color:#000;
-    font-style: normal;
-    margin-right: 10px;
-  }
-  
-  .login{
-    color:#000;
-    font-style: normal;
-    margin-right: 10px;
-  }
-  .post{
-    background-color:#437dcf;
-    color:azure;
   }
   
   ul {
@@ -185,10 +155,12 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
-      
   }
   li {
       float: left;/* 设置横向浮动 */
+  }
+  li el-divider{
+    padding: 25px 0px;
   }
   li a:hover, .dropdown:hover, .dropbtn:hover {
       background-color: #f1f1f1;/* 鼠标悬停时改变背景色 */
@@ -198,7 +170,7 @@
       display: inline-block;/* 设置内联块元素 */
       color: rgb(0, 0, 0);
       text-align: center;
-      padding: 25px 10px;/* 上下 左右 */
+      padding: 25px 20px;/* 上下 左右 */
       text-decoration: none;
   }
   .dropdown {

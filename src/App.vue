@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <bsHeader />
-    <router-view />
+    <!-- <router-view /> -->
   </div>
 </template>
 
 <script>
 import bsHeader from './components/bsHeader.vue'
-
+// import bsHome from './views/bsHome.vue'
 export default {
   name: 'App',
   components: {
-    bsHeader,
+    bsHeader
   }
 }
 </script>
@@ -25,6 +25,7 @@ export default {
   color: #2c3e50;
 } */
 body{
+      width:100%;
         margin: 0;
     }
 </style>
