@@ -57,43 +57,73 @@
       name: 'Search',
       data(){
         return{
-            user:{
-                name:"UserName",
-                likes:10,
+        searchQuery: '', // 用户输入的搜索查询
+            user: {
+                name: "UserName",
+                likes: 10,
             },
-            articles: [
-                {
-                title: '文章标题1',
-                content: '文章内容1...',
-                author: {
-                    name: '作者1姓名'
-                },
-                link: '链接1'
-                },
-                {
-                title: '文章标题2',
-                content: '文章内容2...',
-                author: {
-                    name: '作者2姓名'
-                },
-                link: '链接2'
-                },
-                {
-                title: '文章标题3',
-                content: '文章内容3...',
-                author: {
-                    name: '作者3姓名'
-                },
-                link: '链接3'
-                },
-            ]
+             searchResults: {
+                articles: [
+                    {
+                        title: '文章标题1',
+                        content: '文章内容1...',
+                        author: {
+                            name: '作者1姓名',
+                            avatar: '../assets/avatar/avatar0.png'
+                        },
+                        link: '链接1'
+                    },
+                    {
+                        title: '文章标题2',
+                        content: '文章内容2...',
+                        author: {
+                            name: '作者2姓名',
+                            avatar: '../assets/avatar/avatar1.png'
+                        },
+                        link: '链接2'
+                    },
+                    {
+                        title: '文章标题3',
+                        content: '文章内容3...',
+                        author: {
+                            name: '作者3姓名',
+                            avatar: '../assets/avatar/avatar2.png'
+                        },
+                        link: '链接3'
+                    }
+                ]
+            }
         };
-      }
+    },
+    create(){
+        // 在页面加载时获取用户信息，仅执行一次
+        this.fetchUserInfo();
+    },
+    methods:{
+        fetchUserInfo() {
+        // 发送GET请求获取用户信息
+        get('/user-info') // 用于获取用户信息的接口 '/user-info'
+            .then(result => {
+                this.user = result; // 将获取的用户信息存储到searchResults中的user属性中
+             })
+            .catch(error => {
+                console.error('获取用户信息失败:', error);
+            });
+        },
+        performSearch() {
+            get('/search', { query: this.searchQuery }) // 发送GET请求，传递搜索查询参数
+            .then(result => {
+                this.searchResults = result; // 将搜索结果存储到searchResults数组中
+            })
+            .catch(error => {
+                console.error('搜索失败:', error);
+             });
+        }
     }
+}
+</script>
     
-    </script>
-    
-    <style>
+<style>
    
     .viewSettings{
         width: 100%;
@@ -238,4 +268,4 @@
         font-weight: 700;
         font-size:0.9375rem;
     }
-    </style>
+</style>
