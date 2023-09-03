@@ -15,6 +15,7 @@
 // import Vue from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import {ElButton} from "@/../node_modules/element-plus"
+import {uploadPassage} from "@/http/api"
 
 export default{
     components: { Editor, Toolbar,ElButton },
@@ -27,19 +28,24 @@ export default{
                 placeholder: '请输入内容...',
                 MENU_CONF: {},
             },
-            mode: 'default', // or 'simple'
+            mode: 'default', // or 'simple',
+            uploadData:{
+                
+            },
         }
     },
     methods: {
         onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
             this.editorConfig.MENU_CONF['uploadImage'] = {
-                // server: '/api/upload',
-                // 填后端地址
+                server: 'http://localhost:8081/uploadImage',
             }
         },
         submitPassage(){
-            
+            uploadPassage(this.html).then(
+                res=>console.log(res)
+                
+            )
         }
     },
     watch: {

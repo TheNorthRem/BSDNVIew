@@ -72,9 +72,11 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           login(this.ruleForm).then(res => {
-            localStorage.setItem('token', res.data.token)
-            console.log(res.data.token)
-            console.log(res.data)
+            localStorage.setItem('token', res.data.data.token)
+            localStorage.setItem('UserID',this.ruleForm.username)
+            console.log("token " + localStorage.getItem('token'))
+            console.log("UserId " + localStorage.getItem('UserID'))
+            console.log("登陆成功")
             this.dialogVisible = false;
           }
           )

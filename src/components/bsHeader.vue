@@ -40,10 +40,10 @@
             </el-button> -->
             <!-- <el-button type="" @click="changeRegister" link>注册</el-button>| -->
             <ul>
-                <li><a href="#">注册</a></li>
+                <li><a href="#" @click="changeRegister">注册</a></li>
                 <li><a href="#" @click="changeLogin">登录</a></li>
                 <login v-if="loginFlag"></login>
-                
+                <register v-if="registerFlag"></register>
             </ul>
             <!-- <el-button type="primary" >发布</el-button>   -->
         </div>
