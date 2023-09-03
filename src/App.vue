@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <bsHome />
+    <search />
     <!-- <router-view /> -->
   </div>
 </template>
 
 <script>
 import bsHome from './views/bsHome.vue'
+import search from './views/search.vue'
 import login from '@/components/login.vue'
 
 export default {
@@ -14,7 +15,8 @@ export default {
   components: {
     // bsHeader,
     // Login,
-    bsHome
+    bsHome,
+    search
   }
 }
 </script>
