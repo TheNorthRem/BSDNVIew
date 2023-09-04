@@ -2,13 +2,10 @@
     <div>
       <div class="topBar">
           <img src="../assets/BSDN-logo.png" href="#/" style="width: 8%;height: 8%;">
-          <!-- <a href="#/">
-            <img src="../assets/BSDN-logo.png" style="width: 20%;height: 20%;">
-          </a> 
-          这个不要删 -->
+
         <div class="menuBox">
           <ul>
-            <li><a href="#/">首页</a></li>
+            <li><a href="#/">🏠首页</a></li>
             <li><a href="#">博客</a></li>
             <li><a href="#">社区</a></li>
             <li><a href="#">学习</a></li>
@@ -39,7 +36,7 @@
         </div>
 
       </div>
-      <login v-if="loginFlag" />
+      <login v-if="loginFlag" v-bind:hideLogin ="hideLogin" v-on:loginSuccess="logSuc($event)"/>
       <register v-if="registerFlag" />
     </div>
   </template>
@@ -68,8 +65,8 @@
       return {
         loginFlag: false,
         registerFlag: false,
-        input: '',
-
+        input: '',        
+        hideLogin: false,// 登陆成功时隐藏登陆注册按钮
       }
     },
     methods: {
@@ -89,7 +86,10 @@
       },
       toEditorPassage(){
         this.$router.push({ path: '/editorPassage' })
-      }
+      },
+      logSuc(msg) {
+        this.hideLogin = msg
+      },
     }
   }
   
@@ -97,6 +97,7 @@
   
   <style>
   .topBar{
+      z-index: 9999;
       width: 100%;
       min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
       display: flex; /* 块级元素转换为行内元素 */
@@ -152,10 +153,12 @@
       text-decoration: none;
   }
   .dropdown {
+      z-index: 9999;
       display: inline-block;
   }
   
   .dropdown-content {
+    z-index: 9999;  
       display: none;/* 隐藏下拉菜单 */
       position: absolute;
       background-color: #f9f9f9;

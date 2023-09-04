@@ -19,6 +19,7 @@ import { login } from '@/http/api';
 import { ElDialog, ElForm, ElFormItem, ElButton, ElInput, ElMessage } from '@/../node_modules/element-plus'
 
 export default {
+  props: ["hideLogin"],
   components: {
     ElDialog, ElForm, ElFormItem, ElButton, ElInput
   },
@@ -42,7 +43,7 @@ export default {
     };
     return {
       dialogVisible: true,
-      showLogin: true,
+      // showLogin: true,
       success: false,
       ruleForm: {
         username: '',
@@ -72,6 +73,7 @@ export default {
               console.log("token: " + localStorage.getItem('token'))
               console.log("ID: " + localStorage.getItem('ID'))
               this.dialogVisible = false
+              this.$emit('loginSuccess', true)
               ElMessage({
                 showClose: true,
                 message: '登陆成功！',
