@@ -1,15 +1,17 @@
 <template>
     <div>
       <div class="topBar">
-        <!-- <div class="iconBox"> -->
-          <img src="../assets/BSDN-logo.png" style="width: 8%;height: 8%;">
-        <!-- </div> -->
+          <img src="../assets/BSDN-logo.png" href="#/" style="width: 8%;height: 8%;">
+          <!-- <a href="#/">
+            <img src="../assets/BSDN-logo.png" style="width: 20%;height: 20%;">
+          </a> 
+          这个不要删 -->
         <div class="menuBox">
           <ul>
-            <li><a href="#/">主页</a></li>
-            <li><a href="#">button1</a></li>
-            <li><a href="#">button2</a></li>
-            <li><a href="#">button3</a></li>
+            <li><a href="#/">首页</a></li>
+            <li><a href="#">博客</a></li>
+            <li><a href="#">社区</a></li>
+            <li><a href="#">学习</a></li>
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
               <div class="dropdown-content">
@@ -24,7 +26,7 @@
         <el-input
           v-model="input" class="w-20 m-2" style="width: 35%" placeholder="Please Input">
           <template #prefix>
-            <el-icon class="el-input__icon"><search /></el-icon>
+            <el-icon><search /></el-icon>
           </template>
         </el-input>
         <div class="rightMenu">
@@ -46,7 +48,7 @@
 
   import { ElButton, ElDivider, ElIcon, ElInput } from '@/../node_modules/element-plus'
   import { Upload } from '@element-plus/icons-vue'
-  import { Search } from '@element-plus/icons-vue'
+  import { Search} from '@element-plus/icons-vue'
 
   import login from '@/components/login'
   import register from '@/components/register'
@@ -102,16 +104,13 @@
       align-items: center;/* 垂直居中 */
       justify-content: space-between;/* 两端对齐 */
       /* border-radius: 30px; */
-      border-bottom-right-radius:1em;
-      border-bottom-left-radius:1em;
-      border-bottom: 10px solid rgb(235, 235, 227);
+      border-bottom-right-radius:0.5em;
+      border-bottom-left-radius:0.5em;
+      border-bottom: 1px solid rgb(235, 235, 227);
   }
   .iconBox{
-      /* z-index: 2; */
       display: flex; /* 块级元素转换为行内元素 */
       width:20%;
-      /* height: 100%; */
-      /* flex:1; */
  
   }
   .menuBox{
@@ -119,7 +118,6 @@
       align-items: center;
       justify-content: space-between;
   }
-
 
   .rightMenu{
     display: flex;
