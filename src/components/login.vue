@@ -1,6 +1,6 @@
 <template>
   <!-- <div v-if="showLogin"> -->
-  <el-dialog v-model="dialogVisible" width="30%" align-center="true" style="height:30%;">
+  <el-dialog v-model="dialogVisible" width="34%" align-center="true" style="height:65%;">
     <template #footer>
       <span class="dialog-footer">
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -114,7 +114,7 @@ export default {
   width: 50%;
   height: 50%;
   position: absolute;
-  left: 50%;
+  /* left: 50%; */
   top: 50%;
   transform: translate(-50%, -50%);
 }

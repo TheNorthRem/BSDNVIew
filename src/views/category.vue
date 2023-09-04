@@ -164,7 +164,7 @@ export default {
     width: 90%;
     position:relative;
     top:120px;
-    left:35px;
+    left:25px;
     bottom:0;
 }
 .viewSettings{
@@ -190,7 +190,7 @@ export default {
 }
 .block1{
     border-radius: 12px;
-    width: 100%;
+    width: 96%;
     height: 100%;
     background-color: #F6F5F4;
     transition: background-color .15s ease-in-out,border-color .15s ease-in-out;
