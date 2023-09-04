@@ -1,20 +1,12 @@
 <template>
-<<<<<<< HEAD
     <div style=" width: 60%;  height:70%; margin: 0 auto; border-radius:12px;">
-=======
-    <div style=" width: 50%;">
->>>>>>> 0d7690dad5afcbb4f14d9b36ca0bb98825b01813
         <div style=" top: 50%;
              left: 50%;border-radius:12px;">
             <Toolbar style="border-bottom: 1px solid #ccc" :editor="editor" :defaultConfig="toolbarConfig" :mode="mode" />
-<<<<<<< HEAD
-            <Editor style="height: 620px; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
-=======
             <Editor style="height: 100px; overflow-y: hidden;" v-model="htmlTitle" :defaultConfig="editorConfig" :mode="mode"
             @onCreated="onCreated" />
             <el-divider style="border-style: hidden; color: black" />
             <Editor style="height: 500px; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
->>>>>>> 0d7690dad5afcbb4f14d9b36ca0bb98825b01813
             @onCreated="onCreated" />
         </div>
         <el-button type="primary"  round="true" class="right" @click="submitPassage">提交</el-button>
