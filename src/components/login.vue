@@ -74,9 +74,9 @@ export default {
           login(this.ruleForm).then(res => {
             if (res.data.code == 200) {
               localStorage.setItem('token', res.data.data.token)
-              localStorage.setItem('UserID', this.ruleForm.username)
+              localStorage.setItem('ID', res.data.data.userId)
               console.log("token: " + localStorage.getItem('token'))
-              console.log("UserId: " + localStorage.getItem('UserID'))
+              console.log("ID: " + localStorage.getItem('ID'))
               this.dialogVisible = false
               ElMessage({
                 showClose: true,
