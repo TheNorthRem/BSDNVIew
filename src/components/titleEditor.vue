@@ -1,13 +1,10 @@
 <template>
-    <div style=" width: 50%;">
+    <div style="border: 1px solid #ccc; width: 50%;">
         <div style=" top: 50%;
              left: 50%;">
-            <Toolbar style="border-bottom: 1px solid #ccc" :editor="editor" :defaultConfig="toolbarConfig" :mode="mode" />
             <Editor style="height: 100px; overflow-y: hidden;" v-model="htmlTitle" :defaultConfig="editorConfig" :mode="mode"
             @onCreated="onCreated" />
             <el-divider style="border-style: hidden; color: black" />
-            <Editor style="height: 500px; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
-            @onCreated="onCreated" />
         </div>
         <el-button type="primary" round="true" class="right" @click="submitPassage">提交</el-button>
     </div>
@@ -25,11 +22,11 @@ export default{
     data() {
         return {
             editor: null,
-            htmlTitle: '<h1>标题：</h1>',
-            html: '<p></p>',
+            htmlTitle: '<p></p>',
+            htmlContent: '<p></p>',
             toolbarConfig: {},
             editorConfig: {
-                placeholder: '请输入内容...',
+                placeholder: '请输入标题...',
                 MENU_CONF: {
                     uploadImage:{
                         server: "http://localhost:8081/ImageUpload",
@@ -63,7 +60,6 @@ export default{
         }
     },
     mounted() {
-
     },
     beforeUnmount() {
         const editor = this.editor

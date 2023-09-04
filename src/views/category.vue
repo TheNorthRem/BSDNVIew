@@ -19,6 +19,8 @@
                             <!-- href中为跳转页面 -->
                             <a class="more" herf="">More →</a>
                         </div>
+                        <img src="../assets/hero.webp" class="block1Img"/>
+                        
                     </header>
                 </div>  
             </section>
@@ -157,6 +159,14 @@ export default {
 </script>
 
 <style>
+.block1Img{
+    z-index:3;
+    width: 90%;
+    position:relative;
+    top:120px;
+    left:35px;
+    bottom:0;
+}
 .viewSettings{
     width: 100%;
     min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
@@ -165,16 +175,16 @@ export default {
     z-index:99;
 }
 .gird-item{
-    padding-top:12%;
-    margin-left:12%;
-    margin-right:12%;
+    padding-top:8%;
+    margin-left:10%;
+    margin-right:10%;
     grid-column: span 12;
 }
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding-left: 66px;
-    padding-right: 66px;
+    padding-left: 0px;
+    padding-right: 0px;
     gap: 24px;
     
 }
@@ -193,7 +203,7 @@ export default {
     justify-content: space-between;
     height: 100%;
     margin: 0;
-    gap: 30px;
+    gap: 40px;
     border-radius: 12px;
     overflow: hidden;
     position: relative;
