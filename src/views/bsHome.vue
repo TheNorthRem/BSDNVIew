@@ -7,13 +7,11 @@
             <!-- 主体部分 -->    
             <div class = "mainBox">
                 <div class="topPeekiBox"><br><br><br><br><br>
-                    <img src="../assets/topPeeki.png" style="height: 150px; width: auto;">
+                    <img src="../assets/homeSlogan.png" style="margin-left:35%; height: 75%; width: auto;">
+                    <img class="topPeeki" src="../assets/topPeeki.png" style="height: 150px; width: auto;">
                 </div>
                 <!-- 轮播图 -->     
                 <div class="pictureBox">
-                    <!-- <div style="align-content: center; padding: 20%;">
-                        <h1>轮播图</h1>
-                    </div> -->
                     <el-carousel height="100%" style="width:100%">
                     <el-carousel-item v-for="item in 4" :key="item">
                         <h3 text="2xl">{{ item }}</h3>
@@ -53,10 +51,8 @@
                     <h3>Profile</h3>
                     <h3>Tags</h3>
                     <h3>PageTitle1</h3>
-                    <h3>PageTitle2</h3>
-                    <h3>PageTitle3</h3>
-                    <h3>PageTitle4</h3>
                 </div>
+                <img src="../assets/underAsideBox.webp" style="margin-top:30%; height:auto;width:15%;position: fixed;right: 10%;bottom: 0;" >
             </div>
         </div>
     </div>
@@ -131,15 +127,17 @@ export default {
     display: flex; 
     position: relative; 
     flex-direction: column;/* 垂直排列 */
-    padding: 3% 5% 5% 5%;
+    padding: 2.5% 5% 5% 7%;
 }
 .topPeekiBox{
     display: flex; 
+    justify-items: center;
+    align-items: center;
     /* 调整图片的水平位置*/
     padding-left: 5%;
-    padding-right: 90%;
+    padding-right: 5%;
 }
-.topPeekiBox img{
+.topPeeki{
     /* z-index: 2;  */
     position: absolute;
     top:10px;
@@ -197,10 +195,12 @@ div footer{
 
 .asideBox{
     width: 30%;
+    height: 100%;
     display: flex; /* 块级元素转换为行内元素 */
-    position: relative; /* 设置相对定位 */
+    position: relative; 
     align-items: center;/* 垂直居中 */
     flex-direction: column;/* 垂直排列 */
+    justify-items: space-between;/* 两端对齐 */
     padding: 3% 5% 0% 0%;
 }
 .iconBox{
@@ -208,12 +208,12 @@ div footer{
     align-items:start;
     justify-content: center;
     /* 头像和个人信息之间的垂直间隔 */
-    padding-block-start: 30%;
-    padding-block-end: 15%;     
+    padding-block-start: 3%;
+    padding-block-end: 13%;     
 }
 .infoBox{
     width: 80%;
-    height: 72%;/* 侧栏高度 */
+    /* height: 72%; */
     display: flex;
     align-items: center;
     justify-items: flex-start;

@@ -1,23 +1,12 @@
 <template>
-<<<<<<< HEAD
-    <div style=" width: 60%;  height:70%; margin: 0 auto; border-radius:12px;">
-=======
-    <div style=" width: 50%;">
->>>>>>> 0d7690dad5afcbb4f14d9b36ca0bb98825b01813
+    <div style="border: 1px solid #ccc; width: 50%;">
         <div style=" top: 50%;
-             left: 50%;border-radius:12px;">
-            <Toolbar style="border-bottom: 1px solid #ccc" :editor="editor" :defaultConfig="toolbarConfig" :mode="mode" />
-<<<<<<< HEAD
-            <Editor style="height: 620px; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
-=======
+             left: 50%;">
             <Editor style="height: 100px; overflow-y: hidden;" v-model="htmlTitle" :defaultConfig="editorConfig" :mode="mode"
             @onCreated="onCreated" />
             <el-divider style="border-style: hidden; color: black" />
-            <Editor style="height: 500px; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
->>>>>>> 0d7690dad5afcbb4f14d9b36ca0bb98825b01813
-            @onCreated="onCreated" />
         </div>
-        <el-button type="primary"  round="true" class="right" @click="submitPassage">提交</el-button>
+        <el-button type="primary" round="true" class="right" @click="submitPassage">提交</el-button>
     </div>
     
 </template>
@@ -33,11 +22,11 @@ export default{
     data() {
         return {
             editor: null,
-            htmlTitle: '<h1>标题：</h1>',
-            html: '<p></p>',
+            htmlTitle: '<p></p>',
+            htmlContent: '<p></p>',
             toolbarConfig: {},
             editorConfig: {
-                placeholder: '请输入内容...',
+                placeholder: '请输入标题...',
                 MENU_CONF: {
                     uploadImage:{
                         server: "http://localhost:8081/ImageUpload",
@@ -71,7 +60,6 @@ export default{
         }
     },
     mounted() {
-
     },
     beforeUnmount() {
         const editor = this.editor
@@ -83,24 +71,11 @@ export default{
 
 <style src="@wangeditor/editor/dist/css/style.css"></style>
 <style>
-
 .right {
-    margin-top:3%;
-    margin-left:auto;
-    margin-right:auto;
-    color:#E94457;
-    background: #FDF5F2;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    border: 3px solid #F8DAD7;
+    position: absolute;
+    left:700px;
+    border: 3px solid #73AD21;
     padding: 10px;
-    width:306px;
-    height:48px;
 
 }
 </style>
