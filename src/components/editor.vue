@@ -1,5 +1,5 @@
 <template>
-    <div style="border: 1px solid #ccc; width: 50%;">
+    <div style=" width: 50%;">
         <div style=" top: 50%;
              left: 50%;">
             <Toolbar style="border-bottom: 1px solid #ccc" :editor="editor" :defaultConfig="toolbarConfig" :mode="mode" />
