@@ -52,7 +52,7 @@
                     <div class="info">
                         <h2>{{nickName}}</h2>
                         <h3>{{userName}}</h3>
-                        <h3>Tags</h3>
+                        <h3>{{intro}}</h3>
                         <h3><a href="#/profile">More</a></h3>
                     </div>
                     <!-- <div v-if="!hideLogin" class="info"><h2>请先登录！</h2></div> -->
@@ -67,6 +67,7 @@
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
 import {Mounted, onBeforeMount,} from "vue"
 import showEditor_brief from '@/components/showEditor_brief.vue';
+import { getUserInfo } from '../http/api.js';
 export default { 
     name: 'bsHome',
     components:{
@@ -79,6 +80,9 @@ export default {
     },
     data(){
         return{
+            nickName:"nickName",
+            userName:'userName',
+            intro: "Introduction",
             items: [
                         require('../assets/carousel/test1.jpg'),
                         require('../assets/carousel/test2.jpg'),
@@ -117,6 +121,33 @@ export default {
                 },
             ]
         }
+    },
+    created() {
+        this.Reload();
+    },
+    methods:{
+        Reload() {
+            //判断用户的登录状态
+            let userID=localStorage.getItem('ID');
+            let IDForm = {
+                id: userID,
+            }
+            console.log("userID",userID);
+            if(userID == null) return;
+            else{
+                getUserInfo(IDForm) 
+                .then(result => {
+                    console.log(result)
+                    this.userName = result.data.data.userName;
+                    this.nickName = result.data.data.nickName;
+                    this.intro = result.data.data.intro;
+                })
+                .catch(error => {
+                    console.error('获取用户信息失败:', error);
+                });
+            }
+    }
+      
     }
 }
 </script>

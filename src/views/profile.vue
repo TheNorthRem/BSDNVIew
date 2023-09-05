@@ -23,12 +23,18 @@
                                 <img class="svg" src="../assets/categoryIcon/Icon4.svg" />
                               </div>
                               <div class="infocontent">
-                                <div class="likes">Likes:{{ likes }}</div>
-                                <div class="likes">点击量:{{ clickCounts }}</div>
+                                <div class="likes">Likes :</div>
+                                <div class="likes">{{ likes }}</div>
                               </div>
-                              
+                              <div class="infocontent">
+                                <div class="likes">点击量 :</div>
+                                <div class="likes">{{ clickCounts }}</div>
+                              </div>
                           </div>
                       </div>  
+                      <div class="img">
+                            <img src="../assets/projects-illo.webp" style="width:222px;"/>
+                      </div>
               </section>
               <!-- 右侧 -->
               <div class="rightBlocks">
@@ -71,6 +77,7 @@
     birthday:'birthday',
     clickCounts:0,
     likes:0,
+    intro:"Introduction",
     data(){
       return{
           nickName:'nickName',
@@ -89,19 +96,19 @@
     created(){
       let userID=localStorage.getItem('ID');
             let IDForm = {
-                id: userID,
+                userId: userID,
             }
             if(userID == null) return;
             else{
               detailedUserInfo(IDForm) 
                 .then(result => {
                     console.log(result)
-                    this.qq = result.data.qq;
-                    this.nickName = result.data.nickName;
-                    this.birthday = result.data.birthday;
-                    this.likes = result.data.favoriteCount;
-                    this.clickCounts = result.data.clickCounts;
-
+                    this.qq = result.data.data[0].qq;
+                    this.nickName = result.data.data[0].nickName;
+                    this.birthday = result.data.data[0].birthday;
+                    this.likes = result.data.data[0].favoriteCount;
+                    this.clickCounts = result.data.data[0].clickCounts;
+                    this.intro = result.data.data[0].intro;
                 })
                 .catch(error => {
                     console.error('获取用户信息失败:', error);
@@ -113,6 +120,9 @@
   </script>
   
   <style>
+  .img{
+    margin-top:150px;
+  }
   .moreDetail{
     margin-top:0.7%;
   }
@@ -185,20 +195,17 @@
 
 .one {
   margin-left:10px;
-  height: 300px;
-  
+  height: 600px;
 }
 
 .two {
   margin-left:10px;
-  height: 300px;
-  
+  height: 600px;
 }
 
 .three {
   margin-left:10px;
-  height: 300px;
-  
+  height: 600px;
 }
 
   .blockIcon{
@@ -282,6 +289,8 @@
       width: 100%;
       height: 100%;
       position: relative;
+      display:flex;
+      flex-direction: column;
   }
   .blockHeader {
       max-width: 512px;
