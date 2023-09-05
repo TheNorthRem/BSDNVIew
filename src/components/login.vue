@@ -1,6 +1,6 @@
 <template>
   <!-- <div v-if="showLogin"> -->
-  <el-dialog v-model="dialogVisible" width="500px" align-center="true" style="height:550px;">
+  <el-dialog id="dialog" v-model="dialogVisible" width="500px" align-center="true" style="height:550px;">
       <span class="dialog-footer">
           <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="custom-form">
               <div class="login">登录</div>
@@ -103,7 +103,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped> 
 .custom-form {
   width: 70%!important;
   left:35%;
@@ -135,9 +135,9 @@ export default {
   padding-left:0!important;
   width:350px!important;
 }
-.el-input__wrapper{
+#dialog .el-input__wrapper{
   width:400px;
-  height:64px;
+  height:60px;
 }
 .input{
   margin-bottom:37px;

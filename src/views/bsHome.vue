@@ -43,7 +43,7 @@
             <div class = "asideBox"> 
                 <!-- 头像 -->
                 <div class = "iconBox">
-                    <img src="../assets/avatar/avatar0.png" style="height:100%; width: 200%;">
+                    <img src="../assets/avatar/avatar0.png" style="height:45%; width: 45%;">
                 </div>
                 <!-- 个人信息 -->
                 <div class = "infoBox">

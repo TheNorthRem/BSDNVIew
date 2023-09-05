@@ -20,12 +20,26 @@
           </ul>
         </div>
         <!--搜索框 -->
-        <el-input
+        <!-- <el-input
           v-model="input" class="w-20 m-2" style="width: 35%" placeholder="Please Input">
           <template #prefix>
             <el-icon><search /></el-icon>
           </template>
-        </el-input>
+        </el-input> -->
+        <div class="mt-4" style="width:30%;">
+          <el-input
+            v-model="input"
+            placeholder="Please input"
+            class="w-20 m-2"
+          >
+            <template #prefix>
+              <el-icon><search /></el-icon>
+            </template>
+            <template #append>
+              <el-button>搜索</el-button>
+            </template>
+          </el-input>
+        </div>
         <div class="rightMenu">
           <div style="margin-right: 10%; display:inline-flex;">
             <div v-if="!hideLogin" style="display: inline-flex;">
@@ -101,7 +115,7 @@
   
 </script>
   
-<style>
+<style scoped>
   .topBar{
       z-index: 9999;
       width: 100%;
@@ -110,7 +124,6 @@
       background: #FBFBFA;
       align-items: center;/* 垂直居中 */
       justify-content: space-between;/* 两端对齐 */
-      /* border-radius: 30px; */
       border-bottom-right-radius:0.5em;
       border-bottom-left-radius:0.5em;
       border-bottom: 1px solid rgb(235, 235, 227);
@@ -125,6 +138,10 @@
       align-items: center;
       justify-content: space-between;
   }
+  /* /deep/ .el-input__wrapper{
+    width:100%;
+    height:100%;
+  } */
   .rightMenu{
     width:15%;
     display: inline-flex;
