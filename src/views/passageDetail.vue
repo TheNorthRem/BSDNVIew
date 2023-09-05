@@ -2,6 +2,18 @@
     <div class="editorViewBox">
         <img src="../assets/e1.png" style="height: auto;width: 15%; position: fixed; padding-inline: 3%;left: 2%;bottom: 0;">
         <div class="passageBox">
+            
+            <div style="display: inline-flex;">
+                <img src="../assets/avatar/avatar1.png" style="width: 10%;height: auto; padding-right:3%;" />
+                <div>
+                    <h3>
+                        UserName <!-- UserName：{{nickName[i-1]}} -->
+                    </h3>
+                    ID<!-- <p>ID：{{ uploaderId[i-1] }}</p> -->
+                </div>
+
+            </div>
+            
             <Editor style="height: 80%; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
                 @onCreated="onCreated" />
                 <el-button @click="visible = true" style="width:9%" text>

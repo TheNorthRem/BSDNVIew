@@ -7,6 +7,8 @@
                     :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
             </div>
             <footer style="display: inline-flex;padding-top: 2%;">
+                <!-- 等待替换动态头像资源
+                :src=this.profilePhotoPath[i-1] -->
                 <img src="../assets/avatar/avatar1.png" style="width: 10%;height: auto; padding-right:3%;" />
                 <div>
                     <h3>
@@ -14,7 +16,10 @@
                     </h3>
                     <p>ID：{{ uploaderId[i-1] }}</p>
                 </div>
+                <!-- 绑定：articleId router传递需要的内容参数给新的页面，渲染页面 -->
+                <h4><a href="#/passageDetail" style="padding-left: 900%;" @click="MoreRouter">More...</a></h4>
             </footer>
+            
         </div>
     </span>
 </template>
@@ -22,14 +27,16 @@
 <script>
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { getTopArticles } from "@/http/api"
+import {ElButton} from '@/../node_modules/element-plus';
 import { toRaw } from '@vue/reactivity'
 import {Mounted} from "vue"
 
 export default {
-    components: { Editor, Toolbar, getTopArticles, Mounted },
+    components: { Editor, Toolbar, getTopArticles, Mounted, ElButton },
     data() {
         return {
             arrayLength: 0,
+            toArticleId: 0,
             editor: null,
             html: '<p>hello</p>',
             toolbarConfig: {},
@@ -50,15 +57,25 @@ export default {
             uploaderId: [],
             articleId: [],
             content: [],
+            profilePhotoPath: [],
+            articleId: [],
         }
     },
     methods: {
         // 显示热门文章
+        MoreRouter(){
+        //     console.log(this.toArticleId)
+        //     this.$router.push({
+        //         path:"/passageDetail",
+        //         query:{
+        //             id: this.toArticleId,
+        //         }
+        // })
+        },
         async getTopArticlesFunction() {
             await getTopArticles().then(res => {
                 if (res.data.code == 200) {
                     console.log("获取热门文章成功！")
-                    this.articles
                     console.log(res.data.data)
                     this.arrayLength = toRaw(res.data.data).length
                     for(let i = 0; i < this.arrayLength; i++){
@@ -66,7 +83,9 @@ export default {
                         this.articleId.push(res.data.data[i].articleId)
                         this.nickName.push(res.data.data[i].nickName)
                         this.content.push(res.data.data[i].content)
-                        console.log(res.data.data[i].uploaderId)
+                        this.articleId.push(res.data.data[i].articleId)
+                        // 等待头像资源
+                        // this.profilePhotoPath.push(res.data.data[i].profilePhotoPath)
                     }
                 } else {
                     console.log("获取热门文章失败！")
@@ -76,12 +95,10 @@ export default {
         },
         async onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
-            this.html = this.content[3]
         },
     },
     async mounted() {
         await this.getTopArticlesFunction()
-
     },
     beforeDestroy() {
         const editor = this.editor
