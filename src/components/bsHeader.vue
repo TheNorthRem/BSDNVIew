@@ -1,14 +1,14 @@
 <template>
     <div>
       <div class="topBar">
-          <img src="../assets/BSDN-logo.png" href="#/" style="width: 8%;height: 8%;">
+          <img src="../assets/logo.png" style="padding-left:2%; width: 11%;height: 50%;">
 
         <div class="menuBox">
           <ul>
             <li><a href="#/">🏠首页</a></li>
             <li><a href="#">博客</a></li>
             <li><a href="#">社区</a></li>
-            <li><a href="#">学习</a></li>
+            <li><a href="https://www.icourse163.org/">学习</a></li>
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
               <div class="dropdown-content">
