@@ -12,12 +12,12 @@
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
               <div class="dropdown-content">
-                <a href="#">前端</a>
-                <a href="#">后端</a>
-                <a href="#">数据库</a>
-                <a href="#">生活</a>
-                <a href="#">编程语言</a>
-                <a href="#">其他</a>
+                <a href="#/search">前端</a>
+                <a href="#/search">后端</a>
+                <a href="#/search">数据库</a>
+                <a href="#/search">生活</a>
+                <a href="#/search">编程语言</a>
+                <a href="#/search">其他</a>
               </div>
             </div>
           </ul>

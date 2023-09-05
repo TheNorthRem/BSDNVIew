@@ -21,6 +21,10 @@ const routes = [
         path: '/profile',
         component: () => import('../views/profile')
     },
+    {
+        path: '/search',
+        component: () => import('../views/search')
+    },
 ]
 
 const router = createRouter({
