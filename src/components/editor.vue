@@ -2,7 +2,6 @@
     <div class="editorViewBox">
         <img src="../assets/e1.png" style="height: 15%;width: 15%; padding-inline: 3%;">
         <div class="editorBox">
-          
             <Toolbar class="toolBarBox" :editor="editor" :defaultConfig="toolbarConfig" :mode="mode" />
             <Editor style="height: 10%; overflow-y: hidden;" v-model="title" :defaultConfig="editorConfig" :mode="mode"
                 @onCreated="onCreated" />
@@ -20,15 +19,15 @@
 <script>
 // import Vue from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
-import { ElButton, ElDivider, ElMessage } from "@/../node_modules/element-plus"
+import { ElButton, ElDivider, ElMessage, ElTag } from "@/../node_modules/element-plus"
 import { uploadPassage } from "@/http/api"
 
 export default {
-    components: { Editor, Toolbar, ElButton, ElDivider },
+    components: { Editor, Toolbar, ElButton, ElDivider, ElTag },
     data() {
         return {
             editor: null,
-            title: '<h1>标题：</h1>',
+            title: '<h2>标题：</h2>',
             html: '<p></p>',
             toolbarConfig: {},
             editorConfig: {

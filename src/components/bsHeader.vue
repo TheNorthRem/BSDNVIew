@@ -12,12 +12,12 @@
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
               <div class="dropdown-content">
-                <a href="#">前端</a>
-                <a href="#">后端</a>
-                <a href="#">数据库</a>
-                <a href="#">生活</a>
-                <a href="#">编程语言</a>
-                <a href="#">其他</a>
+                <a href="#/search">前端</a>
+                <a href="#/search">后端</a>
+                <a href="#/search">数据库</a>
+                <a href="#/search">生活</a>
+                <a href="#/search">编程语言</a>
+                <a href="#/search">其他</a>
               </div>
             </div>
           </ul>
@@ -43,7 +43,12 @@
               <el-divider direction="vertical" />
               <el-button  link @click="changeLogin">登录</el-button>
             </div>
-            <div v-if="hideLogin" style="display: flex;">userName,欢迎</div>
+            <!-- 登陆成功后显示“注销”和“登出”按钮 -->
+            <div v-if="hideLogin" style="display: inline-flex;">
+              <el-button  size="large" link >注销</el-button>
+              <el-divider direction="vertical" />
+              <el-button  link @click="logOut">登出</el-button>
+            </div>
           </div>
           <!-- 点击发布先让用户选择标签，再跳转到编辑页面 -->
           <el-button type="primary" color="#000" @click="toEditorPassage">

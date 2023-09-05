@@ -85,7 +85,7 @@ export default {
                 this.$router.push({
                                     path: '/editorPassage',
                                     query: {
-                                        name: 'value'
+                                        name: this.value
                                     }
                                     })
             }else{
