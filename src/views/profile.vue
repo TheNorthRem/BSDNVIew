@@ -23,10 +23,13 @@
                                 <img class="svg" src="../assets/categoryIcon/Icon4.svg" />
                               </div>
                               <div class="infocontent">
-                                <div class="likes">Likes:{{ likes }}</div>
-                                <div class="likes">点击量:{{ clickCounts }}</div>
+                                <div class="likes">Likes :</div>
+                                <div class="likes">{{ likes }}</div>
                               </div>
-                              
+                              <div class="infocontent">
+                                <div class="likes">点击量 :</div>
+                                <div class="likes">{{ clickCounts }}</div>
+                              </div>
                           </div>
                       </div>  
               </section>
@@ -71,6 +74,7 @@
     birthday:'birthday',
     clickCounts:0,
     likes:0,
+    intro:"Introduction",
     data(){
       return{
           nickName:'nickName',
@@ -89,19 +93,19 @@
     created(){
       let userID=localStorage.getItem('ID');
             let IDForm = {
-                id: userID,
+                userId: userID,
             }
             if(userID == null) return;
             else{
               detailedUserInfo(IDForm) 
                 .then(result => {
                     console.log(result)
-                    this.qq = result.data.qq;
-                    this.nickName = result.data.nickName;
-                    this.birthday = result.data.birthday;
-                    this.likes = result.data.favoriteCount;
-                    this.clickCounts = result.data.clickCounts;
-
+                    this.qq = result.data.data[0].qq;
+                    this.nickName = result.data.data[0].nickName;
+                    this.birthday = result.data.data[0].birthday;
+                    this.likes = result.data.data[0].favoriteCount;
+                    this.clickCounts = result.data.data[0].clickCounts;
+                    this.intro = result.data.data[0].intro;
                 })
                 .catch(error => {
                     console.error('获取用户信息失败:', error);
