@@ -1,8 +1,8 @@
-<template>
-  
+<template>  
     <div>
+        <!-- 回到顶部 -->
         <el-backtop :right="100" :bottom="100" />
-                <!-- 整个主页盒子 --> 
+        <!-- 整个主页盒子 --> 
         <div class = "homeBox"> 
             <!-- 主体部分 -->    
             <div class = "mainBox">
@@ -13,8 +13,8 @@
                 <!-- 轮播图 -->     
                 <div class="pictureBox">
                     <el-carousel height="100%" style="width:100%">
-                    <el-carousel-item v-for="item in 4" :key="item">
-                        <h3 text="2xl">{{ item }}</h3>
+                    <el-carousel-item v-for="(item, index) in items" :key="index">
+                        <img :src="item" alt="Carousel Image">
                     </el-carousel-item>
                     </el-carousel>
                 </div> 
@@ -47,10 +47,13 @@
                 </div>
                 <!-- 个人信息 -->
                 <div class = "infoBox">
-                    <h2>UserName</h2>
-                    <h3>Profile</h3>
-                    <h3>Tags</h3>
-                    <h3>PageTitle1</h3>
+                    <div class="info">
+                        <h2>UserName</h2>
+                        <h3>Profile</h3>
+                        <h3>Tags</h3>
+                        <h3>PageTitle1</h3>
+                    </div>
+                    <!-- <div v-if="!hideLogin" class="info"><h2>请先登录！</h2></div> -->
                 </div>
                 <img src="../assets/underAsideBox.webp" style="margin-top:30%; height:auto;width:15%;position: fixed;right: 10%;bottom: 0;" >
             </div>
@@ -69,6 +72,12 @@ export default {
     },
     data(){
         return{
+            items: [
+                        require('../assets/carousel/test1.jpg'),
+                        require('../assets/carousel/test2.jpg'),
+                        require('../assets/carousel/test3.jpg'),
+                        require('../assets/carousel/test4.jpg')
+                    ],
             articles: [
                     {
                         title: '文章标题1',
@@ -101,6 +110,9 @@ export default {
                 },
             ]
         }
+    },
+    methods:{
+      
     }
 }
 </script>
@@ -153,12 +165,9 @@ export default {
     justify-content: center;
     align-content: center;
 }
-.el-carousel__item h3 {
-  color: #475669;
-  opacity: 0.75;
-  line-height: 350px;
-  margin: 0;
-  text-align: center;
+.el-carousel__item img {
+    width:100%;
+    height:100%;
 }
 
 
@@ -197,7 +206,6 @@ div footer{
     width: 30%;
     height: 100%;
     display: flex; /* 块级元素转换为行内元素 */
-    position: relative; 
     align-items: center;/* 垂直居中 */
     flex-direction: column;/* 垂直排列 */
     justify-items: space-between;/* 两端对齐 */
@@ -213,7 +221,7 @@ div footer{
 }
 .infoBox{
     width: 80%;
-    /* height: 72%; */
+    height: 100%;
     display: flex;
     align-items: center;
     justify-items: flex-start;
@@ -222,4 +230,14 @@ div footer{
     background: #FBFBFA;
     flex-direction: column;/* 垂直排列 */
 }
+.info{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+    flex-direction: column;/* 垂直排列 */
+    padding: 5% 10%;
+}
+
 </style>

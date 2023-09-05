@@ -27,9 +27,14 @@
           </template>
         </el-input>
         <div class="rightMenu">
-          <el-button  size="large" link @click="changeRegister">注册</el-button>
-          <el-divider direction="vertical" />
-          <el-button  link @click="changeLogin">登录</el-button>
+          <div style="margin-right: 10%; display:inline-flex;">
+            <div v-if="!hideLogin" style="display: inline-flex;">
+              <el-button  size="large" link @click="changeRegister">注册</el-button>
+              <el-divider direction="vertical" />
+              <el-button  link @click="changeLogin">登录</el-button>
+            </div>
+            <div v-if="hideLogin" style="display: flex;">userName,欢迎</div>
+          </div>
           <el-button type="primary" color="#000" @click="toEditorPassage">
             发布<el-icon class="el-icon--right"><Upload /></el-icon>
           </el-button> 
@@ -39,9 +44,9 @@
       <login v-if="loginFlag" v-bind:hideLogin ="hideLogin" v-on:loginSuccess="logSuc($event)"/>
       <register v-if="registerFlag" />
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
 
   import { ElButton, ElDivider, ElIcon, ElInput } from '@/../node_modules/element-plus'
   import { Upload } from '@element-plus/icons-vue'
@@ -87,20 +92,21 @@
       toEditorPassage(){
         this.$router.push({ path: '/editorPassage' })
       },
+      // 将Login组件返回的值赋给hideLogin
       logSuc(msg) {
         this.hideLogin = msg
       },
     }
   }
   
-  </script>
+</script>
   
-  <style>
+<style>
   .topBar{
       z-index: 9999;
       width: 100%;
       min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
-      display: flex; /* 块级元素转换为行内元素 */
+      display: inline-flex; /* 块级元素转换为行内元素 */
       background: #FBFBFA;
       align-items: center;/* 垂直居中 */
       justify-content: space-between;/* 两端对齐 */
@@ -119,14 +125,12 @@
       align-items: center;
       justify-content: space-between;
   }
-
   .rightMenu{
-    display: flex;
+    width:15%;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    /* margin-right: 10%; */
-    padding-right: 2%;
-    
+    /* justify-items:end; */
+    justify-content: end;
   }
   
   ul {
@@ -179,5 +183,5 @@
   .dropdown:hover .dropdown-content {
       display: block;/* 鼠标悬停时显示下拉菜单 */
   }
-  </style>
+</style>
   
