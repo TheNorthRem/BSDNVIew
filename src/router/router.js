@@ -17,6 +17,10 @@ const routes = [
         path: '/passageDetail',
         component: () => import('../views/passageDetail')
     },
+    {
+        path: '/profile',
+        component: () => import('../views/profile')
+    },
 ]
 
 const router = createRouter({

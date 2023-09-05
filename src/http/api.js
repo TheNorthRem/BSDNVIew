@@ -45,14 +45,6 @@ export function getTopArticles(){
 }
 
 //搜索
-export function searchPassage(){
-    return request({
-        url: "/bsArticle/searchContent",
-        method: 'get',
-    })
-}
-
-//搜索
 // export function ImageUpload(data){
 //     return request({
 //         url: "/ImageUpload",
@@ -60,3 +52,31 @@ export function searchPassage(){
 //         data
 //     })
 // }
+
+//文章搜索
+export function searchPassage(params){
+    return request({
+        url: "/bsArticle/searchContent",
+        method: 'get',
+        params
+    })
+}
+
+//获取当前用户信息
+export function getUserInfo(params){
+    return request({
+        url: "/bsUser/getById",
+        method: 'get',
+        params
+    })
+}
+
+
+//获取用户的详细信息：用户主页展示信息
+export function detailedUserInfo(params){
+    return request({
+        url: "/bsUserInformation/search",
+        method: 'get',
+        params
+    })
+}

@@ -1,16 +1,20 @@
 <template>
-    <div style=" width: 60%;  height:70%; margin: 0 auto; border-radius:12px;">
-        <div style=" top: 50%;
-             left: 50%;border-radius:12px;">
-            <Toolbar style="border-bottom: 1px solid #ccc" :editor="editor" :defaultConfig="toolbarConfig" :mode="mode" />
-            <Editor style="height: 130px; overflow-y: hidden;" v-model="title" :defaultConfig="editorConfig" :mode="mode"
+    <div class="editorViewBox">
+        <img src="../assets/e1.png" style="height: 15%;width: 15%; padding-inline: 3%;">
+        <div class="editorBox">
+          
+            <Toolbar class="toolBarBox" :editor="editor" :defaultConfig="toolbarConfig" :mode="mode" />
+            <Editor style="height: 10%; overflow-y: hidden;" v-model="title" :defaultConfig="editorConfig" :mode="mode"
                 @onCreated="onCreated" />
-            <el-divider style="border-style: hidden; color: black" />
+            <el-divider border-style="solid" />
             <Editor style="height: 400px; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
                 @onCreated="onCreated" />
+            <el-divider border-style="solid" />
+            <el-button type="primary"  round="true" class="right" @click="submitPassage">提 交</el-button>
         </div>
-        <el-button type="primary"  round="true" class="right" @click="submitPassage">提交</el-button>
+        <img src="../assets/e2.png" style="height: 15%;width: 15%; padding-inline: 3%;">
     </div>
+    
 </template>
 
 <script>
@@ -42,6 +46,7 @@ export default {
                 title: this.title,
                 content: this.html,
                 id: localStorage.getItem("ID"),
+                tag:this.$route.query.name
             },
         }
     },
@@ -100,10 +105,20 @@ export default {
 </script>
 
 <style src="@wangeditor/editor/dist/css/style.css"></style>
-<style>
+<style scoped>
+.editorViewBox{
+    width: 100%;  
+    height:100%; 
+    background: #FFFEFC;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: row;
+    padding-block:1%;/* 上下留白 */
 
+}
 .right {
-    margin-top:3%;
+    margin-top:2%;
     margin-left:auto;
     margin-right:auto;
     color:#E94457;
@@ -113,12 +128,22 @@ export default {
     align-items: center;
     justify-content: center; 
     font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
+    font-weight: 900;
     border: 3px solid #F8DAD7;
-    padding: 10px;
-    width:306px;
-    height:48px;
+    padding: 2%;
+    width:13%;
+    height:auto;
 
+}
+.editorBox{
+    width:60%;
+    /* border: #E94457 10px; */
+}
+.toolBarBox{
+    border-bottom: 1px solid #ccc;
+    /* border-radius: 10px; */
+}
+/deep/ .el-divider--horizontal{
+    margin: 0px 0px 0px 0px;
 }
 </style>

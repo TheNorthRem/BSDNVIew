@@ -151,7 +151,7 @@ export default {
   name: 'Category',
   data(){
     return{
-        categoryTitle:['Title1','Title2','Title3','Title4','Title5','Title6','Title7'],
+        categoryTitle:['所有文章','前端','后端','数据库','生活','编程语言','娱乐'],
     }
   }
 }
@@ -161,6 +161,7 @@ export default {
 <style>
 .block1Img{
     z-index:3;
+    padding-right:10%;
     width: 90%;
     position:relative;
     top:120px;

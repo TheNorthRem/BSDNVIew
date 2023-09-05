@@ -1,8 +1,8 @@
-<template>
-  
+<template>  
     <div>
+        <!-- 回到顶部 -->
         <el-backtop :right="100" :bottom="100" />
-                <!-- 整个主页盒子 --> 
+        <!-- 整个主页盒子 --> 
         <div class = "homeBox"> 
             <!-- 主体部分 -->    
             <div class = "mainBox">
@@ -13,8 +13,8 @@
                 <!-- 轮播图 -->     
                 <div class="pictureBox">
                     <el-carousel height="100%" style="width:100%">
-                    <el-carousel-item v-for="CarouselPhoto in CarouselPhotos" :key="CarouselPhoto">
-                        <h3 text="2xl">{{ CarouselPhoto }}</h3>
+                    <el-carousel-item v-for="item in 4" :key="item">
+                        <h3 text="2xl">{{ item }}</h3>
                     </el-carousel-item>
                     </el-carousel>
                 </div> 
@@ -23,7 +23,7 @@
                     <!-- <span v-for="(article, index) in articles" :key="index" style= "padding-bottom: 5%;">
                         <div class="articleInfo">
                            <div class="contentBox">
-                                <h2>{{ article.title }}</h2>
+                               <a href="#/passageDetail"> <h2>{{ article.title }}</h2> </a>
                                 <h4>{{ article.content }}</h4>
                            </div>
                            <footer>
@@ -44,14 +44,18 @@
             <div class = "asideBox"> 
                 <!-- 头像 -->
                 <div class = "iconBox">
-                    <img src="../assets/avatar/avatar0.png" style="height:100%; width: 200%;">
+                        
+                        <img src="../assets/avatar/avatar0.png" style="height:45%; width: 45%;">
                 </div>
                 <!-- 个人信息 -->
                 <div class = "infoBox">
-                    <h2>UserName</h2>
-                    <h3>Profile</h3>
-                    <h3>Tags</h3>
-                    <h3>PageTitle1</h3>
+                    <div class="info">
+                        <h2>{{nickName}}</h2>
+                        <h3>{{userName}}</h3>
+                        <h3>Tags</h3>
+                        <h3><a href="#/profile">More</a></h3>
+                    </div>
+                    <!-- <div v-if="!hideLogin" class="info"><h2>请先登录！</h2></div> -->
                 </div>
                 <img src="../assets/underAsideBox.webp" style="margin-top:30%; height:auto;width:15%;position: fixed;right: 10%;bottom: 0;" >
             </div>
@@ -61,10 +65,6 @@
 
 <script>
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
-import { onBeforeMount,Mounted } from 'vue'
-import {getTopArticles} from "@/http/api"
-import showEditor_brief from '@/components/showEditor_brief.vue'
-
 export default {
     name: 'bsHome',
     components:{
@@ -77,16 +77,38 @@ export default {
     },
     data(){
         return{
-            CarouselPhotos:[],
-            msg:"123"
+            articles: [
+                    {
+                        title: '文章标题1',
+                        content: '文章内容1',
+                        author: {
+                            name: '作者1姓名',
+                            pic: '../assets/avatar/avatar1.png',
+                            profile: '简介1'
+                        },
+                        link: '链接1'
+                    },
+                    {
+                        title: '文章标题2',
+                        content: '文章内容2',
+                        author: {
+                            name: '作者2姓名',
+                            pic: '../assets/avatar/avatar2.png',
+                            profile: '简介2'
+                        },
+                        link: '链接2'
+                    },
+                    {
+                        title: '文章标题3',
+                        content: '文章内容3',
+                        author: {
+                            name: '作者3姓名',
+                            profile: '简介3'
+                        },
+                        link: '链接3'
+                },
+            ]
         }
-        
-    },
-    methods:{
-        
-    },
-    mounted(){
-
     }
 }
 </script>
@@ -139,12 +161,9 @@ export default {
     justify-content: center;
     align-content: center;
 }
-.el-carousel__item h3 {
-  color: #475669;
-  opacity: 0.75;
-  line-height: 350px;
-  margin: 0;
-  text-align: center;
+.el-carousel__item img {
+    width:100%;
+    height:100%;
 }
 
 
@@ -183,7 +202,6 @@ div footer{
     width: 30%;
     height: 100%;
     display: flex; /* 块级元素转换为行内元素 */
-    position: relative; 
     align-items: center;/* 垂直居中 */
     flex-direction: column;/* 垂直排列 */
     justify-items: space-between;/* 两端对齐 */
@@ -195,11 +213,11 @@ div footer{
     justify-content: center;
     /* 头像和个人信息之间的垂直间隔 */
     padding-block-start: 3%;
-    padding-block-end: 13%;     
+    padding-block-end: 13%;  
 }
 .infoBox{
     width: 80%;
-    /* height: 72%; */
+    height: 100%;
     display: flex;
     align-items: center;
     justify-items: flex-start;
@@ -208,4 +226,14 @@ div footer{
     background: #FBFBFA;
     flex-direction: column;/* 垂直排列 */
 }
+.info{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+    flex-direction: column;/* 垂直排列 */
+    padding: 5% 10%;
+}
+
 </style>

@@ -1,57 +1,72 @@
 <template>
     <div>
       <div class="topBar">
-          <img src="../assets/BSDN-logo.png" href="#/" style="width: 8%;height: 8%;">
-          <!-- <a href="#/">
-            <img src="../assets/BSDN-logo.png" style="width: 20%;height: 20%;">
-          </a> 
-          这个不要删 -->
+          <img src="../assets/logo.png" style="padding-left:2%; width: 11%;height: 50%;">
+
         <div class="menuBox">
           <ul>
-            <li><a href="#/">首页</a></li>
+            <li><a href="#/">🏠首页</a></li>
             <li><a href="#">博客</a></li>
             <li><a href="#">社区</a></li>
             <li><a href="https://www.icourse163.org/">学习</a></li>
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
               <div class="dropdown-content">
-                <a href="#">分类1</a>
-                <a href="#">分类2</a>
-                <a href="#">分类3</a>
+                <a href="#">前端</a>
+                <a href="#">后端</a>
+                <a href="#">数据库</a>
+                <a href="#">生活</a>
+                <a href="#">编程语言</a>
+                <a href="#">其他</a>
               </div>
             </div>
           </ul>
         </div>
-        <!--搜索框 -->
-        <el-input
-          v-model="input" class="w-20 m-2" style="width: 35%" placeholder="Please Input">
-          <template #prefix>
-            <el-icon><search /></el-icon>
-          </template>
-        </el-input>
+        <div class="mt-4" style="width:30%;">
+          <el-input
+            v-model="Input.content"
+            placeholder="Please input"
+            class="w-20 m-2"
+          >
+            <template #prefix>
+              <el-icon><search /></el-icon>
+            </template>
+            <template #append>
+              <el-button @click="Search()">搜索</el-button>
+            </template>
+          </el-input>
+        </div>
         <div class="rightMenu">
-          <el-button  size="large" link @click="changeRegister">注册</el-button>
-          <el-divider direction="vertical" />
-          <el-button  link @click="changeLogin" v-if="LoginVisible">登录</el-button>
+          <div style="margin-right: 10%; display:inline-flex;">
+            <div v-if="!hideLogin" style="display: inline-flex;">
+              <el-button  size="large" link @click="changeRegister">注册</el-button>
+              <el-divider direction="vertical" />
+              <el-button  link @click="changeLogin">登录</el-button>
+            </div>
+            <div v-if="hideLogin" style="display: flex;">userName,欢迎</div>
+          </div>
+          <!-- 点击发布先让用户选择标签，再跳转到编辑页面 -->
           <el-button type="primary" color="#000" @click="toEditorPassage">
             发布<el-icon class="el-icon--right"><Upload /></el-icon>
           </el-button> 
         </div>
-
       </div>
-      <login v-if="loginFlag" />
+      <login v-if="loginFlag" v-bind:hideLogin ="hideLogin" v-on:loginSuccess="logSuc($event)"/>
       <register v-if="registerFlag" />
+      <tagSelector v-if="showTagDialog" />
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
 
   import { ElButton, ElDivider, ElIcon, ElInput } from '@/../node_modules/element-plus'
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
 
+  import { searchPassage } from '../http/api.js';
   import login from '@/components/login'
   import register from '@/components/register'
+  import tagSelector from '@/components/tagSelector'
   export default {
     name: 'bsHeader',
     components: {
@@ -61,6 +76,7 @@
       ElInput,
       Upload,
       Search,
+      tagSelector,
       login,
       register
     },
@@ -69,9 +85,17 @@
         LoginVisible: true,
         loginFlag: false,
         registerFlag: false,
-        input: '',
-
+        Input:{
+          content: '',
+          page:1
+        },    
+        hideLogin: false,// 登陆成功时隐藏登陆注册按钮
+        showTagDialog: false,// 发布文章时选择标签的对话框
       }
+    },
+    create(){
+        // 在页面加载时获取用户信息，仅执行一次
+        this.fetchUserInfo();
     },
     methods: {
       toHome(){
@@ -89,22 +113,48 @@
         this.loginFlag = false
       },
       toEditorPassage(){
-        this.$router.push({ path: '/editorPassage' })
-      }
+        //点击发布，显示选择标签的对话框
+        this.showTagDialog = true
+      },
+      // 将Login组件返回的值赋给hideLogin
+      logSuc(msg) {
+        this.hideLogin = msg
+      },
+      Search() {
+            searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
+            .then(result => {
+                this.searchResults = result; // 将搜索结果存储到searchResults数组中
+                console.log(this.searchResults)
+              })
+            .catch(error => {
+              console.log(this.Input);
+                console.error('搜索失败:', error);
+             });
+      },
+      fetchUserInfo() {
+        // 发送GET请求获取用户信息
+        getUserInfo(localStorage.getItem('token')) // 用于获取用户信息的接口 '/user-info'
+            .then(result => {
+                this.user = result; // 将获取的用户信息存储到searchResults中的user属性中
+             })
+            .catch(error => {
+                console.error('获取用户信息失败:', error);
+            });
+        }
     }
   }
   
-  </script>
+</script>
   
-  <style>
+<style scoped>
   .topBar{
+      z-index: 9999;
       width: 100%;
       min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
-      display: flex; /* 块级元素转换为行内元素 */
+      display: inline-flex; /* 块级元素转换为行内元素 */
       background: #FBFBFA;
       align-items: center;/* 垂直居中 */
       justify-content: space-between;/* 两端对齐 */
-      /* border-radius: 30px; */
       border-bottom-right-radius:0.5em;
       border-bottom-left-radius:0.5em;
       border-bottom: 1px solid rgb(235, 235, 227);
@@ -119,14 +169,16 @@
       align-items: center;
       justify-content: space-between;
   }
-
+/deep/.el-input__wrapper{
+    width:100%;
+    height:100%;
+  }
   .rightMenu{
-    display: flex;
+    width:15%;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    /* margin-right: 10%; */
-    padding-right: 2%;
-    
+    /* justify-items:end; */
+    justify-content: end;
   }
   
   ul {
@@ -153,10 +205,12 @@
       text-decoration: none;
   }
   .dropdown {
+      z-index: 9999;
       display: inline-block;
   }
   
   .dropdown-content {
+    z-index: 9999;  
       display: none;/* 隐藏下拉菜单 */
       position: absolute;
       background-color: #f9f9f9;
@@ -177,5 +231,5 @@
   .dropdown:hover .dropdown-content {
       display: block;/* 鼠标悬停时显示下拉菜单 */
   }
-  </style>
+</style>
   
