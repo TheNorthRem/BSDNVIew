@@ -13,8 +13,8 @@
                 <!-- 轮播图 -->     
                 <div class="pictureBox">
                     <el-carousel height="100%" style="width:100%">
-                    <el-carousel-item v-for="item in 4" :key="item">
-                        <h3 text="2xl">{{ item }}</h3>
+                    <el-carousel-item v-for="(item, index) in items" :key="index">
+                        <img :src="item" alt="Carousel Image">
                     </el-carousel-item>
                     </el-carousel>
                 </div> 
@@ -65,7 +65,9 @@
 
 <script>
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
-export default {
+import {Mounted, onBeforeMount,} from "vue"
+import showEditor_brief from '@/components/showEditor_brief.vue';
+export default { 
     name: 'bsHome',
     components:{
         ElCarousel,
@@ -77,6 +79,12 @@ export default {
     },
     data(){
         return{
+            items: [
+                        require('../assets/carousel/test1.jpg'),
+                        require('../assets/carousel/test2.jpg'),
+                        require('../assets/carousel/test3.jpg'),
+                        require('../assets/carousel/test4.jpg')
+                    ],
             articles: [
                     {
                         title: '文章标题1',
