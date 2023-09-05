@@ -35,3 +35,21 @@ export function ImageUpload(data){
         data
     })
 }
+
+//文章搜索
+export function searchPassage(params){
+    return request({
+        url: "/bsArticle/searchContent",
+        method: 'get',
+        params
+    })
+}
+
+//获取当前用户信息
+export function getUserInfo(params){
+    return request({
+        url: "/bsUser/getById",
+        method: 'get',
+        params
+    })
+}

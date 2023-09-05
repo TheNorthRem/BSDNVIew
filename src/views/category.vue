@@ -161,6 +161,7 @@ export default {
 <style>
 .block1Img{
     z-index:3;
+    padding-right:10%;
     width: 90%;
     position:relative;
     top:120px;
