@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogVisible" width="500px" align-center="true" style="height:550px;">
+  <el-dialog v-model="dialogVisible" width="500px" align-center="true" style="height:480px;">
     <span class="dialog-footer">
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="custom-form">
               <div class="register">注册</div>
@@ -145,7 +145,7 @@ export default {
 }
 .registerButton{
   width:350px;
-  height:64px;
+  height:48px;
   color: #E94457;
   font-family: Inter;
   font-size: 24px;

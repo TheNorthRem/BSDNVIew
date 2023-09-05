@@ -1,6 +1,6 @@
 <template>
   <!-- <div v-if="showLogin"> -->
-  <el-dialog id="dialog" v-model="dialogVisible" width="500px" align-center="true" style="height:550px;">
+  <el-dialog id="dialog" v-model="dialogVisible" width="500px" align-center="true" style="height:480px;">
       <span class="dialog-footer">
           <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="custom-form">
               <div class="login">登录</div>
@@ -166,7 +166,7 @@ export default {
 }
 .loginButton{
   width:350px;
-  height:64px;
+  height:48px;
   color: #E94457;
   font-family: Inter;
   font-size: 24px;
