@@ -23,7 +23,7 @@
                     <span v-for="(article, index) in articles" :key="index" style= "padding-bottom: 5%;">
                         <div class="articleInfo">
                            <div class="contentBox">
-                                <h2>{{ article.title }}</h2>
+                               <a href="#/passageDetail"> <h2>{{ article.title }}</h2> </a>
                                 <h4>{{ article.content }}</h4>
                            </div>
                            <footer>
@@ -43,7 +43,8 @@
             <div class = "asideBox"> 
                 <!-- 头像 -->
                 <div class = "iconBox">
-                    <img src="../assets/avatar/avatar0.png" style="height:45%; width: 45%;">
+                        
+                        <img src="../assets/avatar/avatar0.png" style="height:45%; width: 45%;">
                 </div>
                 <!-- 个人信息 -->
                 <div class = "infoBox">
@@ -51,7 +52,7 @@
                         <h2>UserName</h2>
                         <h3>Profile</h3>
                         <h3>Tags</h3>
-                        <h3>PageTitle1</h3>
+                        <h3><a href="#/profile">More</a></h3>
                     </div>
                     <!-- <div v-if="!hideLogin" class="info"><h2>请先登录！</h2></div> -->
                 </div>
@@ -217,7 +218,7 @@ div footer{
     justify-content: center;
     /* 头像和个人信息之间的垂直间隔 */
     padding-block-start: 3%;
-    padding-block-end: 13%;     
+    padding-block-end: 13%;  
 }
 .infoBox{
     width: 80%;

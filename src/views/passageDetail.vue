@@ -1,7 +1,7 @@
 <template>
     <div class="common-layout">
         <el-container>
-            <el-aside width="200px">
+            <el-aside width="20%">
                 <div class="style1" style="height:50px;margin-top: 10px">
                     <span style="font-size:15px;width:200px;margin-right: 30px"></span>
                     <span class="style1"
@@ -14,9 +14,13 @@
 </template>
 
 <script>
-import '@/../node_modules/element-plus'
+import {ElContainer,ElAside,ElMain } from '@/../node_modules/element-plus'
 export default {
-
+    components: {
+        ElContainer,
+        ElAside,
+        ElMain
+    },
 }
 </script>
 
