@@ -13,14 +13,14 @@
                 <!-- 轮播图 -->     
                 <div class="pictureBox">
                     <el-carousel height="100%" style="width:100%">
-                    <el-carousel-item v-for="item in 4" :key="item">
-                        <h3 text="2xl">{{ item }}</h3>
+                    <el-carousel-item v-for="CarouselPhoto in CarouselPhotos" :key="CarouselPhoto">
+                        <h3 text="2xl">{{ CarouselPhoto }}</h3>
                     </el-carousel-item>
                     </el-carousel>
                 </div> 
                 <!-- 文章列表 -->  
                 <div class="articleBox">
-                    <span v-for="(article, index) in articles" :key="index" style= "padding-bottom: 5%;">
+                    <!-- <span v-for="(article, index) in articles" :key="index" style= "padding-bottom: 5%;">
                         <div class="articleInfo">
                            <div class="contentBox">
                                 <h2>{{ article.title }}</h2>
@@ -36,7 +36,8 @@
                                 </div>
                            </footer>
                         </div>
-                    </span>   
+                    </span>    -->
+                    <showEditor_brief></showEditor_brief>
                 </div> 
             </div>
             <!-- 侧栏 -->
@@ -60,47 +61,32 @@
 
 <script>
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
+import { onBeforeMount,Mounted } from 'vue'
+import {getTopArticles} from "@/http/api"
+import showEditor_brief from '@/components/showEditor_brief.vue'
+
 export default {
     name: 'bsHome',
     components:{
         ElCarousel,
         ElCarouselItem,
-        ElBacktop
+        ElBacktop,
+        onBeforeMount,
+        Mounted,
+        showEditor_brief
     },
     data(){
         return{
-            articles: [
-                    {
-                        title: '文章标题1',
-                        content: '文章内容1',
-                        author: {
-                            name: '作者1姓名',
-                            pic: '../assets/avatar/avatar1.png',
-                            profile: '简介1'
-                        },
-                        link: '链接1'
-                    },
-                    {
-                        title: '文章标题2',
-                        content: '文章内容2',
-                        author: {
-                            name: '作者2姓名',
-                            pic: '../assets/avatar/avatar2.png',
-                            profile: '简介2'
-                        },
-                        link: '链接2'
-                    },
-                    {
-                        title: '文章标题3',
-                        content: '文章内容3',
-                        author: {
-                            name: '作者3姓名',
-                            profile: '简介3'
-                        },
-                        link: '链接3'
-                },
-            ]
+            CarouselPhotos:[],
+            msg:"123"
         }
+        
+    },
+    methods:{
+        
+    },
+    mounted(){
+
     }
 }
 </script>

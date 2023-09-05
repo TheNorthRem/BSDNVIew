@@ -11,7 +11,7 @@
             <li><a href="#/">首页</a></li>
             <li><a href="#">博客</a></li>
             <li><a href="#">社区</a></li>
-            <li><a href="#">学习</a></li>
+            <li><a href="https://www.icourse163.org/">学习</a></li>
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
               <div class="dropdown-content">
@@ -32,7 +32,7 @@
         <div class="rightMenu">
           <el-button  size="large" link @click="changeRegister">注册</el-button>
           <el-divider direction="vertical" />
-          <el-button  link @click="changeLogin">登录</el-button>
+          <el-button  link @click="changeLogin" v-if="LoginVisible">登录</el-button>
           <el-button type="primary" color="#000" @click="toEditorPassage">
             发布<el-icon class="el-icon--right"><Upload /></el-icon>
           </el-button> 
@@ -66,6 +66,7 @@
     },
     data() {
       return {
+        LoginVisible: true,
         loginFlag: false,
         registerFlag: false,
         input: '',

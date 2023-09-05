@@ -72,6 +72,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           login(this.ruleForm).then(res => {
+            console.log(res)
             if (res.data.code == 200) {
               localStorage.setItem('token', res.data.data.token)
               localStorage.setItem('ID', res.data.data.userId)

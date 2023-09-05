@@ -35,3 +35,28 @@ export function ImageUpload(data){
         data
     })
 }
+
+//热门文章
+export function getTopArticles(){
+    return request({
+        url: "/bsArticle/getTopArticles",
+        method: 'get',
+    })
+}
+
+//搜索
+export function searchPassage(){
+    return request({
+        url: "/bsArticle/searchContent",
+        method: 'get',
+    })
+}
+
+//搜索
+// export function ImageUpload(data){
+//     return request({
+//         url: "/ImageUpload",
+//         method: 'get',
+//         data
+//     })
+// }
