@@ -46,6 +46,7 @@ export default {
                 title: this.title,
                 content: this.html,
                 id: localStorage.getItem("ID"),
+                tag:this.$route.query.name
             },
         }
     },

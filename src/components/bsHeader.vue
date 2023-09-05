@@ -12,20 +12,16 @@
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
               <div class="dropdown-content">
-                <a href="#">分类1</a>
-                <a href="#">分类2</a>
-                <a href="#">分类3</a>
+                <a href="#">前端</a>
+                <a href="#">后端</a>
+                <a href="#">数据库</a>
+                <a href="#">生活</a>
+                <a href="#">编程语言</a>
+                <a href="#">其他</a>
               </div>
             </div>
           </ul>
         </div>
-        <!--搜索框 -->
-        <!-- <el-input
-          v-model="input" class="w-20 m-2" style="width: 35%" placeholder="Please Input">
-          <template #prefix>
-            <el-icon><search /></el-icon>
-          </template>
-        </el-input> -->
         <div class="mt-4" style="width:30%;">
           <el-input
             v-model="Input.content"
@@ -49,14 +45,15 @@
             </div>
             <div v-if="hideLogin" style="display: flex;">userName,欢迎</div>
           </div>
+          <!-- 点击发布先让用户选择标签，再跳转到编辑页面 -->
           <el-button type="primary" color="#000" @click="toEditorPassage">
             发布<el-icon class="el-icon--right"><Upload /></el-icon>
           </el-button> 
         </div>
-
       </div>
       <login v-if="loginFlag" v-bind:hideLogin ="hideLogin" v-on:loginSuccess="logSuc($event)"/>
       <register v-if="registerFlag" />
+      <tagSelector v-if="showTagDialog" />
     </div>
 </template>
   
@@ -65,10 +62,14 @@
   import { ElButton, ElDivider, ElIcon, ElInput } from '@/../node_modules/element-plus'
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
+<<<<<<< HEAD
+=======
 
   import { searchPassage } from '../http/api.js';
+>>>>>>> 3576565836ea877076c8df03bf64f2ef5a178a45
   import login from '@/components/login'
   import register from '@/components/register'
+  import tagSelector from '@/components/tagSelector'
   export default {
     name: 'bsHeader',
     components: {
@@ -78,6 +79,7 @@
       ElInput,
       Upload,
       Search,
+      tagSelector,
       login,
       register
     },
@@ -90,6 +92,7 @@
           page:1
         },    
         hideLogin: false,// 登陆成功时隐藏登陆注册按钮
+        showTagDialog: false,// 发布文章时选择标签的对话框
       }
     },
     create(){
@@ -112,7 +115,8 @@
         this.loginFlag = false
       },
       toEditorPassage(){
-        this.$router.push({ path: '/editorPassage' })
+        //点击发布，显示选择标签的对话框
+        this.showTagDialog = true
       },
       // 将Login组件返回的值赋给hideLogin
       logSuc(msg) {

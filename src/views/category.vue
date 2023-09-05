@@ -151,7 +151,7 @@ export default {
   name: 'Category',
   data(){
     return{
-        categoryTitle:['Title1','前端','后端','数据库','生活','编程语言','娱乐'],
+        categoryTitle:['所有文章','前端','后端','数据库','生活','编程语言','娱乐'],
     }
   }
 }
