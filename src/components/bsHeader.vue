@@ -62,11 +62,8 @@
   import { ElButton, ElDivider, ElIcon, ElInput } from '@/../node_modules/element-plus'
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
-<<<<<<< HEAD
-=======
 
   import { searchPassage } from '../http/api.js';
->>>>>>> 3576565836ea877076c8df03bf64f2ef5a178a45
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
