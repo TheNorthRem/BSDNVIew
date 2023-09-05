@@ -43,7 +43,12 @@
               <el-divider direction="vertical" />
               <el-button  link @click="changeLogin">登录</el-button>
             </div>
-            <div v-if="hideLogin" style="display: flex;">userName,欢迎</div>
+            <!-- 登陆成功后显示“注销”和“登出”按钮 -->
+            <div v-if="hideLogin" style="display: inline-flex;">
+              <el-button  size="large" link >注销</el-button>
+              <el-divider direction="vertical" />
+              <el-button  link @click="logOut">登出</el-button>
+            </div>
           </div>
           <!-- 点击发布先让用户选择标签，再跳转到编辑页面 -->
           <el-button type="primary" color="#000" @click="toEditorPassage">
