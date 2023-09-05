@@ -49,8 +49,8 @@
                 <!-- 个人信息 -->
                 <div class = "infoBox">
                     <div class="info">
-                        <h2>UserName</h2>
-                        <h3>Profile</h3>
+                        <h2>{{nickName}}</h2>
+                        <h3>{{userName}}</h3>
                         <h3>Tags</h3>
                         <h3><a href="#/profile">More</a></h3>
                     </div>
@@ -64,6 +64,7 @@
 
 <script>
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
+import { getUserInfo } from '../http/api.js';
 export default {
     name: 'bsHome',
     components:{
@@ -73,6 +74,8 @@ export default {
     },
     data(){
         return{
+            nickName:'nickName',
+            userName:'userName',
             items: [
                         require('../assets/carousel/test1.jpg'),
                         require('../assets/carousel/test2.jpg'),
@@ -112,7 +115,30 @@ export default {
             ]
         }
     },
+    created() {
+        this.Reload();
+    },
     methods:{
+        Reload() {
+            //判断用户的登录状态
+            let userID=localStorage.getItem('ID');
+            let IDForm = {
+                id: userID,
+            }
+            console.log("userID",userID);
+            if(userID == null) return;
+            else{
+                getUserInfo(IDForm) 
+                .then(result => {
+                    console.log(result)
+                    this.userName = result.data.data.userName;
+                    this.nickName = result.data.data.nickName;
+                })
+                .catch(error => {
+                    console.error('获取用户信息失败:', error);
+                });
+            }
+    }
       
     }
 }

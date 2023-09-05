@@ -24,7 +24,7 @@
         </div>
         <div class="mt-4" style="width:30%;">
           <el-input
-            v-model="input"
+            v-model="Input.content"
             placeholder="Please input"
             class="w-20 m-2"
           >
@@ -32,7 +32,7 @@
               <el-icon><search /></el-icon>
             </template>
             <template #append>
-              <el-button>搜索</el-button>
+              <el-button @click="Search()">搜索</el-button>
             </template>
           </el-input>
         </div>
@@ -62,6 +62,11 @@
   import { ElButton, ElDivider, ElIcon, ElInput } from '@/../node_modules/element-plus'
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
+<<<<<<< HEAD
+=======
+
+  import { searchPassage } from '../http/api.js';
+>>>>>>> 3576565836ea877076c8df03bf64f2ef5a178a45
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
@@ -82,10 +87,17 @@
       return {
         loginFlag: false,
         registerFlag: false,
-        input: '',        
+        Input:{
+          content: '',
+          page:1
+        },    
         hideLogin: false,// 登陆成功时隐藏登陆注册按钮
         showTagDialog: false,// 发布文章时选择标签的对话框
       }
+    },
+    create(){
+        // 在页面加载时获取用户信息，仅执行一次
+        this.fetchUserInfo();
     },
     methods: {
       toHome(){
@@ -110,6 +122,27 @@
       logSuc(msg) {
         this.hideLogin = msg
       },
+      Search() {
+            searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
+            .then(result => {
+                this.searchResults = result; // 将搜索结果存储到searchResults数组中
+                console.log(this.searchResults)
+              })
+            .catch(error => {
+              console.log(this.Input);
+                console.error('搜索失败:', error);
+             });
+      },
+      fetchUserInfo() {
+        // 发送GET请求获取用户信息
+        getUserInfo(localStorage.getItem('token')) // 用于获取用户信息的接口 '/user-info'
+            .then(result => {
+                this.user = result; // 将获取的用户信息存储到searchResults中的user属性中
+             })
+            .catch(error => {
+                console.error('获取用户信息失败:', error);
+            });
+        }
     }
   }
   
