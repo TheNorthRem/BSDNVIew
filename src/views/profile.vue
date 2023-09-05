@@ -32,6 +32,9 @@
                               </div>
                           </div>
                       </div>  
+                      <div class="img">
+                            <img src="../assets/projects-illo.webp" style="width:222px;"/>
+                      </div>
               </section>
               <!-- 右侧 -->
               <div class="rightBlocks">
@@ -117,6 +120,9 @@
   </script>
   
   <style>
+  .img{
+    margin-top:150px;
+  }
   .moreDetail{
     margin-top:0.7%;
   }
@@ -189,20 +195,17 @@
 
 .one {
   margin-left:10px;
-  height: 300px;
-  
+  height: 600px;
 }
 
 .two {
   margin-left:10px;
-  height: 300px;
-  
+  height: 600px;
 }
 
 .three {
   margin-left:10px;
-  height: 300px;
-  
+  height: 600px;
 }
 
   .blockIcon{
@@ -286,6 +289,8 @@
       width: 100%;
       height: 100%;
       position: relative;
+      display:flex;
+      flex-direction: column;
   }
   .blockHeader {
       max-width: 512px;
