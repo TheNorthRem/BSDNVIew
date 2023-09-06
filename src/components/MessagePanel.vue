@@ -2,11 +2,11 @@
   <div class="panel">
         <div class="front">
             <keep-alive>
-            <ul v-infinite-scroll="load" class="infinite-list1" style="overflow: auto">
-            <li v-for="i in messageLen" :key="i" class="infinite-list-item1">
-                <MessageDetail  :username= this.messages[i-1].nickName :Message= this.messages[i-1].content  srcs="http://localhost:8081/image/al.png"/>
-            </li>
-            </ul>
+                <ul v-infinite-scroll="load" class="infinite-list1" style="overflow: auto">
+                <li v-for="i in messageLen" :key="i" class="infinite-list-item1">
+                    <MessageDetail  :username= this.messages[i-1].nickName :Message= this.messages[i-1].content :time= this.messages[i-1].time srcs="http://localhost:8081/image/al.png"/>
+                </li>
+                </ul>
             </keep-alive>
         </div>
         <div class="bott">
@@ -67,6 +67,19 @@
                 })
                     
                 
+            },
+            update(){
+                getMessage({
+                        'userFromId': localStorage.getItem('ID'),
+                        'userToId': this.toId
+                    }).then(res=>{
+                        console.log(res.data)   
+                        this.messages=res.data.data
+                        this.messageLen=res.data.data.length;
+                    })
+                        
+                
+                    this.Input=''
             }
         },
         mounted(){

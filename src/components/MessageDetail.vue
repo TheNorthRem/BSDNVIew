@@ -6,6 +6,9 @@
             <p class="use1">{{username}}</p>
             <p class="mes1">{{Message}}</p>
         </div>
+        <div class="time"> 
+            <p>{{time}}</p>
+        </div>
   </div>
 
 </template>
@@ -23,7 +26,8 @@ export default {
     props:{
         username:String,
         Message:String,
-        srcs:String
+        srcs:String,
+        time:String
     },
     mounted(){
         console.log(this.username)
@@ -75,6 +79,9 @@ export default {
         margin-left: 25px;
         color: rgb(152, 151, 149);
     }
-    
+    .time{
+        align-self: right;
+        margin-left: 100px;
+    }
     
 </style>

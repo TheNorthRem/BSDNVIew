@@ -17,7 +17,9 @@
 
     </div>
         <div class = "right">
-            <MessagePanel :toId = this.curId :nickName="233" />
+            <keep-alive>
+                <MessagePanel ref="child" :toId = this.curId :nickName="233" />
+            </keep-alive>
         </div>
   
 </div>
@@ -55,8 +57,9 @@
         methods:{
             //接收UserPanel子组件传来的userId，存到curID中
             UserIdChanged(id){
-                this.curId=id
+                this.curId=this.users[id-1].userId
                 console.log(this.curId)
+                this.$refs.child.update()
             }
         }
         

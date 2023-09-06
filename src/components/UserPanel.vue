@@ -1,6 +1,6 @@
-<template>
+<template >
 
-  <div class= "appp" @click="changeUserId">
+  <div class= "appp" @click="changeUserId" >
         <img class="imgg" :src= this.srcs />
         <div class="txtttt"> 
             <p class="ssss">{{username}}</p>
