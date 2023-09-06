@@ -146,11 +146,11 @@ export function logOutUser(userId,token) {
 }
 
 //上传用户头像
-export function uploadUserAvatar(params) {
+export function uploadUserAvatar(data) {
     return request({
         url: "/bsUser/uploadAvatar",
         method: 'post',
-        params
+        data
     })
 }
 
@@ -175,3 +175,15 @@ export function getArticleById(params) {
         params
     })
 }
+
+
+//收藏文章
+export function addFavorites(params) {
+    return request({
+        url: "/bsArticle/addFavorites",
+        method: 'post',
+        params
+    })
+}
+
+
