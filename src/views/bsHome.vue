@@ -31,7 +31,12 @@
                         :articleId=this.TopArticles[i-1].articleId
                         ></showEditor_brief>
                     </span>
-                </div> 
+                </div>
+                <div>
+                    <div class="box1">
+                        <b>Created by BUPTer&emsp;&emsp;&emsp;© 2023 &emsp;&emsp;SpringBoot + vue3</b>
+                    </div>
+                </div>
             </div>
             <!-- 侧栏 -->
             <div class = "asideBox"> 
@@ -46,9 +51,8 @@
                         <h2>{{nickName}}</h2>
                         <h3>{{userName}}</h3>
                         <h3>{{intro}}</h3>
-                        <h3><a href="#/profile">More</a></h3>
+                        <h3 v-if="this.userName!='请先登录！'"><a href="#/profile">More</a></h3>
                     </div>
-                    <!-- <div v-if="!hideLogin" class="info"><h2>请先登录！</h2></div> -->
                 </div>
                 <img src="../assets/underAsideBox.webp" style="margin-top:30%; height:auto;width:15%;position: fixed;right: 10%;bottom: 0;" >
             </div>
@@ -58,11 +62,23 @@
 
 <script>
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
-import {Mounted, BeforeMount,Created} from "vue"
+import {Created} from "vue"
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { getUserInfo } from '../http/api.js';
-import { toRaw } from '@vue/reactivity'
 import { getTopArticles } from "@/http/api"
+
+//解决this指向问题，在window.addEventListener中this是指向window的。
+//需要将vue实例赋值给_this,这样在window.addEventListener中通过_this可以为vue实例上data中的变量赋值
+let _this=this;
+//根据自己需要来监听对应的key
+window.addEventListener("setItemEvent",function(e){
+	//e.key : 是值发生变化的key
+	//e.newValue : 是可以对应的新值
+	if(e.key==="formDocumnet"){
+		console.log(e.newValue);
+		_this.content=e.newValue;
+	}
+})
 
 export default { 
     name: 'bsHome',
@@ -70,8 +86,6 @@ export default {
         ElCarousel,
         ElCarouselItem,
         ElBacktop,
-        BeforeMount,
-        Mounted,
         showEditor_brief,
         getTopArticles,
         Created,
@@ -79,9 +93,9 @@ export default {
     data(){
         return{
             getTopArticlesFunctionSuccessFlag: false,
-            nickName:"nickName",
-            userName:'userName',
-            intro: "Introduction",
+            nickName:"🤖🤖🤖🤖🤖",
+            userName:'请先登录！',
+            intro: "👽👽👽👽👽",
             items: [
                         require('../assets/carousel/test1.jpg'),
                         require('../assets/carousel/test2.jpg'),
@@ -91,7 +105,6 @@ export default {
             profilePhotoPath: [],
             TopArticles:[],
             articleArrayLength:0
-         
         }
     },
     created() {
@@ -101,8 +114,15 @@ export default {
                     console.log(res.data.data)
                     this.articleArrayLength = res.data.data.length
                     this.TopArticles = res.data.data
-                    console.log(this.TopArticles)
-                    console.log(this.articleArrayLength)
+
+                    //修改简介格式
+                    for(let i = 0; i < this.TopArticles.length; i++) {
+                        this.TopArticles[i].brief = "<h3>简介：".concat(this.TopArticles[i].brief).concat("......</h3>")
+                        console.log(this.TopArticles[i].brief)
+                    }
+                    // this.TopArticles.brief = String(this.TopArticles.brief).concat("...")
+                    // console.log(this.TopArticles)
+                    // console.log(this.articleArrayLength)
                 } else {
                     console.log("获取热门文章失败！")
                 }
@@ -112,8 +132,8 @@ export default {
     },
     methods:{
         Reload() {
-            //判断用户的登录状态
-            let userID=localStorage.getItem('ID');
+            //判断用户的登录状态，如果用户已经登录，则显示用户的头像和个人信息
+            let userID=localStorage.getItem('ID');//获取用户ID
             let IDForm = {
                 id: userID,
             }
@@ -132,7 +152,6 @@ export default {
                 });
             }
         },
-        // 主页下面获取文章
        
     },
     // async beforeMount() {
@@ -146,7 +165,9 @@ export default {
     //     console.log("create")
     // },
 
+    
 }
+
 </script>
 
 <style scoped>
@@ -211,11 +232,12 @@ export default {
     align-items: center;/* 垂直居中 */
     flex-direction: column;/* 垂直排列 */
     padding: 10% 0% 0% 0%;
+    margin-left: 0%;
 }
 
 .articleInfo{
     width: 100%;
-    height: 250px;
+    height: 350px;
     border-radius: 12px;
     border: 2px solid #F6F5F4;
     background: #FBFBFA;
@@ -272,4 +294,11 @@ div footer{
     padding: 5% 10%;
 }
 
+.box1{
+    width: 1000px;
+    height: 10px;
+    font-size: 14px;
+    text-align: center;  /*水平居中*/
+    line-height: 10px; /*垂直居中 值为heigth的值*/
+}
 </style>
