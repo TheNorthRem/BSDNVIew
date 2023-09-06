@@ -2,7 +2,7 @@
   <div class="panel">
         <div class="front">
             <keep-alive>
-                <ul v-infinite-scroll="load" class="infinite-list1" style="overflow: auto">
+                <ul v-infinite-scroll="load" class="infinite-list1" style="overflow: auto;height: 500px;">
                 <li v-for="i in messageLen" :key="i" class="infinite-list-item1">
                     <MessageDetail  :username= this.messages[i-1].nickName :Message= this.messages[i-1].content :time= this.messages[i-1].time srcs="http://localhost:8081/image/al.png"/>
                 </li>
@@ -15,7 +15,9 @@
                 <el-button @click="send">发送</el-button>
               </template>
             </el-input>
+            <img src="../assets/avatars.webp" style="width:100%;margin-top:100px;"/>
         </div>
+        
   </div>
 </template>
 
@@ -103,8 +105,9 @@
    
 .inputStyle{
     position:relative;
+    z-index:70;
     z-index: 99;
-    padding-top:0;
+    padding-top:110px;
 }
     .front{
         width: 100%;
@@ -113,12 +116,14 @@
     }
 
     .bott{
+        z-index:60;
         width: 100%;
         height: 440px;
-        background-color: rgb(255, 255, 255) ;
+        /* background-color: rgb(255, 255, 255) ; */
     }
      .infinite-list1 {
-        height: 400px;
+        z-index:99;
+        height: 600px;
         padding: 0;
         margin: 0;
         list-style: none;

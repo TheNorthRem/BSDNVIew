@@ -73,7 +73,7 @@
         width: 100%;
         height: 100%;
         min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
-        background: rgb(214, 209, 209);
+        /* background: rgb(214, 209, 209); */
         position: relative;
         display: flex;
         flex-direction: row;
@@ -82,7 +82,7 @@
 
     .messageBox{
         width: 100%;
-        height: 840px;
+        height: 848px;
         padding-inline: 5%;
         display: flex;
         flex-direction: row;
@@ -105,7 +105,7 @@
     }
 
     .infinite-list {
-        overflow: auto;
+        /* overflow: auto; */
         height: 100%;
         padding: 0;
         margin: 0;
