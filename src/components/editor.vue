@@ -77,6 +77,14 @@ export default {
             }
             ).catch(error => {
                 //加上响应代码
+                ElMessage({
+                    showClose: true,
+                    message: '发布失败,请先登录！',
+                    type: 'error',
+                })
+                this.$router.push({
+                    path: '/',
+                })
                 console.error("被拦截器拦住了!")
                 console.error(error)
             })

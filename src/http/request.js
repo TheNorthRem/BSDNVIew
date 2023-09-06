@@ -33,17 +33,25 @@ request.interceptors.request.use(
 
 //响应拦截器
 request.interceptors.response.use(
+    console.log("响应拦截器"),
 (response) => {
+    console.log("response");
+
     // 对响应数据做点什么
     return response;
 },
 ({response}) => {
-    // 对响应错误做点什么
-    const {status, data} = response;
+    const {status, data} = response; // 获取状态码
     const{ message } = data;
+   
     Message.error(message); // 提示错误信息
     if (status === 401) router.push('/login'); // 跳转到登录页面
+},
+(error) => {  
+    // 对响应错误做点什么
+    console.dir(error);
     return Promise.reject( error );
-}
+  }
+
 );
 export default axios
