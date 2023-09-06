@@ -1,5 +1,20 @@
 <template>
     <!-- <span v-for="i in articlesArrayLength" style="padding-bottom: 5%;"> -->
+<<<<<<< HEAD
+    <div class="articleInfo">
+        <footer class="footerBox">
+            <!-- <h3>
+                {{ this.title }}
+            </h3> -->
+            <h2> {{this.title}} </h2>
+            <!-- 等待替换动态头像资源
+                :src=this.profilePhotoPath[i-1] -->
+            <!-- <img src="../assets/avatar/avatar1.png" style="width: 10%;height: auto; padding-right:3%;" /> -->
+            <div class="authorBox">
+
+                <img src="../assets/avatar/avatar1.png" class="avator" />
+
+=======
         <div class="articleInfo">
             <footer class="footerBox">
                 <h3 >
@@ -12,30 +27,40 @@
                     
                 <img src="../assets/avatar/avatar1.png" class="avator" />
             
+>>>>>>> 8f1703a3eb7d7c92c1af0a3f04c561dc0945dba1
                 <div>
                     <h3>
                         {{ this.nickName }}
                     </h3>
                     <p>ID：{{ this.uploaderId }}</p>
                 </div>
+<<<<<<< HEAD
+=======
                  </div>
             </footer>
 
             <div style="border: 1px solid #652828;border-radius: 3px;">
                 <Editor style="height: 100px; overflow-y: hidden; width: 800px; " v-model= this.ModifiedBrief
                     :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
+>>>>>>> 8f1703a3eb7d7c92c1af0a3f04c561dc0945dba1
             </div>
+        </footer>
 
-            <footer style="display: inline-flex;padding-top: 2%;">
-                <!-- <h4>
+        <div style="border: 1px solid #652828;border-radius: 3px;">
+            <Editor style="height: 200px; overflow-y: hidden; width: 800px; " v-model=this.brief
+                :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
+        </div>
+
+        <footer style="display: inline-flex;padding-top: 2%;">
+            <!-- <h4>
                     <p style="padding-left: 1300%;" >More...</p>
                 </h4> -->
-                <div style="padding-left: 90%;">
-                    <el-button type="primary" text bg @click="MoreRouter">More...</el-button>
-                </div>
+            <div style="padding-left: 90%;">
+                <el-button type="primary" text bg @click="MoreRouter">More...</el-button>
+            </div>
 
-            </footer>
-        </div>
+        </footer>
+    </div>
     <!-- </span> -->
 </template>
 
@@ -43,7 +68,10 @@
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { ElButton } from '@/../node_modules/element-plus';
 import { Mounted, BeforeCreate } from "vue"
+<<<<<<< HEAD
+=======
 // import "js/vue.js"
+>>>>>>> 8f1703a3eb7d7c92c1af0a3f04c561dc0945dba1
 
 export default {
     name: "showEditor_brief",
@@ -66,22 +94,26 @@ export default {
             },
             mode: 'default', // or 'simple',
             //添加了标题、简介标头、省略号
+<<<<<<< HEAD
+            ModifiedBrief: "123",
+=======
             ModifiedBrief: "",
+>>>>>>> 8f1703a3eb7d7c92c1af0a3f04c561dc0945dba1
         }
     },
     props: {
-        uploaderId : Number, 
+        uploaderId: Number,
         uploaderNickName: String,
-        articleId:Number,
-        brief:String,
-        title:String,
-        nickName:String,
+        articleId: Number,
+        brief: String,
+        title: String,
+        nickName: String,
     },
 
     methods: {
         // 显示热门文章
         MoreRouter() {
-            console.log("articleId ::: " + this.articleId)
+            console.log("articleId: " + this.articleId)
             this.$router.push({
                 path: "/passageDetail",
                 query: {
@@ -92,12 +124,21 @@ export default {
         },
         async onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
+            // console.log(this.uploaderId);
+            // console.log(this.articleId);
         },
     },
+<<<<<<< HEAD
+    mounted() {
+
+    },
+    beforeDestroy() {
+=======
     beforeCreate(){
         this.ModifiedBrief = this.brief.concat("...")
     },
     beforeUnmount() {
+>>>>>>> 8f1703a3eb7d7c92c1af0a3f04c561dc0945dba1
         const editor = this.editor
         if (editor == null) return
         editor.destroy() // 组件销毁时，及时销毁编辑器
@@ -135,5 +176,8 @@ export default {
     /* padding-left: 5%; */
     padding-bottom: 3%;
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8f1703a3eb7d7c92c1af0a3f04c561dc0945dba1
 </style>

@@ -66,7 +66,6 @@ import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-
 import {Mounted, BeforeMount,Created} from "vue"
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { getUserInfo } from '../http/api.js';
-import { toRaw } from '@vue/reactivity'
 import { getTopArticles } from "@/http/api"
 
 export default { 
@@ -106,8 +105,15 @@ export default {
                     console.log(res.data.data)
                     this.articleArrayLength = res.data.data.length
                     this.TopArticles = res.data.data
-                    console.log(this.TopArticles)
-                    console.log(this.articleArrayLength)
+
+                    //修改简介格式
+                    for(let i = 0; i < this.TopArticles.length; i++) {
+                        this.TopArticles[i].brief = "<h3>简介：".concat(this.TopArticles[i].brief).concat("......</h3>")
+                        console.log(this.TopArticles[i].brief)
+                    }
+                    // this.TopArticles.brief = String(this.TopArticles.brief).concat("...")
+                    // console.log(this.TopArticles)
+                    // console.log(this.articleArrayLength)
                 } else {
                     console.log("获取热门文章失败！")
                 }
@@ -216,11 +222,12 @@ export default {
     align-items: center;/* 垂直居中 */
     flex-direction: column;/* 垂直排列 */
     padding: 10% 0% 0% 0%;
+    margin-left: 0%;
 }
 
 .articleInfo{
     width: 100%;
-    height: 250px;
+    height: 350px;
     border-radius: 12px;
     border: 2px solid #F6F5F4;
     background: #FBFBFA;

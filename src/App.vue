@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <router-view /> -->
     <bsHeader />
     <!-- <Message /> -->
     <router-view />
@@ -8,7 +7,6 @@
 </template>
 
 <script>
-import bsHome from './views/bsHome.vue'
 import bsHeader from '@/components/bsHeader.vue'
 
 
@@ -16,7 +14,7 @@ import bsHeader from '@/components/bsHeader.vue'
 export default {
   name: 'App',
   components: {
-    bsHeader
+    bsHeader,
   }
 }
 </script>
