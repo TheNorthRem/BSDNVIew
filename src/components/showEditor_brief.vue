@@ -1,34 +1,42 @@
 <template>
     <!-- <span v-for="i in articlesArrayLength" style="padding-bottom: 5%;"> -->
-        <div class="articleInfo">
-            <footer style="display: inline-flex; padding-top: 2%;">
-                <!-- 等待替换动态头像资源
+    <div class="articleInfo">
+        <footer class="footerBox">
+            <!-- <h3>
+                {{ this.title }}
+            </h3> -->
+            <h2> {{this.title}} </h2>
+            <!-- 等待替换动态头像资源
                 :src=this.profilePhotoPath[i-1] -->
-                <img src="../assets/avatar/avatar1.png" style="width: 10%;height: auto; padding-right:3%;" />
+            <!-- <img src="../assets/avatar/avatar1.png" style="width: 10%;height: auto; padding-right:3%;" /> -->
+            <div class="authorBox">
+
+                <img src="../assets/avatar/avatar1.png" class="avator" />
+
                 <div>
                     <h3>
                         {{ this.nickName }}
                     </h3>
                     <p>ID：{{ this.uploaderId }}</p>
                 </div>
-
-            </footer>
-
-            <div style="border: 1px solid #652828;border-radius: 3px;">
-                <Editor style="height: 100px; overflow-y: hidden; width: 800px; " v-model= this.brief
-                    :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
             </div>
+        </footer>
 
-            <footer style="display: inline-flex;padding-top: 2%;">
-                <!-- <h4>
+        <div style="border: 1px solid #652828;border-radius: 3px;">
+            <Editor style="height: 200px; overflow-y: hidden; width: 800px; " v-model=this.brief
+                :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
+        </div>
+
+        <footer style="display: inline-flex;padding-top: 2%;">
+            <!-- <h4>
                     <p style="padding-left: 1300%;" >More...</p>
                 </h4> -->
-                <div style="padding-left: 90%;">
-                    <el-button type="primary" text bg @click="MoreRouter">More...</el-button>
-                </div>
+            <div style="padding-left: 90%;">
+                <el-button type="primary" text bg @click="MoreRouter">More...</el-button>
+            </div>
 
-            </footer>
-        </div>
+        </footer>
+    </div>
     <!-- </span> -->
 </template>
 
@@ -63,18 +71,18 @@ export default {
         }
     },
     props: {
-        uploaderId : Number, 
+        uploaderId: Number,
         uploaderNickName: String,
-        articleId:Number,
-        brief:String,
-        title:String,
-        nickName:String,
+        articleId: Number,
+        brief: String,
+        title: String,
+        nickName: String,
     },
 
     methods: {
         // 显示热门文章
         MoreRouter() {
-            console.log("articleId ::: " + this.articleId)
+            console.log("articleId: " + this.articleId)
             this.$router.push({
                 path: "/passageDetail",
                 query: {
@@ -85,10 +93,12 @@ export default {
         },
         async onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
+            // console.log(this.uploaderId);
+            // console.log(this.articleId);
         },
     },
-    mounted(){
-        
+    mounted() {
+
     },
     beforeDestroy() {
         const editor = this.editor
@@ -104,3 +114,28 @@ export default {
 </script>
 
 <style src="@wangeditor/editor/dist/css/style.css"></style>
+
+<style>
+.footerBox{
+    display: inline-flex; 
+    padding-right: 2%;
+    padding-bottom: 2%;
+    align-content: space-between;
+    justify-content: space-between;
+    justify-items: space-between;
+}
+.authorBox{
+    display: flex; 
+    flex-direction: row;
+    /* display: block; */
+    width: 30%;
+    justify-content: flex-end;
+}
+.avator{
+    width: 35%;
+    height: auto; 
+    padding-right:10%;
+    /* padding-left: 5%; */
+    padding-bottom: 3%;
+}
+</style>

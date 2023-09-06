@@ -217,11 +217,12 @@ export default {
     align-items: center;/* 垂直居中 */
     flex-direction: column;/* 垂直排列 */
     padding: 10% 0% 0% 0%;
+    margin-left: 0%;
 }
 
 .articleInfo{
     width: 100%;
-    height: 250px;
+    height: 350px;
     border-radius: 12px;
     border: 2px solid #F6F5F4;
     background: #FBFBFA;

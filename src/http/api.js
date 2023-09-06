@@ -76,7 +76,7 @@ export function getUserInfo(params) {
 //获取用户的详细信息：用户主页展示信息
 export function detailedUserInfo(params) {
     return request({
-        url: "/bsUserInformation/search",
+        url: "/bsUserInformation/searchContent",
         method: 'get',
         params
     })
@@ -173,5 +173,21 @@ export function getArticleById(params) {
         url: "/bsArticle/getById",
         method: 'get',
         params
+    })
+}
+
+
+export function getByCategory(params) {
+    return request({
+        url: "/bsArticle/getByCategory",
+        method: 'get',
+        params
+    })
+}
+
+export function getAllArticles(params) {
+    return request({
+        url: "/bsArticle/list",
+        method: 'get',
     })
 }
