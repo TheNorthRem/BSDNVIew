@@ -41,16 +41,16 @@
         </div>
         <div class="rightMenu">
           <div style="margin-right: 10%; display:inline-flex;">
-            <div v-if="!hideLogin" style="display: inline-flex;">
+            <div v-if="!this.user" style="display: inline-flex;">
               <el-button  size="large" link @click="reverseRegisterFlag">注册</el-button>
               <el-divider direction="vertical" />
               <el-button  link @click="reverseLoginFlag">登录</el-button>
             </div>
             <!-- 登陆成功后查看是否有id，有的话显示“注销”和“登出”按钮 -->
-            <div v-if="hideLogin" style="display: inline-flex;">
-              <el-button  link size="large" @click="deleteUser">注销</el-button>
+            <div v-if="this.user" style="display: inline-flex;">
+              <el-button  type="danger" link size="large" @click="deleteUser">注销</el-button>
               <el-divider direction="vertical" />
-              <el-button  link @click="logOut">登出</el-button>
+              <el-button  type="primary" link @click="logOut">登出</el-button>
             </div>
           </div>
           <!-- 点击发布先让用户选择标签，再跳转到编辑页面 -->
@@ -92,6 +92,7 @@
     },
     data() {
       return {
+        user:'',
         searchResults:{},
         userLogOut:true,
         LoginVisible: true,
@@ -105,9 +106,10 @@
         showTagDialog: false,// 发布文章时选择标签的对话框
       }
     },
-    create(){
+    created(){
         // 在页面加载时获取用户信息，仅执行一次
         this.fetchUserInfo();
+        console.log('加载...userID为',this.user)
     },
     methods: {
       toHome(){
@@ -154,16 +156,23 @@
              });
       },
       fetchUserInfo() {
+        console.log('用户信息加载中...');
+        let IDForm= {
+          id: localStorage.getItem('ID')
+        }
         // 发送GET请求获取用户信息
-        getUserInfo(localStorage.getItem('token'))
+        getUserInfo(IDForm)
             .then(result => {
-                this.user = result.data.data.records;
-                
-             })
+              console.log('获取用户信息...', result);
+                this.user = result.data.data.userId;
+                console.log('获取用户信息成功', this.user);   
+            })
             .catch(error => {
                 console.error('获取用户信息失败:', error);
             });
-        },
+
+        return
+      },
         deleteUser(){
           let IDForm={
             id:localStorage.getItem('ID')
@@ -186,7 +195,7 @@
               window.localStorage.removeItem('ID');
               window.localStorage.removeItem('token');
               console.log('用户信息清理:');
-              this.$refs.bsHome.Reload();
+              window.location.reload();
                 
              })
             .catch(error => {
