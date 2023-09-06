@@ -75,6 +75,7 @@
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
+  import bsHome from '../views/bsHome.vue'
   export default {
     name: 'bsHeader',
     components: {
@@ -86,10 +87,12 @@
       Search,
       tagSelector,
       login,
-      register
+      register,
+      bsHome
     },
     data() {
       return {
+        userLogOut:true,
         LoginVisible: true,
         loginFlag: false,
         registerFlag: false,
@@ -151,9 +154,9 @@
       },
       fetchUserInfo() {
         // 发送GET请求获取用户信息
-        getUserInfo(localStorage.getItem('token')) // 用于获取用户信息的接口 '/user-info'
+        getUserInfo(localStorage.getItem('token'))
             .then(result => {
-                this.user = result.data.data.records; // 将获取的用户信息存储到searchResults中的user属性中
+                this.user = result.data.data.records;
                 
              })
             .catch(error => {
@@ -182,7 +185,8 @@
               window.localStorage.removeItem('ID');
               window.localStorage.removeItem('token');
               console.log('用户信息清理:');
-              this.fetchUserInfo();
+              this.$refs.bsHome.Reload();
+                
              })
             .catch(error => {
                 console.error('用户登出失败:', error);
