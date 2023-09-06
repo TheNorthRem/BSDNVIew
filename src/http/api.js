@@ -80,3 +80,12 @@ export function detailedUserInfo(params){
         params
     })
 }
+
+//根据id寻找文章
+export function getArticleById(params){
+    return request({
+        url: "/bsArticle/getById",
+        method: 'get',
+        params
+    })
+}

@@ -20,7 +20,17 @@
                 </div> 
                 <!-- 文章列表 -->  
                 <div class="articleBox">
-                    <showEditor_brief></showEditor_brief>
+                    <span v-for="i in articleArrayLength" v-bind:key="i" style="padding-bottom: 5%;">
+                        <p>22</p>
+                        <showEditor_brief
+                        :uploaderId= this.TopArticles[i-1].uploaderId
+                        :uploaderNickName= this.TopArticles[i-1].nickName
+                        :brief= this.TopArticles[i-1].brief
+                        :title= this.TopArticles[i-1].title
+                        :uploadTime= this.TopArticles[i-1].uploadTime
+                        :nickName= this.TopArticles[i-1].nickName
+                        ></showEditor_brief>
+                    </span>
                 </div> 
             </div>
             <!-- 侧栏 -->
@@ -48,21 +58,27 @@
 
 <script>
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
-import {Mounted, onBeforeMount,} from "vue"
+import {Mounted, BeforeMount,Created} from "vue"
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { getUserInfo } from '../http/api.js';
+import { toRaw } from '@vue/reactivity'
+import { getTopArticles } from "@/http/api"
+
 export default { 
     name: 'bsHome',
     components:{
         ElCarousel,
         ElCarouselItem,
         ElBacktop,
-        onBeforeMount,
+        BeforeMount,
         Mounted,
-        showEditor_brief
+        showEditor_brief,
+        getTopArticles,
+        Created,
     },
     data(){
         return{
+            getTopArticlesFunctionSuccessFlag: false,
             nickName:"nickName",
             userName:'userName',
             intro: "Introduction",
@@ -72,9 +88,26 @@ export default {
                         require('../assets/carousel/test3.jpg'),
                         require('../assets/carousel/test4.jpg')
                     ],
+            profilePhotoPath: [],
+            TopArticles:[],
+            articleArrayLength:0
+         
         }
     },
     created() {
+        getTopArticles().then(res => {
+                if (res.data.code == 200) {
+                    console.log("获取热门文章成功！")
+                    console.log(res.data.data)
+                    this.articleArrayLength = res.data.data.length
+                    this.TopArticles = res.data.data
+                    console.log(this.TopArticles)
+                    console.log(this.articleArrayLength)
+                } else {
+                    console.log("获取热门文章失败！")
+                }
+            }
+        )
         this.Reload();
     },
     methods:{
@@ -98,9 +131,21 @@ export default {
                     console.error('获取用户信息失败:', error);
                 });
             }
+        },
+        // 主页下面获取文章
+       
+    },
+    // async beforeMount() {
+    //     await this.getTopArticlesFunction()
+    // },
+    mounted(){
+        
     }
-      
-    }
+    // async created() {
+    //     await this.getTopArticlesFunction()
+    //     console.log("create")
+    // },
+
 }
 </script>
 
