@@ -17,27 +17,22 @@
                 <el-dialog title="修改用户个人信息" v-model="dialogFormVisible" width="700px">
                   <el-form :model="form">
                     <el-form-item label="个人昵称" :label-width="formLabelWidth">
-                      <el-input v-model="form.nickName" autocomplete="off" class="custom-input"></el-input>
+                      <el-input v-model="ruleForm.nickName" autocomplete="off" class="custom-input"></el-input>
                     </el-form-item>
                     <el-form-item label="个人简介" :label-width="formLabelWidth">
-                      <el-input v-model="form.intro" autocomplete="off"></el-input>
+                      <el-input v-model="ruleForm.intro" autocomplete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="qq账号" :label-width="formLabelWidth">
-                      <el-input v-model="form.qq" autocomplete="off"></el-input>
+                      <el-input v-model="ruleForm.qq" autocomplete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="生日" :label-width="formLabelWidth">
-                      <el-input v-model="form.birthday" autocomplete="off"></el-input>
+                      <el-input v-model="ruleForm.birthday" autocomplete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="上传头像" :label-width="formLabelWidth">
-                      <el-upload
-                            class="avatar-uploader"
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            :show-file-list="false"
-                            :on-success="handleAvatarSuccess"
-                            :before-upload="beforeAvatarUpload">
-                            <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                          </el-upload>
+                        <input type="file" name="multifile" multiple @change="onUpload" />
+                        <keep-alive>
+                          <img :src= this.imageUrl  class="avatars"/> 
+                        </keep-alive>
                     </el-form-item>
                   </el-form>
                   <div slot="footer" class="dialog-footer">
@@ -75,6 +70,7 @@
                       </div>  
                       <div class="img">
                             <img src="../assets/projects-illo.webp" style="width:222px;"/>
+
                       </div>
               </section>
               <!-- 右侧 -->
@@ -111,22 +107,30 @@
   </template>
   
   <script>
-  import { ElDialog, ElForm, ElFormItem, ElButton, ElInput,ElUpload } from '@/../node_modules/element-plus'
+  import { ElDialog, ElForm, ElFormItem, ElButton, ElInput } from '@/../node_modules/element-plus'
   import { detailedUserInfo,uploadUserAvatar,editUserInfo } from '../http/api.js';
+
+
+
+
   export default {
     components: {
-    ElDialog, ElForm, ElFormItem, ElButton, ElInput,ElUpload
+    ElDialog, ElForm, ElFormItem, ElButton, ElInput
+  
   },
     data(){
       return{
         imageUrl: '',
         formLabelWidth: '120px',
         dialogFormVisible: false,
-        form:{
+
+        ruleForm:{
           nickName:'',
           qq:'',
           intro:'',
-          birthday:''
+          birthday:'',
+          avatar:'',
+          InformationId:''
 
         },
           userID:'',
@@ -143,7 +147,9 @@
           // 控制点击按钮后子组件显示，再次点击隐藏
           isShow: true,
       }
-    },
+    }
+    ,
+
     methods:{
       getUserInfo(){
         let userID=localStorage.getItem('ID');
@@ -163,6 +169,14 @@
                     this.likes = result.data.data[0].favoriteCount;
                     this.clickCounts = result.data.data[0].clickCounts;
                     this.intro = result.data.data[0].intro;
+                    this.imageUrl=result.data.data[0].avatar;
+                    this.ruleForm.avatar=result.data.data[0].avatar;
+                    this.ruleForm.InformationId=result.data.data[0].informationId;
+                    this.ruleForm.qq = result.data.data[0].qq;
+                    this.ruleForm.nickName = result.data.data[0].nickName;
+                    this.ruleForm.birthday = result.data.data[0].birthday;
+                    this.ruleForm.intro = result.data.data[0].intro;
+
                 })
                 .catch(error => {
                     console.error('个人主页信息失败:', error);
@@ -180,7 +194,14 @@
       },
       editUser(){
         this.dialogFormVisible = false
-        editUserInfo(this.ruleForm)
+        editUserInfo({
+          "informationId": this.ruleForm.InformationId,
+          "birthday": this.ruleForm.birthday,
+          "intro": this.ruleForm.intro,
+          "nickName": this.ruleForm.nickName,
+          "avatar": this.ruleForm.avatar,
+          "qq": this.ruleForm.qq
+        })
         .then(result => {
           console.log(result);
           console.log("上传用户所编辑的信息成功");
@@ -189,46 +210,36 @@
         .catch(error => {
           console.error('上传用户所编辑的信息失败:', error);
         });
+      },
+      onUpload(e){
+        var files = e.target.files[0];
+        var formFile = new FormData();
+        formFile.append('image', files);
+        uploadUserAvatar(formFile).then(res=>{
+          console.log(res)
+          this.imageUrl=res.data.data.url;
+          this.ruleForm.avatar=res.data.data.url;
+          console.log(this.imageUrl)
+        })
       }
     },
     created(){
       this.getUserInfo();
-      
-    },
-    handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-        let URL=this.imageUrl;
-      
-
-        // uploadUserAvatar({IDForm,URL})
-          uploadUserAvatar({
-          'id':localStorage.getItem('ID'),
-          'image':this.imageUrl})
-        .then(result => {
-          console.log(result);
-          console.log("上传用户头像成功")
-        })
-        .catch(error => {
-          console.error('上传用户头像失败:', error);
-        });
-      },
-    beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
-      }
+    }
 }
   
   </script>
   
   <style>
+
+    .avatars{
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border-width: 1;
+      border-style: solid;
+    }
+
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;

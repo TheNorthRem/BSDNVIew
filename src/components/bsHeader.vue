@@ -71,7 +71,7 @@
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
 
-  import { searchPassage,deleteUserByID,logOutUser } from '../http/api.js';
+  import { searchPassage,deleteUserByID,logOutUser,getUserInfo } from '../http/api.js';
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
@@ -118,6 +118,8 @@
       },
       reverseLoginFlag() {
         this.loginFlag = !this.loginFlag
+        this.registerFlag = false
+
       },
       reverseRegisterFlag() {
         this.registerFlag = !this.registerFlag
@@ -126,9 +128,11 @@
         //点击发布，显示选择标签的对话框
         this.showTagDialog =! this.showTagDialog
       },
+      
       // 将Login组件返回的值赋给hideLogin
       logSuc(msg) {
         this.hideLogin = msg;
+        window.location.reload();
       },
       Search() {
             searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
