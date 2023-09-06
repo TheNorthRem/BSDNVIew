@@ -12,7 +12,7 @@
 
     </div>
         <div class = "right">
-            <MessagePanel Id:= this.curId />
+            <MessagePanel :toId = "5" :nickName="233" />
         </div>
   
 </div>
@@ -29,7 +29,7 @@
             return{
                 users:[],
                 arrlen:'',
-                curId: 5
+                curId:'',
             }
         },
 
@@ -46,6 +46,8 @@
                     this.arrlen=res.data.data.length
                     console.log(this.users)
             })
+            this.curId=5
+            console.log(this.curId)
         }
     }
 </script>

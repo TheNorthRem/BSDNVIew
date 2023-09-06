@@ -24,19 +24,22 @@
     import { getMessage } from '@/http/api';
     export default {
         
-        components: {
-            MessageDetail,
-            ElInput,
-            ElButton
-        }
-        ,
+        
+        
         data(){
             return {
                 Input:''
             }
         },
-        props: {
-            Id:Number
+        props:{
+            
+            nickName: String,
+            toId: String
+        },
+        components: {
+            MessageDetail,
+            ElInput,
+            ElButton
         }
         ,
         methods:{
@@ -45,10 +48,11 @@
             }
         },
         mounted(){
-            console.log(this.Id)
+            console.log(this.toId)
+            console.log(this.nickName)
             getMessage({
-                userFromId:localStorage.getItem('ID'),
-                userToId:this.Id
+               'userFromId': localStorage.getItem('ID'),
+                'userToId': this.toId
             }).then(res=>{
                 console.log(res.data)   
             })
