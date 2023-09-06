@@ -2,7 +2,14 @@
   <!-- <div v-if="showLogin"> -->
   <el-dialog id="dialog" v-model="dialogVisible" width="500px" align-center="true" style="height:480px;">
       <span class="dialog-footer">
-          <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="custom-form">
+          <el-form 
+            :model="ruleForm" 
+            status-icon 
+            :rules="rules" 
+            ref="ruleForm" 
+            class="custom-form"
+            @keyup.enter.native="submitForm('ruleForm')"
+            >
               <div class="login">登录</div>
               <el-input placeholder="账号" type="text" v-model="ruleForm.username" autocomplete="off" class="input"></el-input>
               <el-input placeholder="密码" type="password" v-model="ruleForm.password" autocomplete="off" class="input"></el-input>
