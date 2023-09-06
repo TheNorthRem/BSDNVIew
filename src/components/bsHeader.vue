@@ -75,6 +75,7 @@
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
+  import { toRaw } from '@vue/reactivity'
   export default {
     name: 'bsHeader',
     components: {
@@ -90,6 +91,7 @@
     },
     data() {
       return {
+        searchResults:{},
         LoginVisible: true,
         loginFlag: false,
         registerFlag: false,
@@ -128,24 +130,22 @@
       logSuc(msg) {
         this.hideLogin = msg
       },
-      toSearch(){
-        this.$router.push({ path: '/search' })
-      },
       Search() {
             searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
             .then(result => {
-                this.searchResults = result; // 将搜索结果存储到searchResults数组中
-                console.log(this.searchResults);
-                // 获取信息成功后跳转到搜索结果页面
-                this.toSearch();
-                console.log(result.data.data.records);
-                this.$router.push({
-                    name: 'search', // 路由名称，需要根据你的路由配置来设置
-                    params: { userData: this.user } // 传递用户数据作为参数
-                });
+                console.log("result",toRaw(result));
+                // 将搜索结果文章存储到searchResults中
+                this.searchResults = JSON.stringify(result.data.data.records); 
+                console.log("searchResult",this.searchResults);
+                console.log("searchResult",this.searchResults[0].title);
+                // 获取信息成功后跳转到搜索结果页面               
+              this.$router.push({
+                  path: '/search',
+                  query: { searchResults: this.searchResults}
+              })
               })
             .catch(error => {
-              console.log(this.Input);
+                console.log(this.Input);
                 console.error('搜索失败:', error);
              });
       },
