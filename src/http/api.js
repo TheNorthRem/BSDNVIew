@@ -76,7 +76,7 @@ export function getUserInfo(params) {
 //获取用户的详细信息：用户主页展示信息
 export function detailedUserInfo(params) {
     return request({
-        url: "/bsUserInformation/searchContent",
+        url: "/bsUserInformation/search",
         method: 'get',
         params
     })

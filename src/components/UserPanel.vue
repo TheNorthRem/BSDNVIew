@@ -54,15 +54,15 @@ export default {
 
     .appp{
         width: 90%;
-        height:50px;
+        height:60%;
         display: flex;
         position: relative;
         align-items : left;
         
     }
     .imgg{
-        height: 50px !important;
-        width: 50px !important; 
+        height: 100%;
+        width: 20% ; 
         align-self: center;
         margin-left: 20px;
         border-style: solid;

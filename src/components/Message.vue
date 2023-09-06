@@ -82,10 +82,10 @@
 
     .messageBox{
         width: 100%;
-        height: 848px;
-        padding-inline: 5%;
+        height: 100%;
         display: flex;
         flex-direction: row;
+        padding-left:0px!important;
     }
 
     .left{
@@ -115,7 +115,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 11%;
+        height: 20%;
         background: var(--el-color-primary-light-9);
         margin: 0px;
         color: var(--el-color-primary);
