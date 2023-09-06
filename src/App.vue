@@ -2,6 +2,7 @@
   <div id="app">
     <!-- <router-view /> -->
     <bsHeader />
+    <!-- <Message /> -->
     <router-view />
   </div>
 </template>
