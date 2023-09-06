@@ -188,6 +188,7 @@
             });
         },
         logOut(){
+          if (localStorage.getItem('ID') != null && localStorage.getItem('token') != null) {
           logOutUser(localStorage.getItem('ID'),localStorage.getItem('token'))
           .then(result => {
               console.log('用户登出成功', result);
@@ -196,13 +197,16 @@
               window.localStorage.removeItem('token');
               console.log('用户信息清理:');
               window.location.reload();
-                
              })
             .catch(error => {
                 console.error('用户登出失败:', error);
             });
+        } else {
+          window.localStorage.removeItem('ID')
+          window.localStorage.removeItem('token')
+          window.location.reload()
         }
-        
+      }
     }
   }
   
