@@ -31,7 +31,12 @@
                         :articleId=this.TopArticles[i-1].articleId
                         ></showEditor_brief>
                     </span>
-                </div> 
+                </div>
+                <div>
+                    <div class="box1">
+                        <b>Created by BUPTer&emsp;&emsp;&emsp;© 2023 &emsp;&emsp;SpringBoot + vue3</b>
+                    </div>
+                </div>
             </div>
             <!-- 侧栏 -->
             <div class = "asideBox"> 
@@ -272,4 +277,11 @@ div footer{
     padding: 5% 10%;
 }
 
+.box1{
+    width: 1000px;
+    height: 10px;
+    font-size: 14px;
+    text-align: center;  /*水平居中*/
+    line-height: 10px; /*垂直居中 值为heigth的值*/
+}
 </style>
