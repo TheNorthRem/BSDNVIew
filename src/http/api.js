@@ -145,6 +145,27 @@ export function logOutUser(userId,token) {
     })
 }
 
+//上传用户头像
+export function uploadUserAvatar(params) {
+    return request({
+        url: "/bsUser/uploadAvatar",
+        method: 'post',
+        params
+    })
+}
+
+
+
+//修改用户信息
+export function editUserInfo(data) {
+    return request({
+        url: "/bsUserInformation/edit",
+        method: 'post',
+        data
+    })
+}
+
+
 
 
 export function getArticleById(params) {

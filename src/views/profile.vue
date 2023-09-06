@@ -10,9 +10,35 @@
                 <el-button class="subscribeBox">
                   <div class="subscribe">关注</div>
                 </el-button>
-                <el-button class="editBox">
-                  <div class="subscribe" @click="dialogTableVisible = true">编辑信息</div>
+                <el-button class="editBox" @click="dialogTableVisible = true">
+                  <div class="subscribe" >编辑信息</div>
                 </el-button>
+                <!-- 编辑个人主页信息按钮的弹窗 -->
+                <el-dialog title="修改用户个人信息" :visible.sync="dialogFormVisible">
+                  <el-form :model="form">
+                    <el-form-item label="修改个人昵称" :label-width="formLabelWidth">
+                      <el-input v-model="ruleForm.nickName" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="活动区域" :label-width="formLabelWidth">
+                      <el-select v-model="form.region" placeholder="请选择活动区域">
+                        <el-option label="区域一" value="shanghai"></el-option>
+                        <el-option label="区域二" value="beijing"></el-option>
+                      </el-select>
+                    </el-form-item>
+                    <el-form-item label="上传头像" :label-width="formLabelWidth">
+                      <el-button @click="uploadAvatar"> + 
+                      </el-button>
+                    </el-form-item>
+                    <el-form-item label="上传头像" :label-width="formLabelWidth">
+                      <el-button @click="editUser"> 保存
+                      </el-button>
+                    </el-form-item>
+                  </el-form>
+                  <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                  </div>
+                </el-dialog>
             </div>
             
             <div class="moreDetail">
@@ -79,8 +105,12 @@
   </template>
   
   <script>
-  import { detailedUserInfo } from '../http/api.js';
+  import { detailedUserInfo,uploadUserAvatar,editUserInfo } from '../http/api.js';
   export default {
+    ruleForm:{
+      nickName:'',
+
+    },
     name: 'Category',
     qq:'qq',
     birthday:'birthday',
@@ -93,13 +123,37 @@
           // 控制切换按钮后按钮改变样式
           index: 1,
           // 控制点击按钮后子组件显示，再次点击隐藏
-          isShow: true
+          isShow: true,
       }
     },
     methods:{
         show (value) {
         this.index === value ? this.isShow = !this.isShow : this.isShow = true
         this.index = value
+      },
+      uploadAvatar(){
+        let userID=localStorage.getItem('ID');
+            let IDForm = {
+                userId: userID,
+            }
+        uploadUserAvatar(IDForm)
+        .then(result => {
+          console.log(result);
+          console.log("上传用户头像成功")
+        })
+        .catch(error => {
+          console.error('上传用户头像失败:', error);
+        });
+      },
+      editUser(){
+        editUserInfo(this.ruleForm)
+        .then(result => {
+          console.log(result);
+          console.log("上传用户所编辑的信息成功")
+        })
+        .catch(error => {
+          console.error('上传用户所编辑的信息失败:', error);
+        });
       }
     },
     created(){
