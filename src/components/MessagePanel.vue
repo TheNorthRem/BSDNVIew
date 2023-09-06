@@ -18,10 +18,8 @@
 </template>
 
 <script>
-  
     import {ElInput,ElButton} from '@/../node_modules/element-plus'
     import MessageDetail from '@/components/MessageDetail.vue'
-    import { getMessage } from '@/http/api';
     export default {
         
         components: {
@@ -36,7 +34,7 @@
             }
         },
         props(){
-            Id:Number
+            Number
         }
         ,
         methods:{
@@ -45,12 +43,12 @@
             }
         },
         mounted(){
-            getMessage({
-                userFromId:localStorage.getItem('ID'),
-                userToId:this.Id
-            }).then(res=>{
-                console.log(res.data)   
-            })
+            // getMessage({
+            //     userFromId:localStorage.getItem('ID'),
+            //     userToId:this.Id
+            // }).then(res=>{
+            //     console.log(res.data)   
+            // })
         }
     }
 </script>
