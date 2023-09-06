@@ -78,25 +78,47 @@
                 <div class="button">
                     <span @click="show(1)"
                           :class="index===1? 'active':''">文章</span>
+
                     <span @click="show(2)"
-                          :class="index===2? 'active':''">粉丝</span>
+                          :class="index===2? 'active':''">收藏</span>
                     <span @click="show(3)"
-                          :class="index===3? 'active':''">关注</span>
+                          :class="index===3? 'active':''">私信</span>
                 </div>
                 <!-- 面板一 -->
                 <div class="one"
                     v-show="index===1 && isShow">
                     文章列表
+                    <span v-for="i in articles.length" v-bind:key="i" style="padding-bottom: 5%;">
+                        <showEditor_brief
+                        :uploaderId= this.articles[i-1].uploaderId
+                        :uploaderNickName= this.articles[i-1].nickName
+                        :brief= this.articles[i-1].brief
+                        :title= this.articles[i-1].title
+                        :uploadTime= this.articles[i-1].uploadTime
+                        :nickName= this.articles[i-1].nickName
+                        :articleId=this.articles[i-1].articleId
+                        ></showEditor_brief>
+                    </span>
                 </div>
                 <!-- 面板二 -->
                 <div class="two"
                     v-show="index===2 && isShow">
-                    粉丝列表
+                    <span v-for="i in favorites.length" v-bind:key="i" style="padding-bottom: 5%;">
+                        <showEditor_brief
+                        :uploaderId= this.favorites[i-1].uploaderId
+                        :uploaderNickName= this.favorites[i-1].nickName
+                        :brief= this.favorites[i-1].brief
+                        :title= this.favorites[i-1].title
+                        :uploadTime= this.favorites[i-1].uploadTime
+                        :nickName= this.favorites[i-1].nickName
+                        :articleId=this.favorites[i-1].articleId
+                        ></showEditor_brief>
+                    </span>
                 </div>
                 <!-- 面板三 -->
                 <div class="three"
                     v-show="index===3 && isShow">
-                    关注列表
+                    <Message/>
                 </div>
               </div>
           </div>
@@ -108,14 +130,15 @@
   
   <script>
   import { ElDialog, ElForm, ElFormItem, ElButton, ElInput } from '@/../node_modules/element-plus'
-  import { detailedUserInfo,uploadUserAvatar,editUserInfo } from '../http/api.js';
-
-
+  import { detailedUserInfo,uploadUserAvatar,editUserInfo,getArticlesByUser,getFavoriteArticlesByUser } from '../http/api.js';
+  import Message from '../components/Message.vue'
+  import showEditor_brief from '../components/showEditor_brief.vue'
 
 
   export default {
     components: {
-    ElDialog, ElForm, ElFormItem, ElButton, ElInput
+    ElDialog, ElForm, ElFormItem, ElButton, ElInput,
+    Message,showEditor_brief
   
   },
     data(){
@@ -146,6 +169,8 @@
           index: 1,
           // 控制点击按钮后子组件显示，再次点击隐藏
           isShow: true,
+          articles:[],
+          favorites:[]
       }
     }
     ,
@@ -182,13 +207,26 @@
                     console.error('个人主页信息失败:', error);
                 });
             }
+        getArticlesByUser({
+          'userId': localStorage.getItem('ID')
+        }).then(res=>{
+          console.log(res)
+          this.articles=res.data.data
+        })
+        
+        getFavoriteArticlesByUser({
+          'userId': localStorage.getItem('ID')
+        }).then(res=>{
+          console.log(res)
+          this.favorites=res.data.data
+        })
       },
       printout(){
         this.dialogFormVisible=true
         console.log("dialogFormVisible",this.dialogFormVisible);
         
       },
-        show (value) {
+      show (value) {
         this.index === value ? this.isShow = !this.isShow : this.isShow = true
         this.index = value
       },

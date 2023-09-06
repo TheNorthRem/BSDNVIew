@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    <bsHeader />
-    <Message />
+    
     <!-- <router-view /> -->
+    <profile />
   </div>
 </template>
 
 <script>
-import bsHeader from '@/components/bsHeader.vue'
-import Message from '@/components/Message.vue'
+import bsHome from '@/views/bsHome.vue'
+import profile from '@/views/profile.vue'
 
 
 export default {
   name: 'App',
   components: {
-    bsHeader,
-    Message
+    bsHome,
+    profile
   }
 }
 </script>

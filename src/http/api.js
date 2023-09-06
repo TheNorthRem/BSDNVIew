@@ -227,3 +227,19 @@ export function deleteFavorites(params) {
         params
     })
 }
+
+export function getArticlesByUser(params){
+    return request({
+        url: "/bsArticle/getUserArticles",
+        method: 'get',
+        params
+    })  
+}
+
+export function getFavoriteArticlesByUser(params){
+    return request({
+        url: "/bsArticle/getUserFavoriteArticles",
+        method: 'get',
+        params
+    })  
+}
