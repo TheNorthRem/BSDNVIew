@@ -82,6 +82,7 @@
 
     .messageBox{
         width: 100%;
+        height: 840px;
         padding-inline: 5%;
         display: flex;
         flex-direction: row;
@@ -114,15 +115,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 20%;
+        height: 11%;
         background: var(--el-color-primary-light-9);
         margin: 0px;
-        margin-bottom: 3px;
         color: var(--el-color-primary);
-        border-width: 1px;
         border-radius: 5px;
-        border-block-color: rgb(242, 239, 239);
-        box-shadow:5px 5px 8px 0px rgb(32, 32, 32);
+        /* border-block-color: rgb(242, 239, 239); */
+        border: 2px solid #FFFEFC;
+        /* box-shadow:5px 5px 8px 0px rgb(32, 32, 32); */
         width: 100%;
 
     }

@@ -42,12 +42,13 @@ export default {
 <style>
      .app1{
         width: 99%;
-        height: 100px;
-        background-color: rgb(175, 179, 179);
+        height: 90px;
+        background: #FBFBFA;
         display: flex;
         position: relative;
         align-items : left;
-        border-style: solid;
+        border-radius: 15px;
+        border: 2px solid #ffffff;
         flex-direction: row;
     }
     .img1{
@@ -55,7 +56,7 @@ export default {
         width: 50px !important; 
         align-self: center;
         margin-left: 20px;
-        border-style: solid;
+        border: 2px solid #FFFEFC;
         border-radius: 50%;
         border-width: 1px;
     }
@@ -63,6 +64,7 @@ export default {
     .txt1{
         margin-left: 25px ;
         display: flex;
+        width:75px;
         flex-direction: column;
         height: 100px;
     }
