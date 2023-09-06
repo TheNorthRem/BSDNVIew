@@ -80,3 +80,22 @@ export function detailedUserInfo(params){
         params
     })
 }
+
+//获取文章详情根据id查询
+export function detailedPassageInfo(params){
+    return request({
+        url: "/bsArticle/getById",
+        method: 'get',
+        params
+    })
+}
+
+
+//获取文章的全部评论
+export function getComments(params){
+    return request({
+        url: "/bsComments/getComments",
+        method: 'get',
+        params
+    })
+}

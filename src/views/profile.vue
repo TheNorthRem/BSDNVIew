@@ -98,11 +98,13 @@
             let IDForm = {
                 userId: userID,
             }
+            console.log(this.id);
             if(userID == null) return;
             else{
               detailedUserInfo(IDForm) 
                 .then(result => {
                     console.log(result)
+                    console,log("个人主页信息获取成功");
                     this.qq = result.data.data[0].qq;
                     this.nickName = result.data.data[0].nickName;
                     this.birthday = result.data.data[0].birthday;
