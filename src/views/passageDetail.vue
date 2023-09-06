@@ -60,14 +60,10 @@
 import { Editor,  } from '@wangeditor/editor-for-vue'
 import { ElMessage, ElIcon, ElDrawer, ElButton} from "@/../node_modules/element-plus"
 import { CircleCloseFilled } from '@element-plus/icons-vue'
-<<<<<<< HEAD
-import { uploadPassage } from "@/http/api"
 import { Mounted } from "vue"
 import { getArticleById } from "@/http/api"
-
-=======
 import { uploadPassage,detailedPassageInfo,getComments } from "@/http/api"
->>>>>>> c9295328373c16dcc7f671fdad813d96dd99ddc1
+
 export default {
     components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled, Mounted },
     data() {
