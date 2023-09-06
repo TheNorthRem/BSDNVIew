@@ -75,7 +75,11 @@ export default {
                     })
                 }
             }
-            )
+            ).catch(error => {
+                //加上响应代码
+                console.error("被拦截器拦住了!")
+                console.error(error)
+            })
         }
     },
     watch: {
