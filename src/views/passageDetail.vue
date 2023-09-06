@@ -194,7 +194,6 @@ export default {
                                 console.log("获取文章详情信息成功");
                                 this.nickName=result.data.data.userId.nickName;
                                 this.userID = result.data.data.userId.userId
-                                this.nickName=result.data.data.uploader.nickName;
                                 this.content=result.data.data.article.content;
                                 this.favoriteCount=result.data.data.article.favoriteCount;
                                 this.title=result.data.data.article.title;
@@ -279,8 +278,8 @@ export default {
         this.getArticleByIdForm.id = this.$route.query.id
         getArticleById(this.getArticleByIdForm).then(res =>{
                 console.log(res)
-                this.nickName = res.data.data.uploader.nickName
-                this.userID = res.data.data.article.userID
+                this.nickName = res.data.data.userId.nickName
+                this.userID = res.data.data.userId.userID
                 this.html = res.data.data.article.html
                 console.log(res.data.data.uploader.nickName)
                 console.log(this.nickName)
