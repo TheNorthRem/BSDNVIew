@@ -54,12 +54,10 @@ export default {
 
     .appp{
         width: 90%;
-        height: 100px;
-        background-color: rgb(236, 240, 240);
+        height:50px;
         display: flex;
         position: relative;
         align-items : left;
-        border-style: solid;
         
     }
     .imgg{
@@ -76,19 +74,30 @@ export default {
         margin-left: 25px ;
         display: flex;
         flex-direction: column;
-        height: 100px;
     }
     .ssss{
         position: relative;
         align-self: top;
         font-size: 20px;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        font-family: Inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px; /* 133.333% */
+        letter-spacing: -0.13px;
     }
     .messs{
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 0px;
+        margin-top: 2%;
         margin-left: 25px;
         color: rgb(152, 151, 149);
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px; /* 160% */
+        letter-spacing: -0.13px;
     }
 </style>

@@ -1,21 +1,18 @@
 <template>
   <div id="app">
-    
-    <!-- <router-view /> -->
-    <profile />
+    <bsHeader />
+    <router-view />
   </div>
 </template>
 
 <script>
-import bsHome from '@/views/bsHome.vue'
-import profile from '@/views/profile.vue'
+import bsHeader from '@/components/bsHeader.vue'
 
 
 export default {
   name: 'App',
   components: {
-    bsHome,
-    profile
+    bsHeader,
   }
 }
 </script>

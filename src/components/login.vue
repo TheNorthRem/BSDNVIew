@@ -95,7 +95,8 @@ export default {
               console.log('error submit!!');
               return false;
             }
-          }).catch(_ => {
+          }).catch(error => {
+            console.log(error)
             ElMessage({
               showClose: false,
               message: '登录失败！',

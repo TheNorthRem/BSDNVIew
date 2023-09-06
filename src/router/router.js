@@ -28,6 +28,10 @@ const routes = [
         path: '/search',
         component: () => import('../views/search')
     },
+    {
+        path: '/message',
+        component: () => import('../components/Message')
+    },
 ]
 
 //创建router实例
