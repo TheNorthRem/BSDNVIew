@@ -1,7 +1,7 @@
 <template>
     <!-- <span v-for="i in articlesArrayLength" style="padding-bottom: 5%;"> -->
     <div class="articleInfo">
-        <footer class="footerBox">
+        <header class="headerBox">
             <!-- <h3>
                 {{ this.title }}
             </h3> -->
@@ -20,14 +20,18 @@
                     <p>ID：{{ this.uploaderId }}</p>
                 </div>
             </div>
-        </footer>
+        </header>
 
         <div style="border: 1px solid #652828;border-radius: 3px;">
-            <Editor style="height: 200px; overflow-y: hidden; width: 800px; " v-model=this.brief
+            <!-- <Editor style="height: 200px; overflow-y: hidden; width: 800px; " v-model=this.brief
                 :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
+              -->
+              <p>
+                {{ this.brief }}
+              </p>
         </div>
 
-        <footer style="display: inline-flex;padding-top: 2%;">
+        <footer class="footerBox">
             <!-- <h4>
                     <p style="padding-left: 1300%;" >More...</p>
                 </h4> -->
@@ -114,7 +118,7 @@ export default {
 <style src="@wangeditor/editor/dist/css/style.css"></style>
 
 <style>
-.footerBox{
+.headerBox{
     display: inline-flex; 
     padding-right: 2%;
     padding-bottom: 2%;
@@ -135,5 +139,13 @@ export default {
     padding-right:10%;
     /* padding-left: 5%; */
     padding-bottom: 3%;
+}
+.footerBox{
+    width: 100%;
+    display: inline-flex;
+    padding-top: 2%;
+    flex-direction: row;
+    justify-content: flex-end;
+
 }
 </style>
