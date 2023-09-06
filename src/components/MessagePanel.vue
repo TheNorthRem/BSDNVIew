@@ -21,7 +21,7 @@
   
     import {ElInput,ElButton} from '@/../node_modules/element-plus'
     import MessageDetail from '@/components/MessageDetail.vue'
-  
+    import { getMessage } from '@/http/api';
     export default {
         
         components: {
@@ -43,6 +43,14 @@
             send(){
 
             }
+        },
+        mounted(){
+            getMessage({
+                userFromId:localStorage.getItem('ID'),
+                userToId:this.Id
+            }).then(res=>{
+                console.log(res.data)   
+            })
         }
     }
 </script>
