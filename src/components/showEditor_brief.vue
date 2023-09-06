@@ -54,7 +54,7 @@ export default {
             html: '<p>hello</p>',
             toolbarConfig: {},
             editorConfig: {
-                placeholder: '请输入内容...',
+                placeholder: this.$props.brief,
                 readOnly: true,
                 MENU_CONF: {
                     uploadImage: {
