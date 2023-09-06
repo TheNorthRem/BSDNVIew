@@ -148,9 +148,12 @@ export function logOutUser(userId,token) {
 //上传用户头像
 export function uploadUserAvatar(data) {
     return request({
-        url: "/bsUser/uploadAvatar",
+        url: "/ImageUpload",
         method: 'post',
-        data
+        data,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
     })
 }
 
