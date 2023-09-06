@@ -46,7 +46,7 @@
               <el-divider direction="vertical" />
               <el-button  link @click="changeLogin">登录</el-button>
             </div>
-            <!-- 登陆成功后显示“注销”和“登出”按钮 -->
+            <!-- 登陆成功后查看是否有id，有的话显示“注销”和“登出”按钮 -->
             <div v-if="hideLogin" style="display: inline-flex;">
               <el-button  link size="large" @click="deleteUser">注销</el-button>
               <el-divider direction="vertical" />
@@ -88,8 +88,7 @@
       Search,
       tagSelector,
       login,
-      register,
-      bsHome
+      register
     },
     data() {
       return {
