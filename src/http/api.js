@@ -93,13 +93,17 @@ export function detailedPassageInfo(params){
 
 
 //获取文章的全部评论
-export function getComments(params){
+export function getComments(articleId, page){
     return request({
         url: "/bsComments/getComments",
         method: 'get',
-        params
+        params:{
+            "articleId":articleId,
+            "page":page
+        }
     })
 }
+
 //分类跳转，返回分类文章(分页)
 export function getClassifiedArticle(category, page) {
     return request({

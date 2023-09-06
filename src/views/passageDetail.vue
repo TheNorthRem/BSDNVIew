@@ -31,11 +31,23 @@
                     <el-button type="danger" @click="close">
                         <el-icon class="el-icon--left"><CircleCloseFilled /></el-icon>
                     </el-button>
-                    </template>
-                    <div class="comments">
-                        评论区
+                    <!-- <div class="comments" v-for="(article, index) in articles" :key="index"> -->
                         
-                    </div>
+                        
+                        
+                    <!-- </div> -->
+                    </template>
+                    <div class="commentBox" v-for="(comment, index) in comments" :key="index" >
+                            <div class="commentUserName">
+                                {{ comments[index].comments.userID }}
+                            </div>
+                            <div class="commentTime">
+                                {{ comments[index].comments.time }}
+                            </div>
+                            <div class="commentContent">
+                                {{ comments[index].comments.content }}
+                            </div>
+                    </div> 
                 </el-drawer>
         </div>
         <img src="../assets/e2.png" style="height: auto;width: 15%; position: fixed;padding-inline: 3%;right: 2%;bottom: 0;">
@@ -56,10 +68,9 @@ export default {
             nickName:"NickName",
             content:"content",
             userID:"userID",
-            commentForm:{
-                articleId:1 ,
-                page:1
-            },
+            articleId:2,
+            page:1,
+            comments:{},
             visible: false,
             editor: null,
             title: '<h2>标题</h2>',
@@ -116,12 +127,12 @@ export default {
                     }
             },
         getComment(){
-            getComments().then(result => {
+            let articleId = this.articleId;
+            let page = this.page;
+            getComments(articleId,page).then(result => {
                                 console.log(result)
                                 console.log("获取文章评论成功");
-                                this.nickName=result.data.data.nickName;
-                                this.content=result.data.data.content;
-                                this.userID=result.data.data.content;
+                                this.comments=result.data.data;
                             })
                             .catch(error => {
                                 console.error('获取文章评论失败:', error);
@@ -178,6 +189,55 @@ export default {
 
 <style src="@wangeditor/editor/dist/css/style.css"></style>
 <style scoped>
+.commentBox{
+    margin-bottom:2%;
+    z-index:99;
+    width:95%;
+    height:130px;
+    border-radius: 12px;
+    border: 2px solid #F6F5F4;
+    background: #FBFBFA;
+    margin-left:3%;
+    display: flex;
+    flex-direction: column;
+}
+.commentUserName{
+    padding-left:20px;
+    padding-top:20px;
+    color: #050505;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 96% */
+    letter-spacing: -0.13px;
+    display: flex;
+}
+.commentTime{
+    display:flex;
+    padding-left:20px;
+    height: 10%;
+    margin-top:10px;
+    color: #050505;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 160% */
+    letter-spacing: -0.13px;
+}
+.commentContent{
+    display:flex;
+    padding-left:20px;
+    margin-top:10px;
+    color: #050505;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.13px;
+}
 .buttomBox{
     display:flex;
     flex-direction: row;
