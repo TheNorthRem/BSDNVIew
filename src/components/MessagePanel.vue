@@ -22,19 +22,22 @@
     import MessageDetail from '@/components/MessageDetail.vue'
     export default {
         
-        components: {
-            MessageDetail,
-            ElInput,
-            ElButton
-        }
-        ,
+        
+        
         data(){
             return {
                 Input:''
             }
         },
-        props(){
-            Number
+        props:{
+            
+            nickName: String,
+            toId: String
+        },
+        components: {
+            MessageDetail,
+            ElInput,
+            ElButton
         }
         ,
         methods:{
@@ -43,12 +46,14 @@
             }
         },
         mounted(){
-            // getMessage({
-            //     userFromId:localStorage.getItem('ID'),
-            //     userToId:this.Id
-            // }).then(res=>{
-            //     console.log(res.data)   
-            // })
+            console.log(this.toId)
+            console.log(this.nickName)
+            getMessage({
+               'userFromId': localStorage.getItem('ID'),
+                'userToId': this.toId
+            }).then(res=>{
+                console.log(res.data)   
+            })
         }
     }
 </script>

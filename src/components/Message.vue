@@ -17,7 +17,7 @@
 
     </div>
         <div class = "right">
-            <MessagePanel Id := this.curId />
+            <MessagePanel :toId = "5" :nickName="233" />
         </div>
   
 </div>
@@ -34,7 +34,7 @@
             return{
                 users:[],
                 arrlen:'',
-                curId: 5
+                curId:'',
             }
         },
 
