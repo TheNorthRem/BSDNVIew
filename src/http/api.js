@@ -82,7 +82,6 @@ export function detailedUserInfo(params) {
     })
 }
 
-<<<<<<< HEAD
 export function getMessageUser(params){
     return request({
         url: "/bsMessage/searchSendUser",
@@ -90,7 +89,7 @@ export function getMessageUser(params){
         params
     })
 }
-=======
+
 //获取文章详情根据id查询
 export function detailedPassageInfo(params){
     return request({
@@ -124,4 +123,11 @@ export function getClassifiedArticle(category, page) {
         }
     })
 }
->>>>>>> 67422ea89687871a4855d2421e6d5630011c7b4b
+
+export function getMessage(params) {
+    return request({
+        url: "/bsMessage/searchMessage",
+        method: 'get',
+        params
+    })
+}
