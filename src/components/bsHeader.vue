@@ -137,8 +137,8 @@
                 console.log("result",toRaw(result));
                 // 将搜索结果文章存储到searchResults中
                 this.searchResults = JSON.stringify(result.data.data.records); 
-                console.log("searchResult",this.searchResults);
-                console.log("searchResult",this.searchResults[0].title);
+                // console.log("searchResult",this.searchResults);
+                // console.log("searchResult",this.searchResults[0].title);
                 // 获取信息成功后跳转到搜索结果页面               
               this.$router.push({
                   path: '/search',
