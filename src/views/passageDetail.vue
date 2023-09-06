@@ -7,9 +7,9 @@
                 <img src="../assets/avatar/avatar1.png" style="width: 10%;height: auto; padding-right:3%;" />
                 <div>
                     <h3>
-                        {{nickName}}<!-- UserName：{{nickName[i-1]}} -->
+                        作者:{{nickName}}<!-- UserName：{{nickName[i-1]}} -->
                     </h3>
-                        {{userID}}<!-- <p>ID：{{ uploaderId[i-1] }}</p> -->
+                        id:{{userID}}<!-- <p>ID：{{ uploaderId[i-1] }}</p> -->
                 </div>
 
             </div>
@@ -54,20 +54,20 @@
                     </template>
                     <div class="commentBox" v-for="(comment, index) in comments" :key="index" >
                             <div class="commentUserName">
-                                {{ comments[index].comments.userID }}
+                                {{ comments[index].nickName }}
                             </div>
                             <div class="commentTime">
-                                {{ comments[index].comments.time }}
+                                {{ comments[index].time }}
                             </div>
                             <div class="commentContent">
-                                {{ comments[index].comments.content }}
+                                {{ comments[index].content }}
                             </div>
                     </div> 
                 </el-drawer>
         </div>
         <img src="../assets/e2.png" style="height: auto;width: 15%; position: fixed;padding-inline: 3%;right: 2%;bottom: 0;">
     </div>
-
+;
 </template>
 
 <script>
@@ -192,7 +192,8 @@ export default {
                             .then(result => {
                                 console.log(result);
                                 console.log("获取文章详情信息成功");
-                                this.nickName=result.data.data.article.nickName;
+                                this.nickName=result.data.data.userId.nickName;
+                                this.userID = result.data.data.userId.userId
                                 this.content=result.data.data.article.content;
                                 this.favoriteCount=result.data.data.article.favoriteCount;
                                 this.title=result.data.data.article.title;
@@ -208,7 +209,7 @@ export default {
             await getComments(articleId,page).then(result => {
                                 console.log(result)
                                 console.log("获取文章评论成功");
-                                this.comments=result.data.data;
+                                this.comments=result.data.data.records;
                             })
                             .catch(error => {
                                 console.error('获取文章评论失败:', error);
@@ -277,8 +278,8 @@ export default {
         this.getArticleByIdForm.id = this.$route.query.id
         getArticleById(this.getArticleByIdForm).then(res =>{
                 console.log(res)
-                this.nickName = res.data.data.uploader.nickName
-                this.userID = res.data.data.article.userID
+                this.nickName = res.data.data.userId.nickName
+                this.userID = res.data.data.userId.userID
                 this.html = res.data.data.article.html
                 console.log(res.data.data.uploader.nickName)
                 console.log(this.nickName)
@@ -406,7 +407,7 @@ export default {
 
 }
 .passageBox{
-    padding-inline: 25%;
+    padding-inline: 20%;
     display: flex;
     flex-direction: column;
     width:60%;

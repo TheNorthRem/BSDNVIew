@@ -31,7 +31,12 @@
                         :articleId=this.TopArticles[i-1].articleId
                         ></showEditor_brief>
                     </span>
-                </div> 
+                </div>
+                <div>
+                    <div class="box1">
+                        <b>Created by BUPTer&emsp;&emsp;&emsp;© 2023 &emsp;&emsp;SpringBoot + vue3</b>
+                    </div>
+                </div>
             </div>
             <!-- 侧栏 -->
             <div class = "asideBox"> 
@@ -46,9 +51,8 @@
                         <h2>{{nickName}}</h2>
                         <h3>{{userName}}</h3>
                         <h3>{{intro}}</h3>
-                        <h3><a href="#/profile">More</a></h3>
+                        <h3 v-if="this.userName!='请先登录！'"><a href="#/profile">More</a></h3>
                     </div>
-                    <!-- <div v-if="!hideLogin" class="info"><h2>请先登录！</h2></div> -->
                 </div>
                 <img src="../assets/underAsideBox.webp" style="margin-top:30%; height:auto;width:15%;position: fixed;right: 10%;bottom: 0;" >
             </div>
@@ -58,7 +62,7 @@
 
 <script>
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
-import {Mounted, BeforeMount,Created} from "vue"
+import {Created} from "vue"
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { getUserInfo } from '../http/api.js';
 import { getTopArticles } from "@/http/api"
@@ -69,8 +73,6 @@ export default {
         ElCarousel,
         ElCarouselItem,
         ElBacktop,
-        BeforeMount,
-        Mounted,
         showEditor_brief,
         getTopArticles,
         Created,
@@ -78,9 +80,9 @@ export default {
     data(){
         return{
             getTopArticlesFunctionSuccessFlag: false,
-            nickName:"nickName",
-            userName:'userName',
-            intro: "Introduction",
+            nickName:"🤖🤖🤖🤖🤖",
+            userName:'请先登录！',
+            intro: "👽👽👽👽👽",
             items: [
                         require('../assets/carousel/test1.jpg'),
                         require('../assets/carousel/test2.jpg'),
@@ -90,7 +92,6 @@ export default {
             profilePhotoPath: [],
             TopArticles:[],
             articleArrayLength:0
-         
         }
     },
     created() {
@@ -118,8 +119,8 @@ export default {
     },
     methods:{
         Reload() {
-            //判断用户的登录状态
-            let userID=localStorage.getItem('ID');
+            //判断用户的登录状态，如果用户已经登录，则显示用户的头像和个人信息
+            let userID=localStorage.getItem('ID');//获取用户ID
             let IDForm = {
                 id: userID,
             }
@@ -138,7 +139,6 @@ export default {
                 });
             }
         },
-        // 主页下面获取文章
        
     },
     // async beforeMount() {
@@ -152,7 +152,9 @@ export default {
     //     console.log("create")
     // },
 
+    
 }
+
 </script>
 
 <style scoped>
@@ -173,7 +175,7 @@ export default {
 
 .mainBox{
     /* height: 100%; */
-    width: 70%;
+    width: 60%;
     display: flex; 
     position: relative; 
     flex-direction: column;/* 垂直排列 */
@@ -279,4 +281,11 @@ div footer{
     padding: 5% 10%;
 }
 
+.box1{
+    width: 1000px;
+    height: 10px;
+    font-size: 14px;
+    text-align: center;  /*水平居中*/
+    line-height: 10px; /*垂直居中 值为heigth的值*/
+}
 </style>

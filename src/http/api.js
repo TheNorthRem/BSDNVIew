@@ -149,9 +149,12 @@ export function logOutUser(userId,token) {
 //上传用户头像
 export function uploadUserAvatar(data) {
     return request({
-        url: "/bsUser/uploadAvatar",
+        url: "/ImageUpload",
         method: 'post',
-        data
+        data,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
     })
 }
 
@@ -224,4 +227,20 @@ export function deleteFavorites(params) {
         method: 'delete',
         params
     })
+}
+
+export function getArticlesByUser(params){
+    return request({
+        url: "/bsArticle/getUserArticles",
+        method: 'get',
+        params
+    })  
+}
+
+export function getFavoriteArticlesByUser(params){
+    return request({
+        url: "/bsArticle/getUserFavoriteArticles",
+        method: 'get',
+        params
+    })  
 }

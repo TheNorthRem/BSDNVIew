@@ -7,7 +7,7 @@
           <ul>
             <li><a href="#/">🏠首页</a></li>
             <li><a href="#">博客</a></li>
-            <li><a href="#">社区</a></li>
+            <li><a href="#/message">社区</a></li>
             <li><a href="https://www.icourse163.org/">学习</a></li>
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
@@ -41,16 +41,16 @@
         </div>
         <div class="rightMenu">
           <div style="margin-right: 10%; display:inline-flex;">
-            <div v-if="!hideLogin" style="display: inline-flex;">
+            <div v-if="!this.user" style="display: inline-flex;">
               <el-button  size="large" link @click="reverseRegisterFlag">注册</el-button>
               <el-divider direction="vertical" />
               <el-button  link @click="reverseLoginFlag">登录</el-button>
             </div>
-            <!-- 登陆成功后显示“注销”和“登出”按钮 -->
-            <div v-if="hideLogin" style="display: inline-flex;">
-              <el-button  link size="large" @click="deleteUser">注销</el-button>
+            <!-- 登陆成功后查看是否有id，有的话显示“注销”和“登出”按钮 -->
+            <div v-if="this.user" style="display: inline-flex;">
+              <el-button  type="danger" link size="large" @click="deleteUser">注销</el-button>
               <el-divider direction="vertical" />
-              <el-button  link @click="logOut">登出</el-button>
+              <el-button  type="primary" link @click="logOut">登出</el-button>
             </div>
           </div>
           <!-- 点击发布先让用户选择标签，再跳转到编辑页面 -->
@@ -71,7 +71,7 @@
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
 
-  import { searchPassage,deleteUserByID,logOutUser } from '../http/api.js';
+  import { searchPassage,deleteUserByID,logOutUser,getUserInfo } from '../http/api.js';
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
@@ -88,11 +88,11 @@
       Search,
       tagSelector,
       login,
-      register,
-      bsHome
+      register
     },
     data() {
       return {
+        user:'',
         searchResults:{},
         userLogOut:true,
         LoginVisible: true,
@@ -106,9 +106,10 @@
         showTagDialog: false,// 发布文章时选择标签的对话框
       }
     },
-    create(){
+    created(){
         // 在页面加载时获取用户信息，仅执行一次
         this.fetchUserInfo();
+        console.log('加载...userID为',this.user)
     },
     methods: {
       toHome(){
@@ -119,6 +120,8 @@
       },
       reverseLoginFlag() {
         this.loginFlag = !this.loginFlag
+        this.registerFlag = false
+
       },
       reverseRegisterFlag() {
         this.registerFlag = !this.registerFlag
@@ -127,9 +130,11 @@
         //点击发布，显示选择标签的对话框
         this.showTagDialog =! this.showTagDialog
       },
+      
       // 将Login组件返回的值赋给hideLogin
       logSuc(msg) {
-        this.hideLogin = msg
+        this.hideLogin = msg;
+        window.location.reload();
       },
       Search() {
             searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
@@ -155,16 +160,23 @@
              });
       },
       fetchUserInfo() {
+        console.log('用户信息加载中...');
+        let IDForm= {
+          id: localStorage.getItem('ID')
+        }
         // 发送GET请求获取用户信息
-        getUserInfo(localStorage.getItem('token'))
+        getUserInfo(IDForm)
             .then(result => {
-                this.user = result.data.data.records;
-                
-             })
+              console.log('获取用户信息...', result);
+                this.user = result.data.data.userId;
+                console.log('获取用户信息成功', this.user);   
+            })
             .catch(error => {
                 console.error('获取用户信息失败:', error);
             });
-        },
+
+        return
+      },
         deleteUser(){
           let IDForm={
             id:localStorage.getItem('ID')
@@ -187,7 +199,7 @@
               window.localStorage.removeItem('ID');
               window.localStorage.removeItem('token');
               console.log('用户信息清理:');
-              this.$refs.bsHome.Reload();
+              window.location.reload();
                 
              })
             .catch(error => {

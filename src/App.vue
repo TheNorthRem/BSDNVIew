@@ -1,14 +1,12 @@
 <template>
   <div id="app">
     <bsHeader />
-    <!-- <Message /> -->
     <router-view />
   </div>
 </template>
 
 <script>
 import bsHeader from '@/components/bsHeader.vue'
-
 
 
 export default {
