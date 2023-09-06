@@ -3,40 +3,46 @@
     <div class="pageContent">
       <div class="user">
         <div class="userInside">
-          <img src="../assets/avatar/avatar0.png" style="height:70px; width: 70px;" class="avatar">
+          <img src="../assets/avatar/avatar0.png" style="height:70px; width: 70px;" class="avatarImg">
           <div class="userDetail">
             <div class="smallBox">
                 <div class="userName">{{nickName}}</div>
                 <el-button class="subscribeBox">
                   <div class="subscribe">关注</div>
                 </el-button>
-                <el-button class="editBox" @click="dialogTableVisible = true">
+                <el-button class="editBox" @click="printout">
                   <div class="subscribe" >编辑信息</div>
                 </el-button>
                 <!-- 编辑个人主页信息按钮的弹窗 -->
-                <el-dialog title="修改用户个人信息" :visible.sync="dialogFormVisible">
+                <el-dialog title="修改用户个人信息" v-model="dialogFormVisible" width="700px">
                   <el-form :model="form">
-                    <el-form-item label="修改个人昵称" :label-width="formLabelWidth">
-                      <el-input v-model="ruleForm.nickName" autocomplete="off"></el-input>
+                    <el-form-item label="个人昵称" :label-width="formLabelWidth">
+                      <el-input v-model="form.nickName" autocomplete="off" class="custom-input"></el-input>
                     </el-form-item>
-                    <el-form-item label="活动区域" :label-width="formLabelWidth">
-                      <el-select v-model="form.region" placeholder="请选择活动区域">
-                        <el-option label="区域一" value="shanghai"></el-option>
-                        <el-option label="区域二" value="beijing"></el-option>
-                      </el-select>
+                    <el-form-item label="个人简介" :label-width="formLabelWidth">
+                      <el-input v-model="form.intro" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="qq账号" :label-width="formLabelWidth">
+                      <el-input v-model="form.qq" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="生日" :label-width="formLabelWidth">
+                      <el-input v-model="form.birthday" autocomplete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="上传头像" :label-width="formLabelWidth">
-                      <el-button @click="uploadAvatar"> + 
-                      </el-button>
-                    </el-form-item>
-                    <el-form-item label="上传头像" :label-width="formLabelWidth">
-                      <el-button @click="editUser"> 保存
-                      </el-button>
+                      <el-upload
+                            class="avatar-uploader"
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :show-file-list="false"
+                            :on-success="handleAvatarSuccess"
+                            :before-upload="beforeAvatarUpload">
+                            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                          </el-upload>
                     </el-form-item>
                   </el-form>
                   <div slot="footer" class="dialog-footer">
                     <el-button @click="dialogFormVisible = false">取 消</el-button>
-                    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                    <el-button type="primary" @click="editUser">确 定</el-button>
                   </div>
                 </el-dialog>
             </div>
@@ -105,20 +111,32 @@
   </template>
   
   <script>
+  import { ElDialog, ElForm, ElFormItem, ElButton, ElInput,ElUpload } from '@/../node_modules/element-plus'
   import { detailedUserInfo,uploadUserAvatar,editUserInfo } from '../http/api.js';
   export default {
-    ruleForm:{
-      nickName:'',
-
-    },
-    name: 'Category',
-    qq:'qq',
-    birthday:'birthday',
-    clickCounts:0,
-    likes:0,
-    intro:"Introduction",
+    components: {
+    ElDialog, ElForm, ElFormItem, ElButton, ElInput,ElUpload
+  },
     data(){
       return{
+        imageUrl: '',
+        formLabelWidth: '120px',
+        dialogFormVisible: false,
+        form:{
+          nickName:'',
+          qq:'',
+          intro:'',
+          birthday:''
+
+        },
+          userID:'',
+        
+        name: 'Category',
+        qq:'qq',
+        birthday:'birthday',
+        clickCounts:0,
+        likes:0,
+        intro:"Introduction",
           nickName:'nickName',
           // 控制切换按钮后按钮改变样式
           index: 1,
@@ -127,37 +145,8 @@
       }
     },
     methods:{
-        show (value) {
-        this.index === value ? this.isShow = !this.isShow : this.isShow = true
-        this.index = value
-      },
-      uploadAvatar(){
+      getUserInfo(){
         let userID=localStorage.getItem('ID');
-            let IDForm = {
-                userId: userID,
-            }
-        uploadUserAvatar(IDForm)
-        .then(result => {
-          console.log(result);
-          console.log("上传用户头像成功")
-        })
-        .catch(error => {
-          console.error('上传用户头像失败:', error);
-        });
-      },
-      editUser(){
-        editUserInfo(this.ruleForm)
-        .then(result => {
-          console.log(result);
-          console.log("上传用户所编辑的信息成功")
-        })
-        .catch(error => {
-          console.error('上传用户所编辑的信息失败:', error);
-        });
-      }
-    },
-    created(){
-      let userID=localStorage.getItem('ID');
             let IDForm = {
                 userId: userID,
             }
@@ -167,7 +156,7 @@
               detailedUserInfo(IDForm) 
                 .then(result => {
                     console.log(result)
-                    console,log("个人主页信息获取成功");
+                    console.log("个人主页信息获取成功");
                     this.qq = result.data.data[0].qq;
                     this.nickName = result.data.data[0].nickName;
                     this.birthday = result.data.data[0].birthday;
@@ -176,15 +165,93 @@
                     this.intro = result.data.data[0].intro;
                 })
                 .catch(error => {
-                    console.error('获取用户信息失败:', error);
+                    console.error('个人主页信息失败:', error);
                 });
             }
-    }
-  }
+      },
+      printout(){
+        this.dialogFormVisible=true
+        console.log("dialogFormVisible",this.dialogFormVisible);
+        
+      },
+        show (value) {
+        this.index === value ? this.isShow = !this.isShow : this.isShow = true
+        this.index = value
+      },
+      editUser(){
+        this.dialogFormVisible = false
+        editUserInfo(this.ruleForm)
+        .then(result => {
+          console.log(result);
+          console.log("上传用户所编辑的信息成功");
+          this.getUserInfo();
+        })
+        .catch(error => {
+          console.error('上传用户所编辑的信息失败:', error);
+        });
+      }
+    },
+    created(){
+      this.getUserInfo();
+      
+    },
+    handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+        let URL=this.imageUrl;
+      
+
+        // uploadUserAvatar({IDForm,URL})
+          uploadUserAvatar({
+          'id':localStorage.getItem('ID'),
+          'image':this.imageUrl})
+        .then(result => {
+          console.log(result);
+          console.log("上传用户头像成功")
+        })
+        .catch(error => {
+          console.error('上传用户头像失败:', error);
+        });
+      },
+    beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
+      }
+}
   
   </script>
   
   <style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
   .smallBox{
     display:flex;
     flex-direction: row;
@@ -244,7 +311,7 @@
     line-height: 24px; /* 133.333% */
     letter-spacing: -0.13px;
   }
-  .avatar{
+  .avatarImg{
     margin-left:1%;
     margin-top:1%;
   }

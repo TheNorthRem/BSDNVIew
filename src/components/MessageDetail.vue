@@ -4,7 +4,10 @@
         <img class="img1" :src= this.srcs />
         <div class="txt1"> 
             <p class="use1">{{username}}</p>
-            <p class="mes1">{{lastMessage}}</p>
+            <p class="mes1">{{Message}}</p>
+        </div>
+        <div class="time"> 
+            <p>{{time}}</p>
         </div>
   </div>
 
@@ -22,8 +25,9 @@ export default {
     ,
     props:{
         username:String,
-        lastMessage:String,
-        srcs:String
+        Message:String,
+        srcs:String,
+        time:String
     },
     mounted(){
         console.log(this.username)
@@ -37,9 +41,9 @@ export default {
 
 <style>
      .app1{
-        width: 100%;
+        width: 99%;
         height: 100px;
-        background-color: rgb(236, 240, 240);
+        background-color: rgb(175, 179, 179);
         display: flex;
         position: relative;
         align-items : left;
@@ -75,6 +79,9 @@ export default {
         margin-left: 25px;
         color: rgb(152, 151, 149);
     }
-    
+    .time{
+        align-self: right;
+        margin-left: 100px;
+    }
     
 </style>

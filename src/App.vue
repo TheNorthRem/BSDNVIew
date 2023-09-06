@@ -10,14 +10,13 @@
 <script>
 import bsHome from './views/bsHome.vue'
 import bsHeader from '@/components/bsHeader.vue'
-import Message from '@/components/Message.vue'
+
 
 
 export default {
   name: 'App',
   components: {
-    bsHeader,
-    Message
+    bsHeader
   }
 }
 </script>

@@ -20,8 +20,11 @@
                     <el-button @click="visible = true; getComment()" style="width:9%" text>
                         🗣 评论 
                     </el-button>
-                    <el-button @click="visible = true" style="width:9%" text>
-                        👍 收藏 
+                    <el-button @click="addToFavorite" style="width:9%" text>
+                        👍 收藏 {{ favoriteCount }}
+                    </el-button>
+                    <el-button @click="addToFavorite" style="width:18%" text>
+                        📝 发布评论
                     </el-button>
                 </div>
                 
@@ -62,7 +65,7 @@ import { ElMessage, ElIcon, ElDrawer, ElButton} from "@/../node_modules/element-
 import { CircleCloseFilled } from '@element-plus/icons-vue'
 import { Mounted } from "vue"
 import { getArticleById } from "@/http/api"
-import { uploadPassage,detailedPassageInfo,getComments } from "@/http/api"
+import { uploadPassage,detailedPassageInfo,getComments,addFavorites } from "@/http/api"
 
 export default {
     components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled, Mounted,getArticleById },
@@ -76,6 +79,7 @@ export default {
             comments:{},
             visible: false,
             editor: null,
+            favoriteCount:0,
             getArticleByIdForm:{
                 id: this.$route.params.id
             },
@@ -106,6 +110,23 @@ export default {
         
     // },
     methods: {
+        addToFavorite() {
+            try {
+                let userID=localStorage.getItem('ID');
+                        let IDForm = {
+                            userId: userID,
+                            articlesId:this.articleId
+                        }
+                        addFavorites(IDForm).then(result => {
+                                            console.log("收藏文章成功");
+                                        })
+                                        .catch(error => {
+                                            console.error('收藏文章失败:', error);
+                                        });
+            } catch (error) {
+                console.error('An error occurred in addToFavorite:', error);
+            }
+        },
         onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
             this.id = localStorage.getItem("ID");
@@ -126,6 +147,7 @@ export default {
                                 this.nickName=result.data.data.nickName;
                                 this.content=result.data.data.content;
                                 this.userID=result.data.data.content;
+                                this.favoriteCount=result.data.data.favoriteCount;
                             })
                             .catch(error => {
                                 console.error('获取文章详情信息失败:', error);
