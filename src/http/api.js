@@ -115,3 +115,13 @@ export function getClassifiedArticle(category, page) {
         }
     })
 }
+
+
+//注销用户
+export function deleteUser(params) {
+    return request({
+        url: "/bsUserInformation/delete",
+        method: 'delete',
+        params
+    })
+}

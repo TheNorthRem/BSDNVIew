@@ -5,7 +5,13 @@
         <div class="userInside">
           <img src="../assets/avatar/avatar0.png" style="height:70px; width: 70px;" class="avatar">
           <div class="userDetail">
-            <div class="userName">{{nickName}}</div>
+            <div class="smallBox">
+                <div class="userName">{{nickName}}</div>
+                <el-button class="subscribeBox">
+                  <div class="subscribe">关注</div>
+                </el-button>
+            </div>
+            
             <div class="moreDetail">
               {{qq}} | {{birthday}} | 简介
             </div>
@@ -122,6 +128,35 @@
   </script>
   
   <style>
+  .smallBox{
+    display:flex;
+    flex-direction: row;
+  }
+  .subscribeBox{
+    width:49px;
+    height:28px;
+    margin-left:17px;
+    border-radius: 8px;
+    border: 1px solid #FCF1EE;
+    background: #FDF5F2;
+  }
+  .subscribe{
+    height:100%;
+    display: flex;
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+  color: #E94457;
+  font-family: Inter;
+  font-size: 13.5px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px; /* 140.741% */
+  letter-spacing: 0.101px;
+  text-shadow: -1px -1px 0 white,  
+                1px -1px 0 white,
+                -1px 1px 0 white,
+                1px 1px 0 white;
+  }
   .img{
     margin-top:150px;
   }

@@ -45,7 +45,7 @@
             </div>
             <!-- 登陆成功后显示“注销”和“登出”按钮 -->
             <div v-if="hideLogin" style="display: inline-flex;">
-              <el-button  size="large" link >注销</el-button>
+              <el-button  link size="large" @click="delete">注销</el-button>
               <el-divider direction="vertical" />
               <el-button  link @click="logOut">登出</el-button>
             </div>
@@ -68,7 +68,7 @@
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
 
-  import { searchPassage } from '../http/api.js';
+  import { searchPassage,deleteUser } from '../http/api.js';
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
@@ -155,6 +155,16 @@
              })
             .catch(error => {
                 console.error('获取用户信息失败:', error);
+            });
+        },
+        delete(){
+           deleteUser(localStorage.getItem('ID'))
+          .then(result => {
+              console.log('用户注销成功', result);
+              console.log(localStorage.getItem('ID'));
+             })
+            .catch(error => {
+                console.error('用户注销失败:', error);
             });
         }
     }
