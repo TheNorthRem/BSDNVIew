@@ -54,13 +54,13 @@
                     </template>
                     <div class="commentBox" v-for="(comment, index) in comments" :key="index" >
                             <div class="commentUserName">
-                                {{ comments[index].comments.userID }}
+                                {{ comments[index].nickName }}
                             </div>
                             <div class="commentTime">
-                                {{ comments[index].comments.time }}
+                                {{ comments[index].time }}
                             </div>
                             <div class="commentContent">
-                                {{ comments[index].comments.content }}
+                                {{ comments[index].content }}
                             </div>
                     </div> 
                 </el-drawer>
@@ -208,7 +208,7 @@ export default {
             await getComments(articleId,page).then(result => {
                                 console.log(result)
                                 console.log("获取文章评论成功");
-                                this.comments=result.data.data;
+                                this.comments=result.data.data.records;
                             })
                             .catch(error => {
                                 console.error('获取文章评论失败:', error);
@@ -406,7 +406,7 @@ export default {
 
 }
 .passageBox{
-    padding-inline: 25%;
+    padding-inline: 20%;
     display: flex;
     flex-direction: column;
     width:60%;
