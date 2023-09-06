@@ -126,9 +126,9 @@ export function getClassifiedArticle(category, page) {
 
 
 //注销用户
-export function deleteUser(params) {
+export function deleteUserByID(params) {
     return request({
-        url: "/bsUserInformation/delete",
+        url: "/bsUser/delete",
         method: 'delete',
         params
     })
