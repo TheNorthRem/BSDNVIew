@@ -1,4 +1,5 @@
 <template>
+    
     <div class="viewSettings">
         <div class="gird-item">
             <div class="grid-container">
@@ -29,56 +30,31 @@
                     </span>
                 </section>
             </div>
+            <div class="paginationBlock">
+                <el-pagination layout="prev, pager, next" :total="1000" />
+            </div>
         </div>
+        
     </div>
 </template>
     
 <script>
+  import { ElPagination }  from '@/../node_modules/element-plus'
     export default {
       name: 'Search',
+      components: {
+        ElPagination
+      },
       data(){
         return{
-        searchQuery: '', // 用户输入的搜索查询
-            user: {
-                name: "UserName",
-                likes: 10,
-            },
-             searchResults: {
-                articles: [
-                    {
-                        title: '文章标题1',
-                        content: '文章内容1...',
-                        author: {
-                            name: '作者1姓名',
-                            avatar: '../assets/avatar/avatar0.png'
-                        },
-                        link: '链接1'
-                    },
-                    {
-                        title: '文章标题2',
-                        content: '文章内容2...',
-                        author: {
-                            name: '作者2姓名',
-                            avatar: '../assets/avatar/avatar1.png'
-                        },
-                        link: '链接2'
-                    },
-                    {
-                        title: '文章标题3',
-                        content: '文章内容3...',
-                        author: {
-                            name: '作者3姓名',
-                            avatar: '../assets/avatar/avatar2.png'
-                        },
-                        link: '链接3'
-                    }
-                ]
-            }
+            searchResultsString: {}
         };
     },
     created() {
-        const userData = this.$route.params.userData;
-        console.log('Received User Data:', userData);
+        console.log(JSON.parse(this.$route.query.searchResults));
+        // 传参 将路由参数转换为json格式并赋给本地变量
+        this.searchResultsString = JSON.parse(this.$route.query.searchResults);
+        console.log(this.searchResultsString[1].title);  
     },
         
 }
@@ -227,5 +203,12 @@
         margin-right: 8px;
         font-weight: 700;
         font-size:0.9375rem;
+    }
+    .paginationBlock{
+        display: inline-flex;
+        justify-content: center;
+        padding-inline: 35%;
+        padding-block: 2%;
+        
     }
 </style>
