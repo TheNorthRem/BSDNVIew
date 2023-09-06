@@ -187,3 +187,10 @@ export function addFavorites(params) {
 }
 
 
+export function sendMessage(data) {
+    return request({
+        url: "/bsMessage/add",
+        method: 'post',
+        data
+    })
+}
