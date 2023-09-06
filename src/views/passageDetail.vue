@@ -192,7 +192,7 @@ export default {
                             .then(result => {
                                 console.log(result);
                                 console.log("获取文章详情信息成功");
-                                this.nickName=result.data.data.article.nickName;
+                                this.nickName=result.data.data.uploader.nickName;
                                 this.content=result.data.data.article.content;
                                 this.favoriteCount=result.data.data.article.favoriteCount;
                                 this.title=result.data.data.article.title;
