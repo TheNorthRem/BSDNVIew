@@ -76,7 +76,7 @@ export function getUserInfo(params) {
 //获取用户的详细信息：用户主页展示信息
 export function detailedUserInfo(params) {
     return request({
-        url: "/bsUserInformation/search",
+        url: "/bsUserInformation/searchContent",
         method: 'get',
         params
     })
@@ -148,9 +148,12 @@ export function logOutUser(userId,token) {
 //上传用户头像
 export function uploadUserAvatar(data) {
     return request({
-        url: "/bsUser/uploadAvatar",
+        url: "/ImageUpload",
         method: 'post',
-        data
+        data,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
     })
 }
 
@@ -167,7 +170,7 @@ export function editUserInfo(data) {
 
 
 
-
+//通过文章id访问
 export function getArticleById(params) {
     return request({
         url: "/bsArticle/getById",
@@ -176,7 +179,13 @@ export function getArticleById(params) {
     })
 }
 
-
+//通过类别访问文章
+export function getByCategory(params) {
+    return request({
+        url: "/bsArticle/getByCategory",
+        method: 'get',
+    })
+}
 //收藏文章
 export function addFavorites(params) {
     return request({
@@ -186,6 +195,12 @@ export function addFavorites(params) {
     })
 }
 
+export function getAllArticles(params) {
+    return request({
+        url: "/bsArticle/list",
+        method: 'get',
+    })
+}
 
 export function sendMessage(data) {
     return request({

@@ -42,11 +42,11 @@
         <div class="rightMenu">
           <div style="margin-right: 10%; display:inline-flex;">
             <div v-if="!hideLogin" style="display: inline-flex;">
-              <el-button  size="large" link @click="changeRegister">注册</el-button>
+              <el-button  size="large" link @click="reverseRegisterFlag">注册</el-button>
               <el-divider direction="vertical" />
-              <el-button  link @click="changeLogin">登录</el-button>
+              <el-button  link @click="reverseLoginFlag">登录</el-button>
             </div>
-            <!-- 登陆成功后显示“注销”和“登出”按钮 -->
+            <!-- 登陆成功后查看是否有id，有的话显示“注销”和“登出”按钮 -->
             <div v-if="hideLogin" style="display: inline-flex;">
               <el-button  link size="large" @click="deleteUser">注销</el-button>
               <el-divider direction="vertical" />
@@ -54,14 +54,14 @@
             </div>
           </div>
           <!-- 点击发布先让用户选择标签，再跳转到编辑页面 -->
-          <el-button type="primary" color="#000" @click="toEditorPassage">
+          <el-button type="primary" color="#000" @click="reverseShowTagDialog">
             发布<el-icon class="el-icon--right"><Upload /></el-icon>
           </el-button> 
         </div>
       </div>
-      <login v-if="loginFlag" v-bind:hideLogin ="hideLogin" v-on:loginSuccess="logSuc($event)"/>
-      <register v-if="registerFlag" />
-      <tagSelector v-if="showTagDialog" />
+      <login v-if="loginFlag" v-bind:hideLogin ="hideLogin" v-on:loginSuccess="logSuc($event)"  @close="reverseLoginFlag"/>
+      <register v-if="registerFlag"  @close="reverseRegisterFlag"/>
+      <tagSelector v-if="showTagDialog"  @close="reverseShowTagDialog"/>
     </div>
 </template>
   
@@ -88,8 +88,7 @@
       Search,
       tagSelector,
       login,
-      register,
-      bsHome
+      register
     },
     data() {
       return {
@@ -117,18 +116,17 @@
       toCategory() {
         this.$router.push({ path: '/category' })
       },
-      changeLogin() {
+      reverseLoginFlag() {
         this.loginFlag = !this.loginFlag
         this.registerFlag = false
 
       },
-      changeRegister() {
+      reverseRegisterFlag() {
         this.registerFlag = !this.registerFlag
-        this.loginFlag = false
       },
-      toEditorPassage(){
+      reverseShowTagDialog(){
         //点击发布，显示选择标签的对话框
-        this.showTagDialog = true
+        this.showTagDialog =! this.showTagDialog
       },
       
       // 将Login组件返回的值赋给hideLogin
@@ -142,8 +140,8 @@
                 console.log("result",toRaw(result));
                 // 将搜索结果文章存储到searchResults中
                 this.searchResults = JSON.stringify(result.data.data.records); 
-                console.log("searchResult",this.searchResults);
-                console.log("searchResult",this.searchResults[0].title);
+                // console.log("searchResult",this.searchResults);
+                // console.log("searchResult",this.searchResults[0].title);
                 // 获取信息成功后跳转到搜索结果页面               
               this.$router.push({
                   path: '/search',

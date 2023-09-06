@@ -2,7 +2,7 @@
     <div class="editorViewBox">
         <img src="../assets/e1.png" style="height: auto;width: 15%; position: fixed; padding-inline: 3%;left: 2%;bottom: 0;">
         <div class="passageBox">
-            
+
             <div style="display: inline-flex;">
                 <img src="../assets/avatar/avatar1.png" style="width: 10%;height: auto; padding-right:3%;" />
                 <div>
@@ -25,8 +25,8 @@
                     <el-button @click="addToFavorite" style="width:20%;border: 1px solid rgba(0, 0, 0, 0.10);" text :class="{ 'favorite-button-active': isFavorite }"> 
                         {{ buttonText }} {{ favoriteCount }}
                     </el-button>
-                    
-                    
+
+
                     </div>
                     <el-input
                         type="textarea"
@@ -38,8 +38,8 @@
                         📝 发布评论
                     </el-button>
                 </div>
-                
-                
+
+
                 <el-drawer v-model="visible" :show-close="false">
                     <template #header="{ close, titleId, titleClass }">
                     <h4 :id="titleId" :class="titleClass">评 论</h4>
@@ -47,9 +47,9 @@
                         <el-icon class="el-icon--left"><CircleCloseFilled /></el-icon>
                     </el-button>
                     <!-- <div class="comments" v-for="(article, index) in articles" :key="index"> -->
-                        
-                        
-                        
+
+
+
                     <!-- </div> -->
                     </template>
                     <div class="commentBox" v-for="(comment, index) in comments" :key="index" >
@@ -67,7 +67,7 @@
         </div>
         <img src="../assets/e2.png" style="height: auto;width: 15%; position: fixed;padding-inline: 3%;right: 2%;bottom: 0;">
     </div>
-    
+
 </template>
 
 <script>
@@ -83,7 +83,7 @@ export default {
     components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled,ElInput,ElDivider, Mounted,getArticleById },
     data() {
         return {
-            
+
             isFavorite: false, // 初始化为未收藏状态
             textarea: '',
             nickName:"NickName",
@@ -127,8 +127,8 @@ export default {
     },
 },
     // create(){
-        
-        
+
+
     // },
     methods: {
         addToFavorite() {
@@ -161,7 +161,7 @@ export default {
                                 addFavorites(IDForm).then(result => {
                                                     this.favoriteCount++;
                                                     console.log("收藏文章成功");
-                                                    
+
                                                 })
                                                 .catch(error => {
                                                     console.error('收藏文章失败:', error);
@@ -173,7 +173,7 @@ export default {
 
       // 切换按钮状态
       this.isFavorite = !this.isFavorite;
-            
+
         },
         onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
