@@ -154,7 +154,7 @@ export default {
     border-bottom: 1px solid #ccc;
     /* border-radius: 10px; */
 }
-/deep/ .el-divider--horizontal{
+.el-divider--horizontal{
     margin: 0px 0px 0px 0px;
 }
 </style>

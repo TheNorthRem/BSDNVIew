@@ -82,6 +82,14 @@ export function detailedUserInfo(params) {
     })
 }
 
+export function getMessageUser(params){
+    return request({
+        url: "/bsMessage/searchSendUser",
+        method:'get',
+        params
+    })
+}
+
 //获取文章详情根据id查询
 export function detailedPassageInfo(params){
     return request({
@@ -112,6 +120,19 @@ export function getClassifiedArticle(category, page) {
         params: {
             "category": category,
             "page": page
+        }
+    })
+}
+
+
+//登出用户
+export function logOutUser(userId,token) {
+    return request({
+        url: "/login/logOut",
+        method: 'delete',
+        params:{
+            "userId":userId,
+            "token":token
         }
     })
 }
