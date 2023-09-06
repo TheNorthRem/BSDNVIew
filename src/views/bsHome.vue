@@ -91,7 +91,6 @@ export default {
             profilePhotoPath: [],
             TopArticles:[],
             articleArrayLength:0
-         
         }
     },
     created() {
