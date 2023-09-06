@@ -10,33 +10,24 @@
                 <el-button class="subscribeBox">
                   <div class="subscribe">关注</div>
                 </el-button>
-                <el-button class="editBox" @click="dialogTableVisible = true">
+                <el-button class="editBox" @click="printout">
                   <div class="subscribe" >编辑信息</div>
                 </el-button>
                 <!-- 编辑个人主页信息按钮的弹窗 -->
-                <el-dialog title="修改用户个人信息" :visible.sync="dialogFormVisible">
+                <el-dialog title="修改用户个人信息" v-model="dialogFormVisible">
                   <el-form :model="form">
                     <el-form-item label="修改个人昵称" :label-width="formLabelWidth">
-                      <el-input v-model="ruleForm.nickName" autocomplete="off"></el-input>
+                      <el-input v-model="form.nickName" autocomplete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="活动区域" :label-width="formLabelWidth">
-                      <el-select v-model="form.region" placeholder="请选择活动区域">
-                        <el-option label="区域一" value="shanghai"></el-option>
-                        <el-option label="区域二" value="beijing"></el-option>
-                      </el-select>
-                    </el-form-item>
+                    
                     <el-form-item label="上传头像" :label-width="formLabelWidth">
                       <el-button @click="uploadAvatar"> + 
-                      </el-button>
-                    </el-form-item>
-                    <el-form-item label="上传头像" :label-width="formLabelWidth">
-                      <el-button @click="editUser"> 保存
                       </el-button>
                     </el-form-item>
                   </el-form>
                   <div slot="footer" class="dialog-footer">
                     <el-button @click="dialogFormVisible = false">取 消</el-button>
-                    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                    <el-button type="primary" @click="dialogFormVisible = false, editUser">确 定</el-button>
                   </div>
                 </el-dialog>
             </div>
@@ -105,20 +96,26 @@
   </template>
   
   <script>
+  import { ElDialog, ElForm, ElFormItem, ElButton, ElInput, ElMessage } from '@/../node_modules/element-plus'
   import { detailedUserInfo,uploadUserAvatar,editUserInfo } from '../http/api.js';
   export default {
-    ruleForm:{
-      nickName:'',
-
-    },
-    name: 'Category',
-    qq:'qq',
-    birthday:'birthday',
-    clickCounts:0,
-    likes:0,
-    intro:"Introduction",
+    components: {
+    ElDialog, ElForm, ElFormItem, ElButton, ElInput
+  },
     data(){
       return{
+        formLabelWidth: '120px',
+        dialogFormVisible: false,
+        form:{
+          nickName:'',
+
+        },
+        name: 'Category',
+        qq:'qq',
+        birthday:'birthday',
+        clickCounts:0,
+        likes:0,
+        intro:"Introduction",
           nickName:'nickName',
           // 控制切换按钮后按钮改变样式
           index: 1,
@@ -127,6 +124,11 @@
       }
     },
     methods:{
+      printout(){
+        this.dialogFormVisible=true
+        console.log("dialogFormVisible",this.dialogFormVisible);
+        
+      },
         show (value) {
         this.index === value ? this.isShow = !this.isShow : this.isShow = true
         this.index = value
@@ -134,7 +136,7 @@
       uploadAvatar(){
         let userID=localStorage.getItem('ID');
             let IDForm = {
-                userId: userID,
+              id: userID,
             }
         uploadUserAvatar(IDForm)
         .then(result => {
@@ -167,7 +169,7 @@
               detailedUserInfo(IDForm) 
                 .then(result => {
                     console.log(result)
-                    console,log("个人主页信息获取成功");
+                    console.log("个人主页信息获取成功");
                     this.qq = result.data.data[0].qq;
                     this.nickName = result.data.data[0].nickName;
                     this.birthday = result.data.data[0].birthday;
@@ -176,7 +178,7 @@
                     this.intro = result.data.data[0].intro;
                 })
                 .catch(error => {
-                    console.error('获取用户信息失败:', error);
+                    console.error('个人主页信息失败:', error);
                 });
             }
     }
