@@ -12,7 +12,7 @@
 
     </div>
         <div class = "right">
-            <MessagePanel/>
+            <MessagePanel Id := this.curId />
         </div>
   
 </div>
@@ -28,7 +28,8 @@
         data(){
             return{
                 users:[],
-                arrlen:''
+                arrlen:'',
+                curId: 5
             }
         },
 
