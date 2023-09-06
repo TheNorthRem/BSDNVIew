@@ -4,11 +4,16 @@
     <div class="left">
         <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
         <li v-for="i in arrlen" :key="i" class="infinite-list-item">
-            <UserPanel :username= this.users[i-1].nickName lastMessage= "n" srcs="http://localhost:8081/image/al.png"/>
+            <UserPanel 
+            :username= this.users[i-1].nickName 
+            :userId="i"
+            lastMessage= "n" 
+            srcs="http://localhost:8081/image/al.png"
+            :curId="curId"
+            v-on:changeUserId="UserIdChanged($event)"
+            />
         </li>
     </ul>
-
-        
 
     </div>
         <div class = "right">
@@ -41,14 +46,21 @@
             getMessageUser({
                 userId:localStorage.getItem('ID')
             }).then(res=>{
-                    
                     this.users=res.data.data
                     this.arrlen=res.data.data.length
                     console.log(this.users)
             })
-            this.curId=5
-            console.log(this.curId)
+
+        },
+        methods:{
+            //接收UserPanel子组件传来的userId，存到curID中
+            UserIdChanged(id){
+                this.curId=id
+                console.log(this.curId)
+            }
         }
+        
+        
     }
 </script>
 
