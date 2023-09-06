@@ -67,19 +67,6 @@ import showEditor_brief from '@/components/showEditor_brief.vue';
 import { getUserInfo } from '../http/api.js';
 import { getTopArticles } from "@/http/api"
 
-//解决this指向问题，在window.addEventListener中this是指向window的。
-//需要将vue实例赋值给_this,这样在window.addEventListener中通过_this可以为vue实例上data中的变量赋值
-let _this=this;
-//根据自己需要来监听对应的key
-window.addEventListener("setItemEvent",function(e){
-	//e.key : 是值发生变化的key
-	//e.newValue : 是可以对应的新值
-	if(e.key==="formDocumnet"){
-		console.log(e.newValue);
-		_this.content=e.newValue;
-	}
-})
-
 export default { 
     name: 'bsHome',
     components:{
@@ -188,7 +175,7 @@ export default {
 
 .mainBox{
     /* height: 100%; */
-    width: 70%;
+    width: 60%;
     display: flex; 
     position: relative; 
     flex-direction: column;/* 垂直排列 */
