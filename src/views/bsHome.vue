@@ -61,7 +61,6 @@ import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-
 import {Mounted, BeforeMount,Created} from "vue"
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { getUserInfo } from '../http/api.js';
-import { toRaw } from '@vue/reactivity'
 import { getTopArticles } from "@/http/api"
 
 export default { 
@@ -101,8 +100,15 @@ export default {
                     console.log(res.data.data)
                     this.articleArrayLength = res.data.data.length
                     this.TopArticles = res.data.data
-                    console.log(this.TopArticles)
-                    console.log(this.articleArrayLength)
+
+                    //修改简介格式
+                    for(let i = 0; i < this.TopArticles.length; i++) {
+                        this.TopArticles[i].brief = "<h3>简介：".concat(this.TopArticles[i].brief).concat("......</h3>")
+                        console.log(this.TopArticles[i].brief)
+                    }
+                    // this.TopArticles.brief = String(this.TopArticles.brief).concat("...")
+                    // console.log(this.TopArticles)
+                    // console.log(this.articleArrayLength)
                 } else {
                     console.log("获取热门文章失败！")
                 }

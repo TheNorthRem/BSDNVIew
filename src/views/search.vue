@@ -34,7 +34,6 @@
 </template>
     
 <script>
-    import { get } from '@/http/request';
     export default {
       name: 'Search',
       data(){

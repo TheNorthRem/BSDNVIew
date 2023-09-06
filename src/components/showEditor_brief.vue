@@ -15,7 +15,7 @@
             </footer>
 
             <div style="border: 1px solid #652828;border-radius: 3px;">
-                <Editor style="height: 100px; overflow-y: hidden; width: 800px; " v-model=this.brief[i-1]
+                <Editor style="height: 100px; overflow-y: hidden; width: 800px; " v-model= this.brief
                     :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
             </div>
 
@@ -36,11 +36,11 @@
 <script>
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { ElButton } from '@/../node_modules/element-plus';
-import { Mounted } from "vue"
+import { Mounted, BeforeCreate } from "vue"
 
 export default {
     name: "showEditor_brief",
-    components: { Editor, Toolbar, Mounted, ElButton },
+    components: { Editor, Toolbar, Mounted, ElButton, BeforeCreate },
     data() {
         return {
             editor: null,
@@ -58,6 +58,8 @@ export default {
                 },
             },
             mode: 'default', // or 'simple',
+            //添加了标题、简介标头、省略号
+            ModifiedBrief: "123",
         }
     },
     props: {
@@ -85,11 +87,9 @@ export default {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
         },
     },
-    mounted() {
-        console.log(this.uploaderId)
-        console.log(this.getDataFLag)
+    mounted(){
+        
     },
-
     beforeDestroy() {
         const editor = this.editor
         if (editor == null) return
