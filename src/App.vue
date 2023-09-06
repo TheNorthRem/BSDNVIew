@@ -1,21 +1,18 @@
 <template>
   <div id="app">
     <bsHeader />
-    <Message />
-    <!-- <router-view /> -->
+    <router-view />
   </div>
 </template>
 
 <script>
 import bsHeader from '@/components/bsHeader.vue'
-import Message from '@/components/Message.vue'
 
 
 export default {
   name: 'App',
   components: {
     bsHeader,
-    Message
   }
 }
 </script>

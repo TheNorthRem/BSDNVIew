@@ -7,7 +7,7 @@
           <ul>
             <li><a href="#/">🏠首页</a></li>
             <li><a href="#">博客</a></li>
-            <li><a href="#">社区</a></li>
+            <li><a href="#/message">社区</a></li>
             <li><a href="https://www.icourse163.org/">学习</a></li>
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
@@ -128,7 +128,7 @@
       },
       // 将Login组件返回的值赋给hideLogin
       logSuc(msg) {
-        this.hideLogin = msg
+        this.hideLogin = msg;
       },
       Search() {
             searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
