@@ -21,7 +21,6 @@
                 <!-- 文章列表 -->  
                 <div class="articleBox">
                     <span v-for="i in articleArrayLength" v-bind:key="i" style="padding-bottom: 5%;">
-                        <p>22</p>
                         <showEditor_brief
                         :uploaderId= this.TopArticles[i-1].uploaderId
                         :uploaderNickName= this.TopArticles[i-1].nickName
@@ -29,6 +28,7 @@
                         :title= this.TopArticles[i-1].title
                         :uploadTime= this.TopArticles[i-1].uploadTime
                         :nickName= this.TopArticles[i-1].nickName
+                        :articleId=this.TopArticles[i-1].articleId
                         ></showEditor_brief>
                     </span>
                 </div> 

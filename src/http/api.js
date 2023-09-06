@@ -133,3 +133,11 @@ export function deleteUserByID(params) {
         params
     })
 }
+
+export function getArticleById(params) {
+    return request({
+        url: "/bsArticle/getById",
+        method: 'get',
+        params
+    })
+}

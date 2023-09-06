@@ -9,12 +9,12 @@
                     <h3>
                         {{nickName}}<!-- UserName：{{nickName[i-1]}} -->
                     </h3>
-                    {{userID}}<!-- <p>ID：{{ uploaderId[i-1] }}</p> -->
+                        {{userID}}<!-- <p>ID：{{ uploaderId[i-1] }}</p> -->
                 </div>
 
             </div>
             
-            <Editor style="height: 80%; overflow-y: hidden;" v-model="content" :defaultConfig="editorConfig" :mode="mode"
+            <Editor style="height: 80%; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
                 @onCreated="onCreated" />
                 <div class="buttomBox">
                     <el-button @click="visible = true; getComment()" style="width:9%" text>
@@ -57,7 +57,7 @@
 
 <script>
 // import Vue from 'vue'
-import { Editor,  } from '@wangeditor/editor-for-vue'
+import { Editor} from '@wangeditor/editor-for-vue'
 import { ElMessage, ElIcon, ElDrawer, ElButton} from "@/../node_modules/element-plus"
 import { CircleCloseFilled } from '@element-plus/icons-vue'
 import { Mounted } from "vue"
@@ -65,7 +65,7 @@ import { getArticleById } from "@/http/api"
 import { uploadPassage,detailedPassageInfo,getComments } from "@/http/api"
 
 export default {
-    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled, Mounted },
+    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled, Mounted,getArticleById },
     data() {
         return {
             nickName:"NickName",
@@ -183,10 +183,16 @@ export default {
         }
     },
     mounted() {
+        console.log(123)
         console.log(this.$route.query.id)
         this.getArticleByIdForm.id = this.$route.query.id
         getArticleById(this.getArticleByIdForm).then(res =>{
                 console.log(res)
+                this.nickName = res.data.data.uploader.nickName
+                this.userID = res.data.data.article.userID
+                this.html = res.data.data.article.html
+                console.log(res.data.data.uploader.nickName)
+                console.log(this.nickName)
         }).catch(err =>{
             console.log(err)
             console.log(this.target)
