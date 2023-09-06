@@ -128,11 +128,21 @@
       logSuc(msg) {
         this.hideLogin = msg
       },
+      toSearch(){
+        this.$router.push({ path: '/search' })
+      },
       Search() {
             searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
             .then(result => {
                 this.searchResults = result; // 将搜索结果存储到searchResults数组中
-                console.log(this.searchResults)
+                console.log(this.searchResults);
+                // 获取信息成功后跳转到搜索结果页面
+                this.toSearch();
+                console.log(result.data.data.records);
+                this.$router.push({
+                    name: 'search', // 路由名称，需要根据你的路由配置来设置
+                    params: { userData: this.user } // 传递用户数据作为参数
+                });
               })
             .catch(error => {
               console.log(this.Input);
@@ -143,7 +153,8 @@
         // 发送GET请求获取用户信息
         getUserInfo(localStorage.getItem('token')) // 用于获取用户信息的接口 '/user-info'
             .then(result => {
-                this.user = result; // 将获取的用户信息存储到searchResults中的user属性中
+                this.user = result.data.data.records; // 将获取的用户信息存储到searchResults中的user属性中
+                
              })
             .catch(error => {
                 console.error('获取用户信息失败:', error);

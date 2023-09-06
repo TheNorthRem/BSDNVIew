@@ -20,23 +20,6 @@
                 </div> 
                 <!-- 文章列表 -->  
                 <div class="articleBox">
-                    <!-- <span v-for="(article, index) in articles" :key="index" style= "padding-bottom: 5%;">
-                        <div class="articleInfo">
-                           <div class="contentBox">
-                               <a href="#/passageDetail"> <h2>{{ article.title }}</h2> </a>
-                                <h4>{{ article.content }}</h4>
-                           </div>
-                           <footer>
-                                <img src= "../assets/avatar/avatar1.png" style="width: 8%; padding-right:3%;"/>
-                                <div>
-                                    <h3>
-                                        {{ article.author.name }}
-                                    </h3>
-                                    <p>{{ article.author.profile }}</p>
-                                </div>
-                           </footer>
-                        </div>
-                    </span>    -->
                     <showEditor_brief></showEditor_brief>
                 </div> 
             </div>
@@ -89,37 +72,6 @@ export default {
                         require('../assets/carousel/test3.jpg'),
                         require('../assets/carousel/test4.jpg')
                     ],
-            articles: [
-                    {
-                        title: '文章标题1',
-                        content: '文章内容1',
-                        author: {
-                            name: '作者1姓名',
-                            pic: '../assets/avatar/avatar1.png',
-                            profile: '简介1'
-                        },
-                        link: '链接1'
-                    },
-                    {
-                        title: '文章标题2',
-                        content: '文章内容2',
-                        author: {
-                            name: '作者2姓名',
-                            pic: '../assets/avatar/avatar2.png',
-                            profile: '简介2'
-                        },
-                        link: '链接2'
-                    },
-                    {
-                        title: '文章标题3',
-                        content: '文章内容3',
-                        author: {
-                            name: '作者3姓名',
-                            profile: '简介3'
-                        },
-                        link: '链接3'
-                },
-            ]
         }
     },
     created() {
