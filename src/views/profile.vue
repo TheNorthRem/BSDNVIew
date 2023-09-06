@@ -11,7 +11,7 @@
                   <div class="subscribe">关注</div>
                 </el-button>
                 <el-button class="editBox">
-                  <div class="subscribe">编辑信息</div>
+                  <div class="subscribe" @click="dialogTableVisible = true">编辑信息</div>
                 </el-button>
             </div>
             

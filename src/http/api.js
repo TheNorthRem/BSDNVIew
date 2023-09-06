@@ -133,3 +133,15 @@ export function deleteUserByID(params) {
         params
     })
 }
+
+//登出用户
+export function logOutUser(userId,token) {
+    return request({
+        url: "/login/logOut",
+        method: 'delete',
+        params:{
+            "userId":userId,
+            "token":token
+        }
+    })
+}

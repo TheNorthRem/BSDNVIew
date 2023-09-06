@@ -71,7 +71,7 @@
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
 
-  import { searchPassage,deleteUserByID } from '../http/api.js';
+  import { searchPassage,deleteUserByID,logOutUser } from '../http/api.js';
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
@@ -173,7 +173,22 @@
               console.log(IDForm);
                 console.error('用户注销失败:', error);
             });
+        },
+        logOut(){
+          logOutUser(localStorage.getItem('ID'),localStorage.getItem('token'))
+          .then(result => {
+              console.log('用户登出成功', result);
+              this.hideLogin=false;
+              window.localStorage.removeItem('ID');
+              window.localStorage.removeItem('token');
+              console.log('用户信息清理:');
+              this.fetchUserInfo();
+             })
+            .catch(error => {
+                console.error('用户登出失败:', error);
+            });
         }
+        
     }
   }
   
