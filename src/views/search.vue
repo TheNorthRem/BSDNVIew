@@ -1,51 +1,112 @@
 <template>
     <div class="viewSettings">
+        <keep-alive>
         <div class="grid-item">
-            <div class="articleBox">
-                <span v-for="i in articleArrayLength" v-bind:key="i" style="padding-bottom: 5%;">
-                    <showEditor_brief :uploaderId=this.Articles[i-1].uploaderId
-                        :uploaderNickName=this.Articles[i-1].nickName :brief=this.Articles[i-1].brief
-                        :title=this.Articles[i-1].title :uploadTime=this.Articles[i-1].uploadTime
-                        :nickName=this.Articles[i-1].nickName :articleId=this.Articles[i-1].articleId></showEditor_brief>
-                </span>
-            </div>
+           
+                <div class="articleBox">
+                    
+                        <span v-for="i in Articles.length" v-bind:key="i" style="padding-bottom: 5%;">
+                            <showEditor_brief :uploaderId=this.Articles[i-1].uploaderId
+                                :uploaderNickName=this.Articles[i-1].nickName :brief=this.Articles[i-1].brief
+                                :title=this.Articles[i-1].title :uploadTime=this.Articles[i-1].uploadTime
+                                :nickName=this.Articles[i-1].nickName :articleId=this.Articles[i-1].articleId></showEditor_brief>
+                        </span>
+                    
+                </div>
+           
+            <!-- 分页 -->
             <div class="paginationBlock">
-                <el-pagination layout="prev, pager, next" :total="1000" />
+                <el-pagination layout="prev, pager, next" :page-count= this.total v-model:current-page="currentPage" 
+                @current-change="PassRouter" />
             </div>
+        
         </div>
-
+        </keep-alive>
     </div>
 </template>
     
 <script>
 import { ElPagination } from '@/../node_modules/element-plus'
 import showEditor_brief from '@/components/showEditor_brief.vue';
+import { searchPassage } from "@/http/api"
+import { Mounted } from "vue"
+
 export default {
     name: 'Search',
     components: {
         ElPagination,
-        showEditor_brief
+        showEditor_brief,
+        searchPassage,
+        Mounted
     },
     data() {
         return {
-            articleArrayLength: 0,
+
             Articles: [],
-        };
+            currentPage: 1,
+            Input: {
+                content: '',
+                page: 1,
+                total:''
+            },
+            total:''
+        }
+    },
+    methods: {
+       PassRouter() {
+            console.log(3455)
+            this.Input.page=this.currentPage;
+            console.log(this.currentPage)
+            searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
+            .then(result => {
+                console.log("Result: " + this.searchResults)
+                // 获取信息成功后跳转到搜索结果页面
+                console.log("Input Content: " + this.Input.content)
+                this.Articles = result.data.data.records;
+            })
+            .catch(error => {
+                console.log(this.Input);
+                console.error('搜索失败:', error);
+            }); 
+       },
     },
     created() {
-        // console.log(JSON.parse(this.$route.query.searchResults));
+        searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
+            .then(result => {
+                 this.Articles = result.data.data.records;
+                 console.log(result.data.data)
+                 this.total=result.data.data.pages
+                 console.log(this.total)
+                // 获取信息成功后跳转到搜索结果页面
+                console.log("Input Content: " + this.Input.content)
+            })
+            .catch(error => {
+                console.log(this.Input);
+                console.error('搜索失败:', error);
+            });
+
+    
         // console.log(this.$route.query.searchResults);
         // 传参 将路由参数转换为json格式并赋给本地变量
-        this.Articles = JSON.parse(this.$route.query.searchResults);
-        this.articleArrayLength = this.Articles.length
-        for (let i = 0; i < this.articleArrayLength; i++) {
-            this.Articles[i].brief = "<h3>简介：".concat(this.Articles[i].brief).concat("......</h3>")
-            console.log(this.Articles[i].brief)
-        }
-        console.log(this.Articles.length)
-        console.log(this.Articles[1].title);
-    },
 
+        
+        for (let i = 0; i < this.Articles.length; i++) {
+            this.Articles[i].brief = "<h3>简介：".concat(this.Articles[i].brief).concat("......</h3>")
+            // console.log(this.Articles[i].brief)
+        }
+    },
+    watch: {
+        currentPage: {
+            handler() {
+
+            }
+        },
+        $route(to, from) {console.info("加载页面数据");
+            if (this.$route.query.id) {
+                
+            }
+        }
+    }
 }
 </script>
     
@@ -57,7 +118,7 @@ export default {
 }
 
 .grid-item {
-    padding-top: 8%;
+    padding-top: 3%;
     margin-left: 8%;
     margin-right: 8%;
     grid-column: span 12;
