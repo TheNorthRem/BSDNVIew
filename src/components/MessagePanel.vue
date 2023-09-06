@@ -20,7 +20,6 @@
 </template>
 
 <script>
-  
     import {ElInput,ElButton} from '@/../node_modules/element-plus'
     import MessageDetail from '@/components/MessageDetail.vue'
     import {getMessage,sendMessage} from '@/http/api';

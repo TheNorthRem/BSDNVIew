@@ -1,6 +1,6 @@
 <template>
 
-  <div class= "appp">
+  <div class= "appp" @click="changeUserId">
         <img class="imgg" :src= this.srcs />
         <div class="txtttt"> 
             <p class="ssss">{{username}}</p>
@@ -24,7 +24,9 @@ export default {
     props:{
         username:String,
         lastMessage:String,
-        srcs:String
+        srcs:String,
+        userId:Number,
+        curId:Number
     },
     mounted(){
         console.log(this.username)
@@ -36,8 +38,14 @@ export default {
         }else{
             this.message=this.lastMessage
         }
-    }
-
+    },
+    methods:{
+            changeUserId(){
+                console.log(this.userId)
+                //将当前点击的用户id传给父组件
+                this.$emit('changeUserId',this.userId)
+            }
+        }
    
 }
 </script>
