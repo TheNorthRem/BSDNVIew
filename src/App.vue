@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <bsHeader />
+    <!-- <Message /> -->
     <router-view />
   </div>
 </template>

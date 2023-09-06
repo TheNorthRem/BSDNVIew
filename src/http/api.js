@@ -146,11 +146,11 @@ export function logOutUser(userId,token) {
 }
 
 //上传用户头像
-export function uploadUserAvatar(params) {
+export function uploadUserAvatar(data) {
     return request({
         url: "/bsUser/uploadAvatar",
         method: 'post',
-        params
+        data
     })
 }
 
@@ -167,7 +167,7 @@ export function editUserInfo(data) {
 
 
 
-
+//通过文章id访问
 export function getArticleById(params) {
     return request({
         url: "/bsArticle/getById",
@@ -176,11 +176,18 @@ export function getArticleById(params) {
     })
 }
 
-
+//通过类别访问文章
 export function getByCategory(params) {
     return request({
         url: "/bsArticle/getByCategory",
         method: 'get',
+    })
+}
+//收藏文章
+export function addFavorites(params) {
+    return request({
+        url: "/bsArticle/addFavorites",
+        method: 'post',
         params
     })
 }
@@ -189,5 +196,31 @@ export function getAllArticles(params) {
     return request({
         url: "/bsArticle/list",
         method: 'get',
+    })
+}
+
+export function sendMessage(data) {
+    return request({
+        url: "/bsMessage/add",
+        method: 'post',
+        data
+    })
+}
+
+//上传评论
+export function uploadComment(params) {
+    return request({
+        url: "/bsComments/uploadComment",
+        method: 'post',
+        params
+    })
+}
+
+//取消文章收藏
+export function deleteFavorites(params) {
+    return request({
+        url: "/bsArticle/deleteFavorites",
+        method: 'delete',
+        params
     })
 }

@@ -1,10 +1,13 @@
-<template >
+<template>
 
-  <div class= "appp" @click="changeUserId" >
-        <img class="imgg" :src= this.srcs />
-        <div class="txtttt"> 
-            <p class="ssss">{{username}}</p>
-            <p class="messs">{{message}}</p>
+  <div class= "app1">
+        <img class="img1" :src= this.srcs />
+        <div class="txt1"> 
+            <p class="use1">{{username}}</p>
+            <p class="mes1">{{Message}}</p>
+        </div>
+        <div class="time"> 
+            <p>{{time}}</p>
         </div>
   </div>
 
@@ -13,56 +16,41 @@
 <script>
 
 
-
 export default {
     data(){
         return{
-            message:'',
+            
         }
     }
     ,
     props:{
         username:String,
-        lastMessage:String,
+        Message:String,
         srcs:String,
-        userId:Number,
-        curId:Number
+        time:String
     },
     mounted(){
         console.log(this.username)
         console.log(this.srcs)
-    
-        if(this.lastMessage.length>10){
-            let sub=this.lastMessage.substring(0,10);
-            this.message = sub+"..."
-        }else{
-            this.message=this.lastMessage
-        }
-    },
-    methods:{
-            changeUserId(){
-                console.log(this.userId)
-                //将当前点击的用户id传给父组件
-                this.$emit('changeUserId',this.userId)
-            }
-        }
+        
+    }
+
    
 }
 </script>
 
 <style>
-
-    .appp{
-        width: 90%;
+     .app1{
+        width: 99%;
         height: 100px;
-        background-color: rgb(236, 240, 240);
+        background-color: rgb(175, 179, 179);
         display: flex;
         position: relative;
         align-items : left;
         border-style: solid;
-        
+        flex-direction: row;
     }
-    .imgg{
+    .img1{
         height: 50px !important;
         width: 50px !important; 
         align-self: center;
@@ -72,23 +60,28 @@ export default {
         border-width: 1px;
     }
 
-    .txtttt{
+    .txt1{
         margin-left: 25px ;
         display: flex;
         flex-direction: column;
         height: 100px;
     }
-    .ssss{
+    .use1{
         position: relative;
         align-self: top;
         font-size: 20px;
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    .messs{
+    .mes1{
         margin-top: 10px;
         margin-bottom: 10px;
         margin-left: 25px;
         color: rgb(152, 151, 149);
     }
+    .time{
+        align-self: right;
+        margin-left: 100px;
+    }
+    
 </style>
