@@ -1,25 +1,26 @@
 <template>
-    <div class="viewSettings11">
-  
-    <div class="left">
-        <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
-        <li v-for="i in arrlen" :key="i" class="infinite-list-item">
-            <UserPanel 
-            :username= this.users[i-1].nickName 
-            :userId="i"
-            lastMessage= "n" 
-            srcs="http://localhost:8081/image/al.png"
-            :curId="curId"
-            v-on:changeUserId="UserIdChanged($event)"
-            />
-        </li>
-    </ul>
+    <div class="viewSettings11"> 
+        <div class="messageBox"> 
+            <div class="left">
+                <ul v-infinite-scroll="load" class="infinite-list">
+                <li v-for="i in arrlen" :key="i" class="infinite-list-item">
+                    <UserPanel 
+                    :username= this.users[i-1].nickName 
+                    :userId="i"
+                    lastMessage= "n" 
+                    srcs="http://localhost:8081/image/al.png"
+                    :curId="curId"
+                    v-on:changeUserId="UserIdChanged($event)"
+                    />
+                </li>
+            </ul>
+            </div>
+            <div class = "right">
+                <keep-alive>
+                    <MessagePanel ref="child" :toId = this.curId :nickName="233" />
+                </keep-alive>
+            </div>
 
-    </div>
-        <div class = "right">
-            <keep-alive>
-                <MessagePanel ref="child" :toId = this.curId :nickName="233" />
-            </keep-alive>
         </div>
   
 </div>
@@ -70,22 +71,31 @@
 <style>
     .viewSettings11{
         width: 100%;
+        height: 100%;
         min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
         background: rgb(214, 209, 209);
         position: relative;
+        display: flex;
+        flex-direction: row;
+        /* margin-left: 10%; */
+    }
+
+    .messageBox{
+        width: 100%;
+        padding-inline: 5%;
         display: flex;
         flex-direction: row;
     }
 
     .left{
         width: 20%;
-        height: 466px;
+        height: 100%;
         background: rgb(247, 246, 246);
     }
 
     .right{
         width: 80%;
-        height: 466px;
+        height: 40%;
         background: rgb(252, 252, 252);
     }
 
@@ -94,16 +104,17 @@
     }
 
     .infinite-list {
-        height: 466px;
+        overflow: auto;
+        height: 100%;
         padding: 0;
         margin: 0;
         list-style: none;
     }
-    .infinite-list .infinite-list-item {
+    .infinite-list-item {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100px;
+        height: 20%;
         background: var(--el-color-primary-light-9);
         margin: 0px;
         margin-bottom: 3px;
@@ -118,4 +129,4 @@
     .infinite-list .infinite-list-item + .list-item {
         margin-top: 10px;
     }
-</style>>
+</style>
