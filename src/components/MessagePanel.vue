@@ -35,7 +35,7 @@
                 Input:''
             }
         },
-        props(){
+        props: {
             Id:Number
         }
         ,
@@ -45,6 +45,7 @@
             }
         },
         mounted(){
+            console.log(this.Id)
             getMessage({
                 userFromId:localStorage.getItem('ID'),
                 userToId:this.Id

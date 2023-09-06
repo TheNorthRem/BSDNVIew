@@ -90,6 +90,14 @@ export function getMessageUser(params){
     })
 }
 
+export function getMessage(params){
+    return request({
+        url: "/bsMessage/searchMessage",
+        method:'get',
+        params
+    })
+}
+
 //获取文章详情根据id查询
 export function detailedPassageInfo(params){
     return request({
@@ -136,3 +144,4 @@ export function logOutUser(userId,token) {
         }
     })
 }
+
