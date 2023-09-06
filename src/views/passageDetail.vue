@@ -21,7 +21,10 @@
                         🗣 评论 
                     </el-button>
                     <el-button @click="addToFavorite" style="width:9%" text>
-                        👍 收藏 
+                        👍 收藏 {{ favoriteCount }}
+                    </el-button>
+                    <el-button @click="addToFavorite" style="width:18%" text>
+                        📝 发布评论
                     </el-button>
                 </div>
                 
@@ -76,6 +79,7 @@ export default {
             comments:{},
             visible: false,
             editor: null,
+            favoriteCount:0,
             getArticleByIdForm:{
                 id: this.$route.params.id
             },
@@ -143,6 +147,7 @@ export default {
                                 this.nickName=result.data.data.nickName;
                                 this.content=result.data.data.content;
                                 this.userID=result.data.data.content;
+                                this.favoriteCount=result.data.data.favoriteCount;
                             })
                             .catch(error => {
                                 console.error('获取文章详情信息失败:', error);

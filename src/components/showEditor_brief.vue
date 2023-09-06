@@ -14,7 +14,7 @@
 
             </footer>
 
-            <div style="border: 1px solid #652828;border-radius: 3px;">
+            <div style="border: 1px solid #652828;border-radius: 3px;margin-top:10px;">
                 <Editor style="height: 100px; overflow-y: hidden; width: 800px; " v-model=this.brief[i-1]
                     :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
             </div>
