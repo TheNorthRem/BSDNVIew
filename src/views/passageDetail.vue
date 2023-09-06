@@ -13,20 +13,32 @@
                 </div>
 
             </div>
-            
-            <Editor style="height: 80%; overflow-y: hidden;" v-model="html" :defaultConfig="editorConfig" :mode="mode"
+            <div class="title">{{ title }}</div>
+            <el-divider border-style="solid" />
+            <Editor style="height: 80%; overflow-y: hidden;" v-model=this.content :defaultConfig="editorConfig" :mode="mode"
                 @onCreated="onCreated" />
-                <div class="buttomBox">
-                    <el-button @click="visible = true; getComment()" style="width:9%" text>
+                <div class="bottomBox">
+                    <div class="bottomBoxInside">
+                    <el-button @click="visible = true; getComment()" style="width:9%;border: 1px solid rgba(0, 0, 0, 0.10);" text>
                         🗣 评论 
                     </el-button>
-                    <el-button @click="addToFavorite" style="width:9%" text>
-                        👍 收藏 {{ favoriteCount }}
+                    <el-button @click="addToFavorite" style="width:20%;border: 1px solid rgba(0, 0, 0, 0.10);" text :class="{ 'favorite-button-active': isFavorite }"> 
+                        {{ buttonText }} {{ favoriteCount }}
                     </el-button>
-                    <el-button @click="addToFavorite" style="width:18%" text>
+                    
+                    
+                    </div>
+                    <el-input
+                        type="textarea"
+                        :rows="2"
+                        placeholder="请输入内容"
+                        v-model="this.textarea" class="addCommentBox" style="margin-top:2%;">
+                    </el-input>
+                    <el-button @click="addToComment" style="width:18%;margin-top:2%;;border: 1px solid rgba(0, 0, 0, 0.10);" text>
                         📝 发布评论
                     </el-button>
                 </div>
+                
                 
                 <el-drawer v-model="visible" :show-close="false">
                     <template #header="{ close, titleId, titleClass }">
@@ -61,25 +73,29 @@
 <script>
 // import Vue from 'vue'
 import { Editor} from '@wangeditor/editor-for-vue'
-import { ElMessage, ElIcon, ElDrawer, ElButton} from "@/../node_modules/element-plus"
+import { ElMessage, ElIcon, ElDrawer, ElButton,ElInput,ElDivider } from "@/../node_modules/element-plus"
 import { CircleCloseFilled } from '@element-plus/icons-vue'
 import { Mounted } from "vue"
 import { getArticleById } from "@/http/api"
-import { uploadPassage,detailedPassageInfo,getComments,addFavorites } from "@/http/api"
+import { uploadPassage,detailedPassageInfo,getComments,addFavorites,uploadComment,deleteFavorites} from "@/http/api"
 
 export default {
-    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled, Mounted,getArticleById },
+    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled,ElInput,ElDivider, Mounted,getArticleById },
     data() {
         return {
+            
+            isFavorite: false, // 初始化为未收藏状态
+            textarea: '',
             nickName:"NickName",
             content:"content",
             userID:"userID",
             articleId:2,
             page:1,
+            title:"文章标题",
             comments:{},
             visible: false,
             editor: null,
-            favoriteCount:0,
+            favoriteCount:100,
             getArticleByIdForm:{
                 id: this.$route.params.id
             },
@@ -105,27 +121,59 @@ export default {
             },
         }
     },
+    computed: {
+    buttonText() {
+      return this.isFavorite ? '⭐️ 已收藏' : '👍 收藏';
+    },
+},
     // create(){
         
         
     // },
     methods: {
         addToFavorite() {
-            try {
+            if (this.isFavorite) {
+                // 已经收藏，执行取消收藏逻辑
+                try {
                 let userID=localStorage.getItem('ID');
-                        let IDForm = {
-                            userId: userID,
-                            articlesId:this.articleId
-                        }
-                        addFavorites(IDForm).then(result => {
-                                            console.log("收藏文章成功");
-                                        })
-                                        .catch(error => {
-                                            console.error('收藏文章失败:', error);
-                                        });
-            } catch (error) {
-                console.error('An error occurred in addToFavorite:', error);
+                                let IDForm = {
+                                    userId: userID,
+                                    articlesId:this.articleId
+                                }
+                                deleteFavorites(IDForm).then(result => {
+                                                    this.favoriteCount--;
+                                                    console.log("取消收藏文章成功");
+                                                })
+                                                .catch(error => {
+                                                    console.error('取消收藏文章失败:', error);
+                                                });
+                    } catch (error) {
+                        console.error('An error occurred in cancelFavorite:', error);
+                    }
+            } else {
+                // 未收藏，执行收藏逻辑
+                try {
+                        let userID=localStorage.getItem('ID');
+                                let IDForm = {
+                                    userId: userID,
+                                    articlesId:this.articleId
+                                }
+                                addFavorites(IDForm).then(result => {
+                                                    this.favoriteCount++;
+                                                    console.log("收藏文章成功");
+                                                    
+                                                })
+                                                .catch(error => {
+                                                    console.error('收藏文章失败:', error);
+                                                });
+                    } catch (error) {
+                        console.error('An error occurred in addFavorite:', error);
+                    }
             }
+
+      // 切换按钮状态
+      this.isFavorite = !this.isFavorite;
+            
         },
         onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
@@ -142,22 +190,22 @@ export default {
                     else{
                         detailedPassageInfo(IDForm)
                             .then(result => {
-                                console.log(result)
+                                console.log(result);
                                 console.log("获取文章详情信息成功");
-                                this.nickName=result.data.data.nickName;
-                                this.content=result.data.data.content;
-                                this.userID=result.data.data.content;
-                                this.favoriteCount=result.data.data.favoriteCount;
+                                this.nickName=result.data.data.article.nickName;
+                                this.content=result.data.data.article.content;
+                                this.favoriteCount=result.data.data.article.favoriteCount;
+                                this.title=result.data.data.article.title;
                             })
                             .catch(error => {
                                 console.error('获取文章详情信息失败:', error);
                             });
                     }
             },
-        getComment(){
+        async getComment(){
             let articleId = this.articleId;
             let page = this.page;
-            getComments(articleId,page).then(result => {
+            await getComments(articleId,page).then(result => {
                                 console.log(result)
                                 console.log("获取文章评论成功");
                                 this.comments=result.data.data;
@@ -165,7 +213,26 @@ export default {
                             .catch(error => {
                                 console.error('获取文章评论失败:', error);
                             });
-        }
+        },
+        addToComment(){
+            let userID=localStorage.getItem('ID');
+            let CommentForm = {
+                userId: userID,
+                articleId:this.articleId,
+                content:this.textarea,
+                fatherCommentId:0
+            }
+            console.log("articleId",this.articleId);
+            uploadComment(CommentForm).then(result => {
+                                console.log(result)
+                                console.log("上传评论成功");
+                                // 清空输入框内容
+                                this.textarea = ''; // 将输入框内容重置为空字符串
+                            })
+                            .catch(error => {
+                                console.error('上传评论失败:', error);
+                            });
+            }
         },
         submitPassage() {
             console.log(this.uploadData)
@@ -230,6 +297,28 @@ export default {
 
 <style src="@wangeditor/editor/dist/css/style.css"></style>
 <style scoped>
+.favorite-button-active {
+  /* 定义按钮激活时的样式 */
+  color: #E94457;
+  font-weight:bold;
+  /* 根据需要设置其他样式 */
+}
+.title{
+    margin-top:3%;
+    margin-bottom:3%;
+    margin-left:3%;
+    color: #373530;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 131.27%; /* 52.508px */
+    letter-spacing: -0.6px;
+}
+.addCommentBox{
+    z-index:9999;
+}
 .commentBox{
     margin-bottom:2%;
     z-index:99;
@@ -279,9 +368,14 @@ export default {
     line-height: 24px; /* 133.333% */
     letter-spacing: -0.13px;
 }
-.buttomBox{
+.bottomBoxInside{
     display:flex;
     flex-direction: row;
+}
+.bottomBox{
+    margin-top:5%;
+    display:flex;
+    flex-direction: column;
 }
 .editorViewBox{
     width: 100%;  

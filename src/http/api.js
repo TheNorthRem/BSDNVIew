@@ -194,3 +194,21 @@ export function sendMessage(data) {
         data
     })
 }
+
+//上传评论
+export function uploadComment(params) {
+    return request({
+        url: "/bsComments/uploadComment",
+        method: 'post',
+        params
+    })
+}
+
+//取消文章收藏
+export function deleteFavorites(params) {
+    return request({
+        url: "/bsArticle/deleteFavorites",
+        method: 'delete',
+        params
+    })
+}
