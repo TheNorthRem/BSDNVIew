@@ -23,10 +23,13 @@
           </ul>
         </div>
         <div class="mt-4" style="width:30%;">
+          <!-- 点击回车或者搜索按钮进行搜索 可清空 -->
           <el-input
             v-model="Input.content"
             placeholder="Please input"
             class="w-20 m-2"
+            clearable 
+            @keyup.enter.native="Search()"
           >
             <template #prefix>
               <el-icon><search /></el-icon>
@@ -45,7 +48,7 @@
             </div>
             <!-- 登陆成功后显示“注销”和“登出”按钮 -->
             <div v-if="hideLogin" style="display: inline-flex;">
-              <el-button  size="large" link >注销</el-button>
+              <el-button  link size="large" @click="deleteUser">注销</el-button>
               <el-divider direction="vertical" />
               <el-button  link @click="logOut">登出</el-button>
             </div>
@@ -68,7 +71,7 @@
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
 
-  import { searchPassage } from '../http/api.js';
+  import { searchPassage,deleteUserByID } from '../http/api.js';
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
@@ -125,11 +128,21 @@
       logSuc(msg) {
         this.hideLogin = msg
       },
+      toSearch(){
+        this.$router.push({ path: '/search' })
+      },
       Search() {
             searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
             .then(result => {
                 this.searchResults = result; // 将搜索结果存储到searchResults数组中
-                console.log(this.searchResults)
+                console.log(this.searchResults);
+                // 获取信息成功后跳转到搜索结果页面
+                this.toSearch();
+                console.log(result.data.data.records);
+                this.$router.push({
+                    name: 'search', // 路由名称，需要根据你的路由配置来设置
+                    params: { userData: this.user } // 传递用户数据作为参数
+                });
               })
             .catch(error => {
               console.log(this.Input);
@@ -140,10 +153,25 @@
         // 发送GET请求获取用户信息
         getUserInfo(localStorage.getItem('token')) // 用于获取用户信息的接口 '/user-info'
             .then(result => {
-                this.user = result; // 将获取的用户信息存储到searchResults中的user属性中
+                this.user = result.data.data.records; // 将获取的用户信息存储到searchResults中的user属性中
+                
              })
             .catch(error => {
                 console.error('获取用户信息失败:', error);
+            });
+        },
+        deleteUser(){
+          let IDForm={
+            id:localStorage.getItem('ID')
+          }
+           deleteUserByID(IDForm)
+          .then(result => {
+              console.log('用户注销成功', result);
+              console.log(IDForm);
+             })
+            .catch(error => {
+              console.log(IDForm);
+                console.error('用户注销失败:', error);
             });
         }
     }

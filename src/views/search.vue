@@ -28,25 +28,6 @@
                         </div>
                     </span>
                 </section>
-                <!-- 右侧放置用户简介 -->
-                <section class="profile">
-                    <!-- 用户头像 -->
-                    <div class="avatarBox">
-                        <img class="avatarImgInProfile" src="../assets/avatar/avatar0.png" />
-                    </div>
-                    <!-- 用户信息的简略展示 -->
-                    <div class="profileBox">
-                        <!-- 用户名 -->
-                        <span class="userProfileName">
-                            {{ user.name }}
-                        </span>
-                        <!-- 点赞数 -->
-                        <span class="Likes">
-                            Likes:{{ user.likes }}
-                        </span>
-                    </div>
-                
-                </section>
             </div>
         </div>
     </div>
@@ -96,31 +77,11 @@
             }
         };
     },
-    create(){
-        // 在页面加载时获取用户信息，仅执行一次
-        this.fetchUserInfo();
+    created() {
+        const userData = this.$route.params.userData;
+        console.log('Received User Data:', userData);
     },
-    methods:{
-        fetchUserInfo() {
-        // 发送GET请求获取用户信息
-        get('/user-info') // 用于获取用户信息的接口 '/user-info'
-            .then(result => {
-                this.user = result; // 将获取的用户信息存储到searchResults中的user属性中
-             })
-            .catch(error => {
-                console.error('获取用户信息失败:', error);
-            });
-        },
-        performSearch() {
-            get('/search', { query: this.searchQuery }) // 发送GET请求，传递搜索查询参数
-            .then(result => {
-                this.searchResults = result; // 将搜索结果存储到searchResults数组中
-            })
-            .catch(error => {
-                console.error('搜索失败:', error);
-             });
-        }
-    }
+        
 }
 </script>
     
@@ -138,7 +99,6 @@
     }
     .grid-container {
         display: grid;
-        grid-template-columns: 923px 170px;
         gap: 24px;
         
     }
