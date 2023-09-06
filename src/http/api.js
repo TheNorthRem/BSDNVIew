@@ -175,3 +175,12 @@ export function getArticleById(params) {
         params
     })
 }
+
+
+export function sendMessage(data) {
+    return request({
+        url: "/bsMessage/add",
+        method: 'post',
+        data
+    })
+}

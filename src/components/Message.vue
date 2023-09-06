@@ -1,5 +1,5 @@
 <template>
-    <div class="viewSettings">
+    <div class="viewSettings11">
   
     <div class="left">
         <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
@@ -12,7 +12,7 @@
 
     </div>
         <div class = "right">
-            <MessagePanel :toId = "5" :nickName="233" />
+            <MessagePanel :toId = this.curId :nickName="233" />
         </div>
   
 </div>
@@ -29,7 +29,7 @@
             return{
                 users:[],
                 arrlen:'',
-                curId:'',
+                curId:2,
             }
         },
 
@@ -46,14 +46,13 @@
                     this.arrlen=res.data.data.length
                     console.log(this.users)
             })
-            this.curId=5
             console.log(this.curId)
         }
     }
 </script>
 
 <style>
-    .viewSettings{
+    .viewSettings11{
         width: 100%;
         min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
         background: rgb(214, 209, 209);
@@ -65,13 +64,13 @@
     .left{
         width: 20%;
         height: 466px;
-        background: rgb(168, 161, 161);
+        background: rgb(247, 246, 246);
     }
 
     .right{
         width: 80%;
         height: 466px;
-        background: rgb(133, 96, 96);
+        background: rgb(252, 252, 252);
     }
 
     .panel{

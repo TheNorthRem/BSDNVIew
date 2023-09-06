@@ -1,11 +1,13 @@
 <template>
   <div class="panel">
         <div class="front">
+            <keep-alive>
             <ul v-infinite-scroll="load" class="infinite-list1" style="overflow: auto">
-            <li v-for="i in 10" :key="i" class="infinite-list-item1">
-                <MessageDetail  username="hhhh" lastMessage="wwwwqqqwwqeqweqwew" srcs="http://localhost:8081/image/al.png"/>
+            <li v-for="i in messageLen" :key="i" class="infinite-list-item1">
+                <MessageDetail  :username= this.messages[i-1].nickName :Message= this.messages[i-1].content  srcs="http://localhost:8081/image/al.png"/>
             </li>
             </ul>
+            </keep-alive>
         </div>
         <div class="bott">
             <el-input v-model="Input" class ="inputStyle" size="large"  placeholder="Please input" >
@@ -21,20 +23,22 @@
   
     import {ElInput,ElButton} from '@/../node_modules/element-plus'
     import MessageDetail from '@/components/MessageDetail.vue'
-    import { getMessage } from '@/http/api';
+    import {getMessage,sendMessage} from '@/http/api';
     export default {
         
         
         
         data(){
             return {
-                Input:''
+                Input:'',
+                messages:[],
+                messageLen:''
             }
         },
         props:{
             
             nickName: String,
-            toId: String
+            toId: Number
         },
         components: {
             MessageDetail,
@@ -44,17 +48,41 @@
         ,
         methods:{
             send(){
-
+                sendMessage({
+                            'userFromId': localStorage.getItem('ID'),
+                            'userToId' : this.toId,
+                            'content':this.Input
+                }).then(res=>{
+                    console.log(res)
+                    getMessage({
+                        'userFromId': localStorage.getItem('ID'),
+                        'userToId': this.toId
+                    }).then(res=>{
+                        console.log(res.data)   
+                        this.messages=res.data.data
+                        this.messageLen=res.data.data.length;
+                    })
+                        
+                
+                    this.Input=''
+                })
+                    
+                
             }
         },
         mounted(){
             console.log(this.toId)
             console.log(this.nickName)
+
+            
+
             getMessage({
                'userFromId': localStorage.getItem('ID'),
-                'userToId': this.toId
+               'userToId': this.toId
             }).then(res=>{
                 console.log(res.data)   
+                this.messages=res.data.data
+                this.messageLen=res.data.data.length;
             })
         }
     }
@@ -65,7 +93,7 @@
     .front{
         width: 100%;
         height: 400px;
-        background-color: aqua;
+        background-color: rgb(248, 251, 251);
     }
 
     .bott{
