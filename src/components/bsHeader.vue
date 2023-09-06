@@ -23,10 +23,13 @@
           </ul>
         </div>
         <div class="mt-4" style="width:30%;">
+          <!-- 点击回车或者搜索按钮进行搜索 可清空 -->
           <el-input
             v-model="Input.content"
             placeholder="Please input"
             class="w-20 m-2"
+            clearable 
+            @keyup.enter.native="Search()"
           >
             <template #prefix>
               <el-icon><search /></el-icon>

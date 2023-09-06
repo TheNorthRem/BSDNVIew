@@ -82,6 +82,14 @@ export function detailedUserInfo(params) {
     })
 }
 
+
+export function getMessageUser(params){
+    return request({
+        url: "/bsMessage/searchSendUser",
+        method:'get',
+        params
+    })
+}
 //获取文章详情根据id查询
 export function detailedPassageInfo(params){
     return request({
