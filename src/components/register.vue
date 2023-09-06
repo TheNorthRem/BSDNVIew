@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogVisible" width="500px" align-center="true" style="height:480px;">
+  <el-dialog v-model="dialogVisible" width="500px" align-center="true" style="height:700px;">
     <span class="dialog-footer">
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="custom-form">
         <div class="register">注册</div>
