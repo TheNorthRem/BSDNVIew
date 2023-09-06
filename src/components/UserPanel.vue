@@ -81,11 +81,23 @@ export default {
         font-size: 20px;
         margin-bottom: 0px;
         margin-top: 0px;
+        font-family: Inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px; /* 133.333% */
+        letter-spacing: -0.13px;
     }
     .messs{
         margin-bottom: 0px;
         margin-top: 2%;
         margin-left: 25px;
         color: rgb(152, 151, 149);
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px; /* 160% */
+        letter-spacing: -0.13px;
     }
 </style>

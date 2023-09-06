@@ -101,7 +101,11 @@
 </script>
 <style>
    
-
+.inputStyle{
+    position:relative;
+    z-index: 99;
+    padding-top:0;
+}
     .front{
         width: 100%;
         height: 400px;
@@ -110,7 +114,7 @@
 
     .bott{
         width: 100%;
-        height: 200px;
+        height: 440px;
         background-color: rgb(255, 255, 255) ;
     }
      .infinite-list1 {
