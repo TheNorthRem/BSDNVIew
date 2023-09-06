@@ -6,7 +6,8 @@ export function login(data) {
         url: '/login',
         method: 'post',
         data
-    })}
+    })
+}
 
 
 //注册
@@ -19,7 +20,7 @@ export function register(data) {
 }
 
 //上传文章
-export function uploadPassage(data){
+export function uploadPassage(data) {
     return request({
         url: "/bsArticle/upload",
         method: 'post',
@@ -28,7 +29,7 @@ export function uploadPassage(data){
 }
 
 //上传文章照片
-export function ImageUpload(data){
+export function ImageUpload(data) {
     return request({
         url: "/ImageUpload",
         method: 'get',
@@ -37,7 +38,7 @@ export function ImageUpload(data){
 }
 
 //热门文章
-export function getTopArticles(){
+export function getTopArticles() {
     return request({
         url: "/bsArticle/getTopArticles",
         method: 'get',
@@ -54,7 +55,7 @@ export function getTopArticles(){
 // }
 
 //文章搜索
-export function searchPassage(params){
+export function searchPassage(params) {
     return request({
         url: "/bsArticle/searchContent",
         method: 'get',
@@ -63,7 +64,7 @@ export function searchPassage(params){
 }
 
 //获取当前用户信息
-export function getUserInfo(params){
+export function getUserInfo(params) {
     return request({
         url: "/bsUser/getById",
         method: 'get',
@@ -73,7 +74,7 @@ export function getUserInfo(params){
 
 
 //获取用户的详细信息：用户主页展示信息
-export function detailedUserInfo(params){
+export function detailedUserInfo(params) {
     return request({
         url: "/bsUserInformation/search",
         method: 'get',
@@ -81,6 +82,7 @@ export function detailedUserInfo(params){
     })
 }
 
+<<<<<<< HEAD
 export function getMessageUser(params){
     return request({
         url: "/bsMessage/searchSendUser",
@@ -88,3 +90,38 @@ export function getMessageUser(params){
         params
     })
 }
+=======
+//获取文章详情根据id查询
+export function detailedPassageInfo(params){
+    return request({
+        url: "/bsArticle/getById",
+        method: 'get',
+        params
+    })
+}
+
+
+//获取文章的全部评论
+export function getComments(articleId, page){
+    return request({
+        url: "/bsComments/getComments",
+        method: 'get',
+        params:{
+            "articleId":articleId,
+            "page":page
+        }
+    })
+}
+
+//分类跳转，返回分类文章(分页)
+export function getClassifiedArticle(category, page) {
+    return request({
+        url: "/bsArticle/getByCategory",
+        method: 'get',
+        params: {
+            "category": category,
+            "page": page
+        }
+    })
+}
+>>>>>>> 67422ea89687871a4855d2421e6d5630011c7b4b

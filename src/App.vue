@@ -8,15 +8,12 @@
 
 <script>
 import bsHome from './views/bsHome.vue'
-import login from '@/components/login.vue'
 import bsHeader from '@/components/bsHeader.vue'
 
 export default {
   name: 'App',
   components: {
-    bsHeader,
-    // Login,
-    bsHome
+    bsHeader
   }
 }
 </script>
