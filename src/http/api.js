@@ -80,3 +80,11 @@ export function detailedUserInfo(params){
         params
     })
 }
+
+export function getMessageUser(params){
+    return request({
+        url: "/bsMessage/searchSendUser",
+        method:'get',
+        params
+    })
+}
