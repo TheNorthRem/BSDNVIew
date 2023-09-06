@@ -60,9 +60,12 @@
 import { Editor,  } from '@wangeditor/editor-for-vue'
 import { ElMessage, ElIcon, ElDrawer, ElButton} from "@/../node_modules/element-plus"
 import { CircleCloseFilled } from '@element-plus/icons-vue'
+import { Mounted } from "vue"
+import { getArticleById } from "@/http/api"
 import { uploadPassage,detailedPassageInfo,getComments } from "@/http/api"
+
 export default {
-    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled },
+    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled, Mounted },
     data() {
         return {
             nickName:"NickName",
@@ -73,6 +76,9 @@ export default {
             comments:{},
             visible: false,
             editor: null,
+            getArticleByIdForm:{
+                id: this.$route.params.id
+            },
             title: '<h2>标题</h2>',
             html: '<p></p>',
             toolbarConfig: {},
@@ -177,7 +183,14 @@ export default {
         }
     },
     mounted() {
-
+        console.log(this.$route.query.id)
+        this.getArticleByIdForm.id = this.$route.query.id
+        getArticleById(this.getArticleByIdForm).then(res =>{
+                console.log(res)
+        }).catch(err =>{
+            console.log(err)
+            console.log(this.target)
+        })
     },
     beforeUnmount() {
         const editor = this.editor
