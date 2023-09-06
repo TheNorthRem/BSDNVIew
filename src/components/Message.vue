@@ -12,7 +12,7 @@
 
     </div>
         <div class = "right">
-            <MessagePanel Id := this.curId />
+            <MessagePanel Id:= this.curId />
         </div>
   
 </div>
