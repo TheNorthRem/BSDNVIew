@@ -23,8 +23,8 @@
                 <!-- <h4>
                     <p style="padding-left: 1300%;" >More...</p>
                 </h4> -->
-                <div style="padding-left: 1000%;">
-                    <el-button type="primary" text bg @click="MoreRouter(i)" :index=i>More...</el-button>
+                <div style="padding-left: 90%;">
+                    <el-button type="primary" text bg @click="MoreRouter">More...</el-button>
                 </div>
 
             </footer>
@@ -66,19 +66,20 @@ export default {
         articleId:Number,
         brief:String,
         title:String,
-        nickName:String
+        nickName:String,
     },
 
     methods: {
         // 显示热门文章
-        MoreRouter(i) {
-            console.log(this.toArticleId)
+        MoreRouter() {
+            console.log("articleId ::: " + this.articleId)
             this.$router.push({
                 path: "/passageDetail",
                 query: {
-                    id: this.articleId[i],
+                    id: this.articleId,
                 }
             })
+            localStorage.setItem("ID", this.articleId);
         },
         async onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错

@@ -145,3 +145,12 @@ export function logOutUser(userId,token) {
     })
 }
 
+
+
+export function getArticleById(params) {
+    return request({
+        url: "/bsArticle/getById",
+        method: 'get',
+        params
+    })
+}
