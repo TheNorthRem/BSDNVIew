@@ -80,3 +80,12 @@ export function detailedUserInfo(params){
         params
     })
 }
+
+//分类跳转，返回分类文章(分页)
+export function getClassifiedArticle(params) {
+    return request({
+        url: "/bsArticle/getByCategory",
+        method: 'get',
+        params
+    })
+}
