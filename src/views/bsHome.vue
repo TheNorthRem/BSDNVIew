@@ -31,7 +31,12 @@
                         :articleId=this.TopArticles[i-1].articleId
                         ></showEditor_brief>
                     </span>
-                </div> 
+                </div>
+                <div>
+                    <div class="box1">
+                        <b>Created by BUPTer&emsp;&emsp;&emsp;© 2023 &emsp;&emsp;SpringBoot + vue3</b>
+                    </div>
+                </div>
             </div>
             <!-- 侧栏 -->
             <div class = "asideBox"> 
@@ -109,8 +114,15 @@ export default {
                     console.log(res.data.data)
                     this.articleArrayLength = res.data.data.length
                     this.TopArticles = res.data.data
-                    console.log(this.TopArticles)
-                    console.log(this.articleArrayLength)
+
+                    //修改简介格式
+                    for(let i = 0; i < this.TopArticles.length; i++) {
+                        this.TopArticles[i].brief = "<h3>简介：".concat(this.TopArticles[i].brief).concat("......</h3>")
+                        console.log(this.TopArticles[i].brief)
+                    }
+                    // this.TopArticles.brief = String(this.TopArticles.brief).concat("...")
+                    // console.log(this.TopArticles)
+                    // console.log(this.articleArrayLength)
                 } else {
                     console.log("获取热门文章失败！")
                 }
@@ -220,11 +232,12 @@ export default {
     align-items: center;/* 垂直居中 */
     flex-direction: column;/* 垂直排列 */
     padding: 10% 0% 0% 0%;
+    margin-left: 0%;
 }
 
 .articleInfo{
     width: 100%;
-    height: 250px;
+    height: 350px;
     border-radius: 12px;
     border: 2px solid #F6F5F4;
     background: #FBFBFA;
@@ -281,4 +294,11 @@ div footer{
     padding: 5% 10%;
 }
 
+.box1{
+    width: 1000px;
+    height: 10px;
+    font-size: 14px;
+    text-align: center;  /*水平居中*/
+    line-height: 10px; /*垂直居中 值为heigth的值*/
+}
 </style>
