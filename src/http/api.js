@@ -6,7 +6,8 @@ export function login(data) {
         url: '/login',
         method: 'post',
         data
-    })}
+    })
+}
 
 
 //注册
@@ -19,7 +20,7 @@ export function register(data) {
 }
 
 //上传文章
-export function uploadPassage(data){
+export function uploadPassage(data) {
     return request({
         url: "/bsArticle/upload",
         method: 'post',
@@ -28,7 +29,7 @@ export function uploadPassage(data){
 }
 
 //上传文章照片
-export function ImageUpload(data){
+export function ImageUpload(data) {
     return request({
         url: "/ImageUpload",
         method: 'get',
@@ -37,7 +38,7 @@ export function ImageUpload(data){
 }
 
 //热门文章
-export function getTopArticles(){
+export function getTopArticles() {
     return request({
         url: "/bsArticle/getTopArticles",
         method: 'get',
@@ -54,7 +55,7 @@ export function getTopArticles(){
 // }
 
 //文章搜索
-export function searchPassage(params){
+export function searchPassage(params) {
     return request({
         url: "/bsArticle/searchContent",
         method: 'get',
@@ -63,7 +64,7 @@ export function searchPassage(params){
 }
 
 //获取当前用户信息
-export function getUserInfo(params){
+export function getUserInfo(params) {
     return request({
         url: "/bsUser/getById",
         method: 'get',
@@ -73,7 +74,7 @@ export function getUserInfo(params){
 
 
 //获取用户的详细信息：用户主页展示信息
-export function detailedUserInfo(params){
+export function detailedUserInfo(params) {
     return request({
         url: "/bsUserInformation/search",
         method: 'get',
@@ -82,10 +83,13 @@ export function detailedUserInfo(params){
 }
 
 //分类跳转，返回分类文章(分页)
-export function getClassifiedArticle(params) {
+export function getClassifiedArticle(category, page) {
     return request({
         url: "/bsArticle/getByCategory",
         method: 'get',
-        params
+        params: {
+            "category": category,
+            "page": page
+        }
     })
 }
