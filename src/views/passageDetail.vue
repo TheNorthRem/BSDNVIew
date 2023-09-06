@@ -7,9 +7,9 @@
                 <img src="../assets/avatar/avatar1.png" style="width: 10%;height: auto; padding-right:3%;" />
                 <div>
                     <h3>
-                        {{nickName}}<!-- UserName：{{nickName[i-1]}} -->
+                        作者:{{nickName}}<!-- UserName：{{nickName[i-1]}} -->
                     </h3>
-                        {{userID}}<!-- <p>ID：{{ uploaderId[i-1] }}</p> -->
+                        id:{{userID}}<!-- <p>ID：{{ uploaderId[i-1] }}</p> -->
                 </div>
 
             </div>
@@ -67,7 +67,7 @@
         </div>
         <img src="../assets/e2.png" style="height: auto;width: 15%; position: fixed;padding-inline: 3%;right: 2%;bottom: 0;">
     </div>
-
+;
 </template>
 
 <script>
@@ -192,7 +192,8 @@ export default {
                             .then(result => {
                                 console.log(result);
                                 console.log("获取文章详情信息成功");
-                                this.nickName=result.data.data.article.nickName;
+                                this.nickName=result.data.data.userId.nickName;
+                                this.userID = result.data.data.userId.userId
                                 this.content=result.data.data.article.content;
                                 this.favoriteCount=result.data.data.article.favoriteCount;
                                 this.title=result.data.data.article.title;
