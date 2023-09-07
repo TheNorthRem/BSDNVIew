@@ -71,7 +71,7 @@
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
 
-  import { searchPassage,deleteUserByID,logOutUser,getUserInfo } from '../http/api.js';
+  import { searchPassage,deleteUserByID,logOutUser,getUserInfo, getToken } from '../http/api.js';
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
@@ -156,21 +156,36 @@
       },
       fetchUserInfo() {
         console.log('用户信息加载中...');
-        let IDForm= {
-          id: localStorage.getItem('ID')
-        }
-        // 发送GET请求获取用户信息
-        getUserInfo(IDForm)
-            .then(result => {
-              console.log('获取用户信息...', result);
-                this.user = result.data.data.userId;
-                console.log('获取用户信息成功', this.user);   
-            })
-            .catch(error => {
-                console.error('获取用户信息失败:', error);
-            });
+        let userID = localStorage.getItem('ID')
+        let token = localStorage.getItem('token')
 
-        return
+        if (userID == null || token == null)
+          return;
+
+        let IDForm = {
+          id: userID
+        }
+        //token核验
+        getToken(IDForm).then(res => {
+          if (res.data.code == 200 && res.data.message == token) {
+            //token核验成功
+            // 发送GET请求获取用户信息
+            let NewIDForm = {
+              id: userID
+            }
+            getUserInfo(NewIDForm)
+                .then(result => {
+                  console.log('获取用户信息...', result);
+                    this.user = result.data.data.userId;
+                    console.log('获取用户信息成功', this.user);   
+                })
+                .catch(error => {
+                    console.error('获取用户信息失败:', error);
+                });
+            } else { //token核验失败，无权限!
+                console.log("token核验失败,无权限获取用户信息!")
+            }
+          }).catch(_ => {})
       },
         deleteUser(){
           let IDForm={
