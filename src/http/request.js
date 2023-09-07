@@ -1,6 +1,6 @@
 import axios from 'axios';
 import router from '@/router/router';
-import { Message } from '@/../node_modules/element-plus';
+import { ElMessage } from '@/../node_modules/element-plus';
 axios.defaults.baseURL = 'http://localhost:8081'
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';//配置请求头
 axios.defaults.headers.post['Authorization'] =  localStorage.getItem('token')
@@ -44,7 +44,7 @@ request.interceptors.response.use(
     const {status, data} = response; // 获取状态码
     const{ message } = data;
    
-    Message.error(message); // 提示错误信息
+    ElMessage.error(message); // 提示错误信息
     if (status === 401) router.push('/login'); // 跳转到登录页面
 },
 (error) => {  
