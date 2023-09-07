@@ -96,7 +96,7 @@ export default {
         getTopArticles().then(res => {
                 if (res.data.code == 200) {
                     console.log("获取热门文章成功！")
-                    //console.log(res.data.data)
+                    // console.log(res.data.data)
                     this.articleArrayLength = res.data.data.length
                     this.TopArticles = res.data.data
 
@@ -281,17 +281,5 @@ div footer{
     line-height: 10px; /*垂直居中 值为heigth的值*/
 }
 
-.articleInfo{
-    width: 100%;
-    height: 350px;
-    border-radius: 12px;
-    border: 2px solid #F6F5F4;
-    background: #FBFBFA;
-    display: flex;
-    justify-content: space-between;
-    /* align-items: center; */
-    padding: 3%; 
-    flex-direction: column;
-}
 
 </style>
