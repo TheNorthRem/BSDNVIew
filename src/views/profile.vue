@@ -87,9 +87,8 @@
                 <!-- 面板一 -->
                 <div class="one"
                     v-show="index===1 && isShow">
-                    文章列表
                     <span v-for="i in articles.length" v-bind:key="i" style="padding-bottom: 5%;">
-                        <showEditor_brief
+                        <showEditor_brief class="editorBox"
                         :uploaderId= this.articles[i-1].uploaderId
                         :uploaderNickName= this.articles[i-1].nickName
                         :brief= this.articles[i-1].brief
@@ -104,7 +103,7 @@
                 <div class="two"
                     v-show="index===2 && isShow">
                     <span v-for="i in favorites.length" v-bind:key="i" style="padding-bottom: 5%;">
-                        <showEditor_brief
+                        <showEditor_brief  class="editorBox"
                         :uploaderId= this.favorites[i-1].uploaderId
                         :uploaderNickName= this.favorites[i-1].nickName
                         :brief= this.favorites[i-1].brief
@@ -272,8 +271,11 @@
   </script>
   
   <style>
+  .editorBox{
+    width:95%;
+  }
 .getMessagePage{
-  width:70%;
+  width:72%;
   overflow: hidden;
 }
     .avatars{
