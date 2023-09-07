@@ -22,13 +22,13 @@
             </div>
         </header>
 
-        <div style="border: 1px solid #652828;border-radius: 3px;">
+        <div style="border: 1px solid #652828;border-radius: 3px; padding: 2%">
             <!-- <Editor style="height: 200px; overflow-y: hidden; width: 800px; " v-model=this.brief
                 :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
               -->
-              <p>
+              <h3>
                 {{ this.brief }}
-              </p>
+              </h3>
         </div>
 
         <footer class="footerBox">
@@ -47,11 +47,11 @@
 <script>
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { ElButton } from '@/../node_modules/element-plus';
-import { Mounted, BeforeCreate } from "vue"
+// import { Mounted } from "vue"
 
 export default {
     name: "showEditor_brief",
-    components: { Editor, Toolbar, Mounted, ElButton, BeforeCreate },
+    components: { Editor, Toolbar, ElButton },
     data() {
         return {
             editor: null,
@@ -91,7 +91,9 @@ export default {
                     id: this.articleId,
                 }
             })
-            localStorage.setItem("ID", this.articleId);
+            // localStiorage.setItem("articleID", this.articleId);
+            localStorage.setItem("articleID", this.articleId);
+
         },
         async onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
@@ -99,10 +101,7 @@ export default {
             // console.log(this.articleId);
         },
     },
-    mounted() {
-
-    },
-    beforeDestroy() {
+    beforeUnmount() {
         const editor = this.editor
         if (editor == null) return
         editor.destroy() // 组件销毁时，及时销毁编辑器
@@ -146,6 +145,19 @@ export default {
     padding-top: 2%;
     flex-direction: row;
     justify-content: flex-end;
-
 }
+
+.articleInfo{
+    width: 100%;
+    height: 350px;
+    border-radius: 12px;
+    border: 2px solid #F6F5F4;
+    background: #FBFBFA;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    padding: 5%; 
+    flex-direction: column;
+}
+
 </style>

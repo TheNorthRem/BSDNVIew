@@ -62,7 +62,6 @@
 
 <script>
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
-import {Created} from "vue"
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { getUserInfo, getToken } from '../http/api.js';
 import { getTopArticles } from "@/http/api"
@@ -74,8 +73,7 @@ export default {
         ElCarouselItem,
         ElBacktop,
         showEditor_brief,
-        getTopArticles,
-        Created,
+        getTopArticles
     },
     data(){
         return{
@@ -104,12 +102,11 @@ export default {
 
                     //修改简介格式
                     for(let i = 0; i < this.TopArticles.length; i++) {
+                        this.TopArticles[i].brief = "简介：".concat(this.TopArticles[i].brief).concat("......")
+                        console.log(this.TopArticles[i].brief)
                         this.TopArticles[i].brief = "<h3>简介：".concat(this.TopArticles[i].brief).concat("......</h3>")
                         //console.log(this.TopArticles[i].brief)
                     }
-                    // this.TopArticles.brief = String(this.TopArticles.brief).concat("...")
-                    // console.log(this.TopArticles)
-                    // console.log(this.articleArrayLength)
                 } else {
                     console.log("获取热门文章失败！")
                 }
@@ -230,19 +227,6 @@ export default {
     margin-left: 0%;
 }
 
-.articleInfo{
-    width: 100%;
-    height: 350px;
-    border-radius: 12px;
-    border: 2px solid #F6F5F4;
-    background: #FBFBFA;
-    display: flex;
-    justify-content: space-between;
-    /* align-items: center; */
-    padding: 3%; 
-    flex-direction: column;
-}
-
 div footer{
     display: flex;
     /* justify-content: center; */
@@ -296,4 +280,18 @@ div footer{
     text-align: center;  /*水平居中*/
     line-height: 10px; /*垂直居中 值为heigth的值*/
 }
+
+.articleInfo{
+    width: 100%;
+    height: 350px;
+    border-radius: 12px;
+    border: 2px solid #F6F5F4;
+    background: #FBFBFA;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    padding: 3%; 
+    flex-direction: column;
+}
+
 </style>

@@ -29,7 +29,6 @@
 import { ElPagination } from '@/../node_modules/element-plus'
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { searchPassage } from "@/http/api"
-import { Mounted } from "vue"
 
 export default {
     name: 'Search',
@@ -37,7 +36,6 @@ export default {
         ElPagination,
         showEditor_brief,
         searchPassage,
-        Mounted
     },
     data() {
         return {
@@ -91,7 +89,7 @@ export default {
 
         
         for (let i = 0; i < this.Articles.length; i++) {
-            this.Articles[i].brief = "<h3>简介：".concat(this.Articles[i].brief).concat("......</h3>")
+            this.Articles[i].brief = "简介：".concat(this.Articles[i].brief).concat("......")
             // console.log(this.Articles[i].brief)
         }
     },

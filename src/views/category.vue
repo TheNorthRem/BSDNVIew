@@ -19,7 +19,6 @@
                                 <!-- href中为跳转页面 -->
                                 <a class="more" @click="() => {
                                         this.getByCategoryForm.category = this.categoryTitle[0];
-                                        console.log(this.getByCategoryForm)
                                         getAllArticlesFunction();
                                     }">More →</a>
                             </div>
@@ -46,7 +45,6 @@
                                     <!-- href中为跳转页面 -->
                                     <a class="more" @click="() => {
                                         this.getByCategoryForm.category = this.categoryTitle[1];
-                                        console.log(this.getByCategoryForm)
                                         getByCategoryFunction();
                                     }">More →</a>
                                 </div>
@@ -69,7 +67,6 @@
                                     <!-- href中为跳转页面 -->
                                     <a class="more" @click="() => {
                                         this.getByCategoryForm.category = this.categoryTitle[2];
-                                        console.log(this.getByCategoryForm)
                                         getByCategoryFunction();
                                     }">More →</a>
                                 </div>
@@ -92,7 +89,6 @@
                                     <!-- href中为跳转页面 -->
                                     <a class="more" @click="() => {
                                         this.getByCategoryForm.category = this.categoryTitle[3];
-                                        console.log(this.getByCategoryForm)
                                         getByCategoryFunction();
                                     }">More →</a>
                                 </div>
@@ -115,7 +111,6 @@
                                     <!-- href中为跳转页面 -->
                                     <a class="more" @click="() => {
                                         this.getByCategoryForm.category = this.categoryTitle[4];
-                                        console.log(this.getByCategoryForm)
                                         getByCategoryFunction();
                                     }">More →</a>
                                 </div>
@@ -138,7 +133,6 @@
                                     <!-- href中为跳转页面 -->
                                     <a class="more" @click="() => {
                                         this.getByCategoryForm.category = this.categoryTitle[5];
-                                        console.log(this.getByCategoryForm)
                                         getByCategoryFunction();
                                     }">More →</a>
                                 </div>
@@ -161,7 +155,6 @@
                                     <!-- href中为跳转页面 -->
                                     <a class="more" @click="() => {
                                         this.getByCategoryForm.category = this.categoryTitle[6];
-                                        console.log(this.getByCategoryForm)
                                         getByCategoryFunction();
                                     }">More →</a>
                                 </div>
