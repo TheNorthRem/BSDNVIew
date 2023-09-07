@@ -129,9 +129,8 @@
                                 <span class="blockHeaderTitleForCate">
                                     <h2> {{ categoryTitle[5] }} </h2>
                                 </span>
-                                <div class="moreButtonForCate">
-                                    <!-- href中为跳转页面 -->
-                                    <a class="moreForCate" @click="() => {
+                                <div class="moreButton">
+                                    <a class="more" @click="() => {
                                         this.getByCategoryForm.category = this.categoryTitle[5];
                                         getByCategoryFunction();
                                     }">More →</a>
@@ -169,10 +168,13 @@
 
 <script>
 import  {getByCategory,getAllArticles} from "@/http/api"
+import{ElBacktop} from '@/../node_modules/element-plus'
 export default {
     name: 'Category',
     components: {
-        getByCategory,getAllArticles
+        getByCategory,
+        getAllArticles,
+        ElBacktop
     },
     data() {
         return {

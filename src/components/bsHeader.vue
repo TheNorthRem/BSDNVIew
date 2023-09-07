@@ -2,12 +2,11 @@
     <div>
       <div class="topBar">
           <img src="../assets/logo.png" style="padding-left:2%; width: 11%;height: 50%;">
-
         <div class="menuBox">
           <ul>
             <li><a href="#/">🏠首页</a></li>
             <li><a href="#">博客</a></li>
-            <li><a href="#/message">社区</a></li>
+            <li><a href="https://www.csdn.net/">社区</a></li>
             <li><a href="https://www.icourse163.org/">学习</a></li>
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
@@ -67,7 +66,7 @@
   
 <script>
 
-  import { ElButton, ElDivider, ElIcon, ElInput } from '@/../node_modules/element-plus'
+  import { ElButton, ElDivider, ElIcon, ElInput, ElMessage } from '@/../node_modules/element-plus'
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
 
@@ -84,12 +83,18 @@
       ElInput,
       Upload,
       Search,
+      ElMessage,
       tagSelector,
       login,
       register
     },
     data() {
       return {
+        categoryTitle: [ '前端', '后端', '数据库', '生活', '编程语言', '娱乐'],
+        getByCategoryForm: {
+                category: "",
+                page: 1,
+            },
         user:'',
         searchResults:{},
         userLogOut:true,
@@ -128,18 +133,19 @@
         //点击发布，显示选择标签的对话框
         this.showTagDialog =! this.showTagDialog
       },
-      
       // 将Login组件返回的值赋给hideLogin
       logSuc(msg) {
         this.hideLogin = msg;
+        // 重新加载页面
         window.location.reload();
       },
       Search() {
             searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
             .then(result => {
-                // 将搜索结果文章存储到searchResults中
+                // 将搜索结果文章存储到searchResults中 并将其转换为JSON格式
                 this.searchResults = JSON.stringify(result.data.data.records);
                 console.log("Result: " + this.searchResults)
+                // 跳转到搜索结果页面 并将搜索结果传递过去
                 this.$router.push({
                   path: '/search',
                   query: { 
@@ -152,8 +158,14 @@
             .catch(error => {
                 console.log(this.Input);
                 console.error('搜索失败:', error);
+                ElMessage({
+                    showClose: true,
+                    message: '搜索失败,请先登录！',
+                    type: 'error',
+                })
              });
       },
+      // 获取用户信息
       fetchUserInfo() {
         console.log('用户信息加载中...');
         let userID = localStorage.getItem('ID')
@@ -187,6 +199,7 @@
             }
           }).catch(_ => {})
       },
+        // 注销用户
         deleteUser(){
           let IDForm={
             id:localStorage.getItem('ID')
@@ -201,26 +214,31 @@
                 console.error('用户注销失败:', error);
             });
         },
+        // 登出用户
         logOut(){
+          // 如果用户已经登陆，发送登出请求
           if (localStorage.getItem('ID') != null && localStorage.getItem('token') != null) {
           logOutUser(localStorage.getItem('ID'),localStorage.getItem('token'))
           .then(result => {
               console.log('用户登出成功', result);
               this.hideLogin=false;
+              // 清除用户信息
               window.localStorage.removeItem('ID');
               window.localStorage.removeItem('token');
               console.log('用户信息清理:');
+              // 重新加载页面
               window.location.reload();
              })
             .catch(error => {
                 console.error('用户登出失败:', error);
             });
-        } else {
-          window.localStorage.removeItem('ID')
-          window.localStorage.removeItem('token')
-          window.location.reload()
+          } else {
+            // 如果用户未登陆，清除用户信息
+            window.localStorage.removeItem('ID')
+            window.localStorage.removeItem('token')
+            window.location.reload()
+          }
         }
-      }
     }
   }
   
@@ -285,24 +303,24 @@
       text-decoration: none;
   }
   .dropdown {
-      z-index: 9999;
-      display: inline-block;
+      z-index: 9999;/* 设置下拉菜单的层级 保证不被覆盖*/
+      display: inline-block;/* 块级元素同行显示 */
   }
   
   .dropdown-content {
     z-index: 9999;  
       display: none;/* 隐藏下拉菜单 */
-      position: absolute;
+      position: absolute; /* 绝对定位 保证布局稳定 */
       background-color: #f9f9f9;
-      min-width: 160px;
+      min-width: 110px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   }
   
   .dropdown-content a {
       color: rgb(0, 0, 0);
       padding: 12px 16px;
-      text-decoration: none;
-      display: block;/* 设置块级元素 */
+      text-decoration: none;/* 去掉下划线 */
+      display: block; /* 垂直方向 */
   }
   .dropdown-content a:hover {
     background-color: #f1f1f1;

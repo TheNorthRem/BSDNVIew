@@ -36,16 +36,14 @@ request.interceptors.response.use(
     console.log("响应拦截器"),
 (response) => {
     console.log("response");
-
     // 对响应数据做点什么
     return response;
 },
 ({response}) => {
     const {status, data} = response; // 获取状态码
-    const{ message } = data;
-   
+    const{ message } = data; 
     ElMessage.error(message); // 提示错误信息
-    if (status === 401) router.push('/login'); // 跳转到登录页面
+    if (status === 401) router.push('/'); // 跳转到首页
 },
 (error) => {  
     // 对响应错误做点什么

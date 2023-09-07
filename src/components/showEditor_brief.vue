@@ -97,8 +97,6 @@ export default {
         },
         async onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
-            // console.log(this.uploaderId);
-            // console.log(this.articleId);
         },
     },
     beforeUnmount() {
@@ -129,11 +127,11 @@ export default {
     display: flex; 
     flex-direction: row;
     /* display: block; */
-    width: 30%;
+    width: 35%;
     justify-content: flex-end;
 }
 .avator{
-    width: 35%;
+    width: 30%;
     height: auto; 
     padding-right:10%;
     /* padding-left: 5%; */
