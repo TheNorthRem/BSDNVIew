@@ -1,6 +1,7 @@
 <template>
   <div class="viewSettings">
     <div class="pageContent">
+      
       <div class="user">
         <div class="userInside">
           <img src="../assets/avatar/avatar0.png" style="height:70px; width: 70px;" class="avatarImg">
