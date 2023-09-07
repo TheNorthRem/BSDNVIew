@@ -87,9 +87,8 @@
                 <!-- 面板一 -->
                 <div class="one"
                     v-show="index===1 && isShow">
-                    文章列表
                     <span v-for="i in articles.length" v-bind:key="i" style="padding-bottom: 5%;">
-                        <showEditor_brief
+                        <showEditor_brief class="editorBox"
                         :uploaderId= this.articles[i-1].uploaderId
                         :uploaderNickName= this.articles[i-1].nickName
                         :brief= this.articles[i-1].brief
@@ -104,7 +103,7 @@
                 <div class="two"
                     v-show="index===2 && isShow">
                     <span v-for="i in favorites.length" v-bind:key="i" style="padding-bottom: 5%;">
-                        <showEditor_brief
+                        <showEditor_brief  class="editorBox"
                         :uploaderId= this.favorites[i-1].uploaderId
                         :uploaderNickName= this.favorites[i-1].nickName
                         :brief= this.favorites[i-1].brief
@@ -118,7 +117,10 @@
                 <!-- 面板三 -->
                 <div class="three"
                     v-show="index===3 && isShow">
-                    <Message/>
+                    <div class="getMessagePage">
+                      <Message/>
+                    </div>
+                    
                 </div>
               </div>
           </div>
@@ -269,7 +271,13 @@
   </script>
   
   <style>
-
+  .editorBox{
+    width:95%;
+  }
+.getMessagePage{
+  width:72%;
+  overflow: hidden;
+}
     .avatars{
       width: 60px;
       height: 60px;
@@ -479,7 +487,7 @@
       flex-direction: column;/* 垂直排列 */
   }
   .viewSettings{
-      width: 100%!important;
+      width: 100vw;
       height:100%;
       min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
   }

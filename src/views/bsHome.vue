@@ -63,7 +63,7 @@
 <script>
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
 import showEditor_brief from '@/components/showEditor_brief.vue';
-import { getUserInfo } from '../http/api.js';
+import { getUserInfo, getToken } from '../http/api.js';
 import { getTopArticles } from "@/http/api"
 
 export default { 
@@ -104,6 +104,8 @@ export default {
                     for(let i = 0; i < this.TopArticles.length; i++) {
                         this.TopArticles[i].brief = "简介：".concat(this.TopArticles[i].brief).concat("......")
                         console.log(this.TopArticles[i].brief)
+                        this.TopArticles[i].brief = "<h3>简介：".concat(this.TopArticles[i].brief).concat("......</h3>")
+                        //console.log(this.TopArticles[i].brief)
                     }
                 } else {
                     console.log("获取热门文章失败！")
@@ -115,27 +117,34 @@ export default {
     methods:{
         Reload() {
             //判断用户的登录状态，如果用户已经登录，则显示用户的头像和个人信息
-            //TODO:Redis token校验
-            let userID=localStorage.getItem('ID');//获取用户ID
+            //token校验
+            let userID = localStorage.getItem('ID');//获取用户ID
+            let token = localStorage.getItem('token');
+            if(userID == null || token == null) return;
             let IDForm = {
                 id: userID,
             }
+            console.log(IDForm)
             console.log("userID",userID);
-            if(userID == null) return;
-            else{
-                getUserInfo(IDForm) 
-                .then(result => {
-                    console.log(result)
-                    this.userName = result.data.data.userName;
-                    this.nickName = result.data.data.nickName;
-                    this.intro = result.data.data.intro;
-                })
-                .catch(error => {
-                    console.error('获取用户信息失败:', error);
-                });
-            }
+            getToken(IDForm).then(result => {
+                if (result.data.code == 200 && result.data.message == token) {
+                    let NewIDFrom = {
+                        id: userID,
+                    }
+                    getUserInfo(NewIDFrom) .then(result => {
+                        console.log(result)
+                        this.userName = result.data.data.userName;
+                        this.nickName = result.data.data.nickName;
+                        this.intro = result.data.data.intro;
+                    }).catch(error => {
+                        console.error('获取用户信息失败:', error);
+                    });
+                }
+                else {
+                    console.error("获取用户信息失败!");
+                }
+            })
         },
-       
     },
     // async beforeMount() {
     //     await this.getTopArticlesFunction()
