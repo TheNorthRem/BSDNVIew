@@ -318,7 +318,7 @@ export default {
     letter-spacing: -0.6px;
 }
 .addCommentBox{
-    z-index:9999;
+    
 }
 .commentBox{
     margin-bottom:2%;
