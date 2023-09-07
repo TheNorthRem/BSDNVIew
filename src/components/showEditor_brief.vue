@@ -88,11 +88,11 @@ export default {
             this.$router.push({
                 path: "/passageDetail",
                 query: {
-                    id: this.articleId,
+                    articleID: this.articleId,
                 }
             })
             // localStiorage.setItem("articleID", this.articleId);
-            localStorage.setItem("articleID", this.articleId);
+            // localStorage.setItem("articleID", this.articleId);
 
         },
         async onCreated(editor) {
@@ -108,7 +108,7 @@ export default {
     },
     watch: {
         uploaderId() {
-            console.log(this.uploaderId);
+            // console.log(this.uploaderId);
         },
     },
 }
