@@ -129,9 +129,8 @@
                                 <span class="blockHeaderTitleForCate">
                                     <h2> {{ categoryTitle[5] }} </h2>
                                 </span>
-                                <div class="moreButtonForCate">
-                                    <!-- href中为跳转页面 -->
-                                    <a class="moreForCate" @click="() => {
+                                <div class="moreButton">
+                                    <a class="more" @click="() => {
                                         this.getByCategoryForm.category = this.categoryTitle[5];
                                         getByCategoryFunction();
                                     }">More →</a>
@@ -169,10 +168,13 @@
 
 <script>
 import  {getByCategory,getAllArticles} from "@/http/api"
+import{ElBacktop} from '@/../node_modules/element-plus'
 export default {
     name: 'Category',
     components: {
-        getByCategory,getAllArticles
+        getByCategory,
+        getAllArticles,
+        ElBacktop
     },
     data() {
         return {
@@ -190,15 +192,15 @@ export default {
             getByCategory(this.getByCategoryForm) // 发送GET请求，传递搜索查询参数
                 .then(result => {
                     console.log("搜索分类成功！")
-                    console.log(result)
+                    // console.log(this.getByCategoryForm);
                     // 将搜索结果文章存储到searchResults中
                     this.searchResults = JSON.stringify(result.data.data.records);
                     // console.log("searchResult",this.searchResults);
                     // console.log("searchResult",this.searchResults[0].title);
                     // 获取信息成功后跳转到搜索结果页面               
                     this.$router.push({
-                        path: '/search',
-                        query: { searchResults: this.searchResults }
+                        path: '/categorySearch',
+                        query: { Articles: this.searchResults }
                     })
                 })
                 .catch(error => {

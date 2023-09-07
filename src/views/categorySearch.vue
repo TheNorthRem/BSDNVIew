@@ -1,6 +1,4 @@
 <template>
-    <!-- 回到顶部 -->
-    <el-backtop :right="100" :bottom="100" />
     <div class="viewSettings">
         <keep-alive>
         <div class="grid-item">
@@ -28,17 +26,16 @@
 </template>
     
 <script>
-import { ElPagination, ElBacktop } from '@/../node_modules/element-plus'
+import { ElPagination } from '@/../node_modules/element-plus'
 import showEditor_brief from '@/components/showEditor_brief.vue';
-import { searchPassage } from "@/http/api"
+import { getByCategory } from "@/http/api"
 
 export default {
     name: 'Search',
     components: {
         ElPagination,
         showEditor_brief,
-        searchPassage,
-        ElBacktop
+        getByCategory,
     },
     data() {
         return {
@@ -46,23 +43,21 @@ export default {
             Articles: [],
             currentPage: 1,
             Input: {
-                content: '',
+                category: '',
                 page: 1,
-                total:''
             },
-            total:''
+            total: 1,
         }
     },
     methods: {
        PassRouter() {
-            console.log(3455)
             this.Input.page=this.currentPage;
             console.log(this.currentPage)
-            searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
+            getByCategory(this.Input) // 发送GET请求，传递搜索查询参数
             .then(result => {
-                console.log("Result: " + this.searchResults)
+                // console.log("Result: " + this.searchResults)
                 // 获取信息成功后跳转到搜索结果页面
-                console.log("Input Content: " + this.Input.content)
+                // console.log("Input Content: " + this.Input.content)
                 this.Articles = result.data.data.records;
             })
             .catch(error => {
@@ -72,28 +67,32 @@ export default {
        },
     },
     created() {
-        console.log("加载搜索页面数据");
-        console.log(this.Input)
-        searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
-            .then(result => {
-                 this.Articles = result.data.data.records;
-                 console.log(result.data.data)
-                 this.total=result.data.data.pages
-                 console.log(this.total)
-                // 获取信息成功后跳转到搜索结果页面
-                console.log("Input Content: " + this.Input.content)
-            })
-            .catch(error => {
-                console.log('搜索失败input:',this.Input);
-                console.error('搜索失败:', error);
-            });
+        console.log("this is categorySearch")
+        // console.log(this.$route.query.Articles);
+        this.Articles = JSON.parse(this.$route.query.Articles)
+        console.log(this.Articles)
+        
+        // getByCategory(this.Input) // 发送GET请求，传递搜索查询参数
+        //     .then(result => {
+        //          this.Articles = result.data.data.records;
+        //          console.log(result.data.data)
+        //          this.total=result.data.data.pages
+        //          console.log(this.total)
+        //         // 获取信息成功后跳转到搜索结果页面
+        //         console.log("Input Content: " + this.Input.content)
+        //     })
+        //     .catch(error => {
+        //         console.log(this.Input);
+        //         console.error('搜索失败:', error);
+        //     });
 
     
         // console.log(this.$route.query.searchResults);
         // 传参 将路由参数转换为json格式并赋给本地变量
-
         
+
         for (let i = 0; i < this.Articles.length; i++) {
+            console.log(this.Articles[i].brief)
             this.Articles[i].brief = "简介：".concat(this.Articles[i].brief).concat("......")
             // console.log(this.Articles[i].brief)
         }
@@ -115,7 +114,7 @@ export default {
     
 <style>
 .viewSettings {
-    width: 100vw;
+    width: 100%;
     min-width: 1400px;
     /* 最小宽度 控制缩放时的布局不变形 */
 }

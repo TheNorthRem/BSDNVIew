@@ -1,4 +1,6 @@
 <template>
+    <!-- 回到顶部 -->
+    <el-backtop :right="100" :bottom="100" />
     <div class="editorViewBox">
         <img src="../assets/e1.png" style="height: auto;width: 15%; position: fixed; padding-inline: 3%;left: 2%;bottom: 0;">
         <div class="passageBox">
@@ -73,25 +75,26 @@
 <script>
 // import Vue from 'vue'
 import { Editor} from '@wangeditor/editor-for-vue'
-import { ElMessage, ElIcon, ElDrawer, ElButton,ElInput,ElDivider } from "@/../node_modules/element-plus"
+import { ElMessage, ElIcon, ElDrawer, ElButton,ElInput,ElDivider, ElBacktop } from "@/../node_modules/element-plus"
 import { CircleCloseFilled } from '@element-plus/icons-vue'
 // import { Mounted } from "vue"
 import { getArticleById } from "@/http/api"
 import { uploadPassage,detailedPassageInfo,getComments,addFavorites,uploadComment,deleteFavorites} from "@/http/api"
+import { BeforeCreate,Created } from "vue"
 
 export default {
-    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled,ElInput,ElDivider,getArticleById },
+    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled,ElInput,ElDivider,getArticleById,ElBacktop,BeforeCreate,Created },
     data() {
         return {
 
             isFavorite: false, // 初始化为未收藏状态
             textarea: '',
-            nickName:"NickName",
-            content:"content",
-            userID:"userID",
+            nicName:"",
+            content:"",
+            userID:"",
             articleId:2,
             page:1,
-            title:"文章标题",
+            title:"",
             comments:{},
             visible: false,
             editor: null,
@@ -99,8 +102,8 @@ export default {
             getArticleByIdForm:{
                 id: this.$route.params.id
             },
-            title: '<h2>标题</h2>',
-            html: '<p></p>',
+            title: '',
+            html: '',
             toolbarConfig: {},
             editorConfig: {
                 readOnly:true,
@@ -177,15 +180,16 @@ export default {
         },
         onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
-            this.id = localStorage.getItem("ID");
-            console.log("passageID",localStorage.getItem("ID"));
+            console.log(this.$route.query.articleID)
+            this.id = this.$route.query.articleID;
+            console.log("123:" + this.id)
+            // console.log("passageID",localStorage.getItem("articleID"));
             this.getPassage();
         },
         getPassage(){
                     let IDForm = {
                         id: this.id,
                     }
-                    console.log("passageID:",localStorage.getItem("ID"));
                     if(this.id == null) return;
                     else{
                         detailedPassageInfo(IDForm)
@@ -272,7 +276,7 @@ export default {
             }
         }
     },
-    mounted() {
+    created() {
         console.log(123)
         console.log(this.$route.query.id)
         this.getArticleByIdForm.id = this.$route.query.id

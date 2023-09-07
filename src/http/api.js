@@ -122,14 +122,11 @@ export function getComments(articleId, page){
 }
 
 //分类跳转，返回分类文章(分页)
-export function getClassifiedArticle(category, page) {
+export function getClassifiedArticle(params) {
     return request({
         url: "/bsArticle/getByCategory",
         method: 'get',
-        params: {
-            "category": category,
-            "page": page
-        }
+        params
     })
 }
 

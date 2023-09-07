@@ -88,18 +88,15 @@ export default {
             this.$router.push({
                 path: "/passageDetail",
                 query: {
-                    id: this.articleId,
+                    articleID: this.articleId,
                 }
             })
             // localStiorage.setItem("articleID", this.articleId);
-            localStorage.setItem("articleID", this.articleId);
+            // localStorage.setItem("articleID", this.articleId);
 
         },
         async onCreated(editor) {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
-            // console.log(this.uploaderId);
-            // console.log(this.articleId);
-           
         },
     },
     
@@ -112,7 +109,7 @@ export default {
     },
     watch: {
         uploaderId() {
-            console.log(this.uploaderId);
+            // console.log(this.uploaderId);
         },
     },
 }
@@ -133,11 +130,11 @@ export default {
     display: flex; 
     flex-direction: row;
     /* display: block; */
-    width: 30%;
+    width: 35%;
     justify-content: flex-end;
 }
 .avator{
-    width: 35%;
+    width: 30%;
     height: auto; 
     padding-right:10%;
     /* padding-left: 5%; */
