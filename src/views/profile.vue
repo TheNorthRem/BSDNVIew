@@ -2,12 +2,12 @@
   <div class="viewSettings">
     <div class="pageContent">
       
-      <div class="user">
-        <div class="userInside">
-          <img src="../assets/avatar/avatar0.png" style="height:70px; width: 70px;" class="avatarImg">
-          <div class="userDetail">
-            <div class="smallBox">
-                <div class="userName">{{nickName}}</div>
+      <div class="userProfile">
+        <div class="userInsideProfile">
+          <img :src= this.ruleForm.avatar style="height:70px; width: 70px;" class="avatarImg">
+          <div class="userDetailProfile">
+            <div class="smallBoxProfile">
+                <div class="userNameProfile">{{nickName}}</div>
                 <el-button class="subscribeBox">
                   <div class="subscribe">关注</div>
                 </el-button>
@@ -49,10 +49,10 @@
           </div>
         </div>
       </div>
-      <div class="gird-item">
-          <div class="grid-container">
+      <div class="gird-itemProfile">
+          <div class="grid-containerProfile">
               <!-- 分类1的格子，也是左侧的唯一的格子 -->
-              <section class="block1">
+              <section class="block1Profile">
                       <!-- 个人信息 -->
                       <div class = "infoBox">
                           <div class="info">
@@ -75,8 +75,8 @@
                       </div>
               </section>
               <!-- 右侧 -->
-              <div class="rightBlocks">
-                <div class="button">
+              <div class="rightBlocksProfile">
+                <div class="buttonProfile">
                     <span @click="show(1)"
                           :class="index===1? 'active':''">文章</span>
 
@@ -97,6 +97,7 @@
                         :uploadTime= this.articles[i-1].uploadTime
                         :nickName= this.articles[i-1].nickName
                         :articleId=this.articles[i-1].articleId
+                        :avatar=this.articles[i-1].avatar
                         ></showEditor_brief>
                     </span>
                 </div>
@@ -112,6 +113,7 @@
                         :uploadTime= this.favorites[i-1].uploadTime
                         :nickName= this.favorites[i-1].nickName
                         :articleId=this.favorites[i-1].articleId
+                        :avatar=this.favorites[i-1].avatar
                         ></showEditor_brief>
                     </span>
                 </div>
@@ -155,7 +157,7 @@
           qq:'',
           intro:'',
           birthday:'',
-          avatar:'',
+          avatar:'../assets/avatar/avatar0.png',
           InformationId:''
 
         },
@@ -171,9 +173,9 @@
           // 控制切换按钮后按钮改变样式
           index: 1,
           // 控制点击按钮后子组件显示，再次点击隐藏
-          isShow: true,
-          articles:[],
-          favorites:[]
+        isShow: true,
+        articles:[],
+        favorites:[]
       }
     }
     ,
@@ -310,7 +312,7 @@
     height: 178px;
     display: block;
   }
-  .smallBox{
+  .smallBoxProfile{
     display:flex;
     flex-direction: row;
   }
@@ -353,14 +355,14 @@
   .moreDetail{
     margin-top:0.7%;
   }
-  .userDetail{
+  .userDetailProfile{
     width:100%;
     margin-left:2%;
     display: flex;
     justify-items: flex-start;
     flex-direction: column;
   }
-  .userName{
+  .userNameProfile{
     color: #050505;
     font-family: Inter;
     font-size: 18px;
@@ -373,7 +375,7 @@
     margin-left:1%;
     margin-top:1%;
   }
-  .user{
+  .userProfile{
     display: flex;
     width: 100%;
     height: 104px;
@@ -384,7 +386,7 @@
     padding-top:2%;
     padding-inline: 10%;
   }
-  .userInside{
+  .userInsideProfile{
     width: 100%;
     height: 100%;
     border-radius: 12px;
@@ -403,7 +405,7 @@
     justify-items: flex-start;
     flex-direction: column;
   }
-.button span {
+.buttonProfile span {
   color: #121212;
   border-radius: 5px;
   display: inline-block;
@@ -417,7 +419,7 @@
   margin-bottom:10px;
 }
 
-.button span.active {
+.buttonProfile span.active {
   color: #121212;
   background: rgba(0, 0, 0, 0.10);
 }
@@ -497,7 +499,7 @@
       left:1%;
       position: relative;
   }
-  .gird-item{
+  .gird-itemProfile{
       width:85%;
       padding-top:1.5%;
       padding-right: 5%;
@@ -505,7 +507,7 @@
       margin-right:5%;
       grid-column: span 12;
   }
-  .grid-container {
+  .grid-containerProfile {
       width: 100%;
       align-items: center;
       flex-shrink: 0;
@@ -517,7 +519,7 @@
       gap: 24px;
       
   }
-  .block1{
+  .block1Profile{
       border-radius: 12px;
       width: 100%;
       height: 100%;
@@ -535,17 +537,14 @@
       color: var(--color-link);
       margin-bottom: 10px;
   }
-  .moreButton{
-      color: #0a85d1;
-  }
-  .more{
+  .moreProfile{
       position: relative;
       line-height: 24px;
   }
   .more:hover{
       text-decoration:underline;
   }
-  .rightBlocks{
+  .rightBlocksProfile{
       width:100%;
       display: flex;
       flex-direction: column;
