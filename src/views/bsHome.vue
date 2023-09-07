@@ -43,7 +43,7 @@
                 <!-- 头像 -->
                 <div class = "iconBox">
                         
-                        <img src="../assets/avatar/avatar0.png" style="height:45%; width: 45%;">
+            <img :src= this.avatar style="height:45%; width: 45%;" />
                 </div>
                 <!-- 个人信息 -->
                 <div class = "infoBox">
@@ -54,7 +54,7 @@
                         <h3 v-if="this.userName!='请先登录！'"><a href="#/profile">More</a></h3>
                     </div>
                 </div>
-                <img src="../assets/underAsideBox.webp" style="margin-top:30%; height:auto;width:15%;position: fixed;right: 10%;bottom: 0;" >
+                <img src='../assets/underAsideBox.webp' style="margin-top:30%; height:auto;width:15%;position: fixed;right: 10%;bottom: 0;" >
             </div>
         </div>
     </div>
@@ -89,10 +89,13 @@ export default {
                     ],
             profilePhotoPath: [],
             TopArticles:[],
-            articleArrayLength:0
+            articleArrayLength:0,
+            avatar:'../assets/avatar/avatar0.png'
         }
     },
     created() {
+        this.Reload();
+        
         getTopArticles().then(res => {
                 if (res.data.code == 200) {
                     console.log("获取热门文章成功！")
@@ -112,7 +115,7 @@ export default {
                 }
             }
         )
-        this.Reload();
+        
     },
     methods:{
         Reload() {
@@ -136,6 +139,8 @@ export default {
                         this.userName = result.data.data.userName;
                         this.nickName = result.data.data.nickName;
                         this.intro = result.data.data.intro;
+                        this.avatar=result.data.data.avatar;
+                        console.log(this.avatar)
                     }).catch(error => {
                         console.error('获取用户信息失败:', error);
                     });
@@ -253,7 +258,7 @@ div footer{
     padding-block-end: 13%;  
 }
 .infoBox{
-    width: 80%;
+    width: 70%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -262,6 +267,7 @@ div footer{
     border: 2px solid #F6F5F4;
     background: #FBFBFA;
     flex-direction: column;/* 垂直排列 */
+    padding-inline: 5%;
 }
 .info{
     width: 100%;
