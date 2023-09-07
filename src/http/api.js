@@ -254,3 +254,11 @@ export function getFavoriteArticlesByUser(params){
         params
     })  
 }
+
+export function getToken(params) {
+    return request({
+        url: "/login/getToken",
+        method: 'get',
+        params
+    })
+}
