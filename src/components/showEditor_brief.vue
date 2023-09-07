@@ -6,20 +6,20 @@
                 {{ this.title }}
             </h3> -->
             <h2> {{this.title}} </h2>
-            <!-- 等待替换动态头像资源
-                :src=this.profilePhotoPath[i-1] -->
-            <!-- <img src="../assets/avatar/avatar1.png" style="width: 10%;height: auto; padding-right:3%;" /> -->
-            <div class="authorBox">
+            <keep-alive>
+                <div class="authorBox">
+               
+                     <img :src= this.avatar class="avator" />
 
-                <img src="../assets/avatar/avatar1.png" class="avator" />
-
-                <div>
-                    <h3>
-                        {{ this.nickName }}
-                    </h3>
-                    <p>ID：{{ this.uploaderId }}</p>
+                    <div>
+                        <h3>
+                            {{ this.nickName }}
+                        </h3>
+                        <p>ID：{{ this.uploaderId }}</p>
+                    </div>
+               
                 </div>
-            </div>
+             </keep-alive>
         </header>
 
         <div style="border: 1px solid #652828;border-radius: 3px; padding: 2%">
@@ -69,7 +69,6 @@ export default {
                 },
             },
             mode: 'default', // or 'simple',
-            //添加了标题、简介标头、省略号
         }
     },
     props: {
@@ -79,6 +78,7 @@ export default {
         brief: String,
         title: String,
         nickName: String,
+        avatar:String
     },
 
     methods: {
@@ -99,8 +99,12 @@ export default {
             this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
             // console.log(this.uploaderId);
             // console.log(this.articleId);
+           
         },
     },
+    
+    
+
     beforeUnmount() {
         const editor = this.editor
         if (editor == null) return
