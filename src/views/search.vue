@@ -91,7 +91,7 @@ export default {
 
         
         for (let i = 0; i < this.Articles.length; i++) {
-            this.Articles[i].brief = "<h3>简介：".concat(this.Articles[i].brief).concat("......</h3>")
+            this.Articles[i].brief = "简介：".concat(this.Articles[i].brief).concat("......")
             // console.log(this.Articles[i].brief)
         }
     },

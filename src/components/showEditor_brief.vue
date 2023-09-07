@@ -26,9 +26,9 @@
             <!-- <Editor style="height: 200px; overflow-y: hidden; width: 800px; " v-model=this.brief
                 :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
               -->
-              <p>
+              <h3>
                 {{ this.brief }}
-              </p>
+              </h3>
         </div>
 
         <footer class="footerBox">

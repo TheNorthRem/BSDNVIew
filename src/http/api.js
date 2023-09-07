@@ -185,6 +185,7 @@ export function getByCategory(params) {
     return request({
         url: "/bsArticle/getByCategory",
         method: 'get',
+        params
     })
 }
 //收藏文章
