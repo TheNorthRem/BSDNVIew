@@ -366,18 +366,18 @@
   }
   .user{
     display: flex;
-    width: 1490px;
+    width: 100%;
     height: 104px;
     align-items: center;
     flex-shrink: 0;
-    
     margin-left:5%;
     margin-right:5%;
     padding-top:2%;
+    padding-inline: 10%;
   }
   .userInside{
-    width: 1490px;
-    height: 104px;
+    width: 100%;
+    height: 100%;
     border-radius: 12px;
     border: 2px solid #F6F5F4;
     background: #FBFBFA;
@@ -385,8 +385,10 @@
     align-items: center;
     justify-items: flex-start;
     flex-direction: row;
+    margin-inline: 5%;
   }
   .pageContent{
+    width: 100% !important;
     display: flex;
     align-items: center;
     justify-items: flex-start;
@@ -422,8 +424,9 @@
 }
 
 .three {
-  margin-left:10px;
-  height: 600px;
+  margin-left:0%;
+  width:100%;
+  height: 100%;
 }
 
   .blockIcon{
@@ -476,7 +479,8 @@
       flex-direction: column;/* 垂直排列 */
   }
   .viewSettings{
-      width: 100%;
+      width: 100%!important;
+      height:100%;
       min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
   }
   .svg{
@@ -485,20 +489,22 @@
       position: relative;
   }
   .gird-item{
+      width:85%;
       padding-top:1.5%;
+      padding-right: 5%;
       margin-left:5%;
       margin-right:5%;
       grid-column: span 12;
   }
   .grid-container {
-      width: 1500px;
+      width: 100%;
       align-items: center;
       flex-shrink: 0;
       padding-top: 2%;
       display: grid;
       grid-template-columns: 250px 2fr;
       padding-left: 0px;
-      padding-right: 0px;
+      padding-right: 10%;
       gap: 24px;
       
   }
@@ -531,6 +537,7 @@
       text-decoration:underline;
   }
   .rightBlocks{
+      width:100%;
       display: flex;
       flex-direction: column;
   }

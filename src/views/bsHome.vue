@@ -62,7 +62,6 @@
 
 <script>
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
-import {Created} from "vue"
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { getUserInfo } from '../http/api.js';
 import { getTopArticles } from "@/http/api"
@@ -74,8 +73,7 @@ export default {
         ElCarouselItem,
         ElBacktop,
         showEditor_brief,
-        getTopArticles,
-        Created,
+        getTopArticles
     },
     data(){
         return{
@@ -107,9 +105,6 @@ export default {
                         this.TopArticles[i].brief = "简介：".concat(this.TopArticles[i].brief).concat("......")
                         console.log(this.TopArticles[i].brief)
                     }
-                    // this.TopArticles.brief = String(this.TopArticles.brief).concat("...")
-                    // console.log(this.TopArticles)
-                    // console.log(this.articleArrayLength)
                 } else {
                     console.log("获取热门文章失败！")
                 }
@@ -120,6 +115,7 @@ export default {
     methods:{
         Reload() {
             //判断用户的登录状态，如果用户已经登录，则显示用户的头像和个人信息
+            //TODO:Redis token校验
             let userID=localStorage.getItem('ID');//获取用户ID
             let IDForm = {
                 id: userID,

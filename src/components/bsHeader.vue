@@ -75,8 +75,6 @@
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
-  import bsHome from '../views/bsHome.vue'
-  import { toRaw } from '@vue/reactivity'
   export default {
     name: 'bsHeader',
     components: {
@@ -142,9 +140,6 @@
                 // 将搜索结果文章存储到searchResults中
                 this.searchResults = JSON.stringify(result.data.data.records);
                 console.log("Result: " + this.searchResults)
-                // console.log("searchResult",this.searchResults);
-                // console.log("searchResult",this.searchResults[0].title);
-                // 获取信息成功后跳转到搜索结果页面
                 this.$router.push({
                   path: '/search',
                   query: { 
@@ -192,6 +187,7 @@
             });
         },
         logOut(){
+          if (localStorage.getItem('ID') != null && localStorage.getItem('token') != null) {
           logOutUser(localStorage.getItem('ID'),localStorage.getItem('token'))
           .then(result => {
               console.log('用户登出成功', result);
@@ -200,13 +196,16 @@
               window.localStorage.removeItem('token');
               console.log('用户信息清理:');
               window.location.reload();
-                
              })
             .catch(error => {
                 console.error('用户登出失败:', error);
             });
+        } else {
+          window.localStorage.removeItem('ID')
+          window.localStorage.removeItem('token')
+          window.location.reload()
         }
-        
+      }
     }
   }
   

@@ -72,8 +72,11 @@ export default {
         position: relative;
         align-self: top;
         font-size: 20px;
+        width:100px;
+        height:25px;
+        white-space: nowrap;
         margin-top: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 3px;
     }
     .mes1{
         margin-top: 10px;

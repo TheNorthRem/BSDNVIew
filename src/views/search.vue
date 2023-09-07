@@ -29,7 +29,6 @@
 import { ElPagination } from '@/../node_modules/element-plus'
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { searchPassage } from "@/http/api"
-import { Mounted } from "vue"
 
 export default {
     name: 'Search',
@@ -37,7 +36,6 @@ export default {
         ElPagination,
         showEditor_brief,
         searchPassage,
-        Mounted
     },
     data() {
         return {

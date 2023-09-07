@@ -77,7 +77,7 @@ export function getUserInfo(params) {
 //获取用户的详细信息：用户主页展示信息
 export function detailedUserInfo(params) {
     return request({
-        url: "/bsUserInformation/searchContent",
+        url: "/bsUserInformation/search",
         method: 'get',
         params
     })
@@ -143,6 +143,15 @@ export function logOutUser(userId,token) {
             "userId":userId,
             "token":token
         }
+    })
+}
+
+//注销用户
+export function deleteUserByID(params) {
+    return request({
+        url: "/bsUser/delete",
+        method: 'delete',
+        params
     })
 }
 
