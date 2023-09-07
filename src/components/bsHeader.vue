@@ -10,13 +10,11 @@
             <li><a href="https://www.icourse163.org/">学习</a></li>
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
-              <div class="dropdown-content">
-                <a href="#/search">前端</a>
-                <a href="#/search">后端</a>
-                <a href="#/search">数据库</a>
-                <a href="#/search">生活</a>
-                <a href="#/search">编程语言</a>
-                <a href="#/search">其他</a>
+              <div class="dropdown-content"  >
+                <a v-for="item in categoryTitle" @click="() => 
+                { this.getByCategoryForm.category = item;
+                  getByCategoryFunction();
+                }" >{{item}}</a>
               </div>
             </div>
           </ul>
@@ -69,8 +67,7 @@
   import { ElButton, ElDivider, ElIcon, ElInput, ElMessage } from '@/../node_modules/element-plus'
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
-
-  import { searchPassage,deleteUserByID,logOutUser,getUserInfo, getToken } from '../http/api.js';
+  import { searchPassage,deleteUserByID,logOutUser,getUserInfo, getToken, getByCategory } from '../http/api.js';
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
@@ -238,8 +235,27 @@
             window.localStorage.removeItem('token')
             window.location.reload()
           }
-        }
-    }
+        },
+        // 分类
+        getByCategoryFunction() {
+            getByCategory(this.getByCategoryForm) // 发送GET请求，传递搜索查询参数
+                .then(result => {
+                    console.log("搜索分类成功！")
+                    console.log(result)
+                    // 将搜索结果文章存储到searchResults中
+                    this.searchResults = JSON.stringify(result.data.data.records);              
+                    this.$router.push({
+                        path: '/search',
+                        query: { searchResults: this.searchResults }
+                    })
+                })
+                .catch(error => {
+                    console.log(this.getByCategoryForm);
+                    console.error('搜索失败:', error);
+                });
+        },
+      }
+
   }
   
 </script>
@@ -310,6 +326,7 @@
   .dropdown-content {
     z-index: 9999;  
       display: none;/* 隐藏下拉菜单 */
+
       position: absolute; /* 绝对定位 保证布局稳定 */
       background-color: #f9f9f9;
       min-width: 110px;
