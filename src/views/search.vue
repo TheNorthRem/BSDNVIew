@@ -1,4 +1,6 @@
 <template>
+    <!-- 回到顶部 -->
+    <el-backtop :right="100" :bottom="100" />
     <div class="viewSettings">
         <keep-alive>
         <div class="grid-item">
@@ -26,7 +28,7 @@
 </template>
     
 <script>
-import { ElPagination } from '@/../node_modules/element-plus'
+import { ElPagination, ElBacktop } from '@/../node_modules/element-plus'
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { searchPassage } from "@/http/api"
 
@@ -36,6 +38,7 @@ export default {
         ElPagination,
         showEditor_brief,
         searchPassage,
+        ElBacktop
     },
     data() {
         return {

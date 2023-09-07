@@ -1,4 +1,6 @@
 <template>
+    <!-- 回到顶部 -->
+    <el-backtop :right="100" :bottom="100" />
     <div class="editorViewBox">
         <img src="../assets/e1.png" style="height: auto;width: 15%; position: fixed; padding-inline: 3%;left: 2%;bottom: 0;">
         <div class="passageBox">
@@ -73,14 +75,14 @@
 <script>
 // import Vue from 'vue'
 import { Editor} from '@wangeditor/editor-for-vue'
-import { ElMessage, ElIcon, ElDrawer, ElButton,ElInput,ElDivider } from "@/../node_modules/element-plus"
+import { ElMessage, ElIcon, ElDrawer, ElButton,ElInput,ElDivider, ElBacktop } from "@/../node_modules/element-plus"
 import { CircleCloseFilled } from '@element-plus/icons-vue'
 // import { Mounted } from "vue"
 import { getArticleById } from "@/http/api"
 import { uploadPassage,detailedPassageInfo,getComments,addFavorites,uploadComment,deleteFavorites} from "@/http/api"
 
 export default {
-    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled,ElInput,ElDivider,getArticleById },
+    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled,ElInput,ElDivider,getArticleById, ElBacktop },
     data() {
         return {
 

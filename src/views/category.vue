@@ -130,7 +130,6 @@
                                     <h2> {{ categoryTitle[5] }} </h2>
                                 </span>
                                 <div class="moreButton">
-                                    <!-- href中为跳转页面 -->
                                     <a class="more" @click="() => {
                                         this.getByCategoryForm.category = this.categoryTitle[5];
                                         getByCategoryFunction();
@@ -169,10 +168,13 @@
 
 <script>
 import  {getByCategory,getAllArticles} from "@/http/api"
+import{ElBacktop} from '@/../node_modules/element-plus'
 export default {
     name: 'Category',
     components: {
-        getByCategory,getAllArticles
+        getByCategory,
+        getAllArticles,
+        ElBacktop
     },
     data() {
         return {
