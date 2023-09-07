@@ -75,12 +75,12 @@
 import { Editor} from '@wangeditor/editor-for-vue'
 import { ElMessage, ElIcon, ElDrawer, ElButton,ElInput,ElDivider } from "@/../node_modules/element-plus"
 import { CircleCloseFilled } from '@element-plus/icons-vue'
-import { Mounted } from "vue"
+// import { Mounted } from "vue"
 import { getArticleById } from "@/http/api"
 import { uploadPassage,detailedPassageInfo,getComments,addFavorites,uploadComment,deleteFavorites} from "@/http/api"
 
 export default {
-    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled,ElInput,ElDivider, Mounted,getArticleById },
+    components: { Editor, ElIcon, ElDrawer, ElButton, CircleCloseFilled,ElInput,ElDivider,getArticleById },
     data() {
         return {
 

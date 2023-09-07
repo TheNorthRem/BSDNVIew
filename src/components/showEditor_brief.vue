@@ -47,11 +47,11 @@
 <script>
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { ElButton } from '@/../node_modules/element-plus';
-import { Mounted, BeforeCreate } from "vue"
+// import { Mounted } from "vue"
 
 export default {
     name: "showEditor_brief",
-    components: { Editor, Toolbar, Mounted, ElButton, BeforeCreate },
+    components: { Editor, Toolbar, ElButton },
     data() {
         return {
             editor: null,
@@ -99,10 +99,7 @@ export default {
             // console.log(this.articleId);
         },
     },
-    mounted() {
-
-    },
-    beforeDestroy() {
+    beforeUnmount() {
         const editor = this.editor
         if (editor == null) return
         editor.destroy() // 组件销毁时，及时销毁编辑器

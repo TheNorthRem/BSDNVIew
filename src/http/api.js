@@ -146,6 +146,15 @@ export function logOutUser(userId,token) {
     })
 }
 
+//注销用户
+export function deleteUserByID(params) {
+    return request({
+        url: "/bsUser/delete",
+        method: 'delete',
+        params
+    })
+}
+
 //上传用户头像
 export function uploadUserAvatar(data) {
     return request({
