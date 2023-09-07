@@ -22,7 +22,7 @@
             </div>
         </header>
 
-        <div style="border: 1px solid #652828;border-radius: 3px;">
+        <div style="border: 1px solid #652828;border-radius: 3px; padding: 2%">
             <!-- <Editor style="height: 200px; overflow-y: hidden; width: 800px; " v-model=this.brief
                 :defaultConfig="editorConfig" :mode="mode" @onCreated="onCreated" />
               -->
@@ -143,6 +143,19 @@ export default {
     padding-top: 2%;
     flex-direction: row;
     justify-content: flex-end;
-
 }
+
+.articleInfo{
+    width: 100%;
+    height: 350px;
+    border-radius: 12px;
+    border: 2px solid #F6F5F4;
+    background: #FBFBFA;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    padding: 5%; 
+    flex-direction: column;
+}
+
 </style>

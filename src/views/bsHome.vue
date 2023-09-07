@@ -218,19 +218,6 @@ export default {
     margin-left: 0%;
 }
 
-.articleInfo{
-    width: 100%;
-    height: 350px;
-    border-radius: 12px;
-    border: 2px solid #F6F5F4;
-    background: #FBFBFA;
-    display: flex;
-    justify-content: space-between;
-    /* align-items: center; */
-    padding: 3%; 
-    flex-direction: column;
-}
-
 div footer{
     display: flex;
     /* justify-content: center; */
@@ -284,4 +271,18 @@ div footer{
     text-align: center;  /*水平居中*/
     line-height: 10px; /*垂直居中 值为heigth的值*/
 }
+
+.articleInfo{
+    width: 100%;
+    height: 350px;
+    border-radius: 12px;
+    border: 2px solid #F6F5F4;
+    background: #FBFBFA;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    padding: 3%; 
+    flex-direction: column;
+}
+
 </style>
