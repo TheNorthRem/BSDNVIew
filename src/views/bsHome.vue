@@ -120,6 +120,7 @@ export default {
     methods:{
         Reload() {
             //判断用户的登录状态，如果用户已经登录，则显示用户的头像和个人信息
+            //TODO:Redis token校验
             let userID=localStorage.getItem('ID');//获取用户ID
             let IDForm = {
                 id: userID,
