@@ -6,7 +6,7 @@
           <ul>
             <li><a href="#/">🏠首页</a></li>
             <li><a href="#">博客</a></li>
-            <li><a href="#/message">社区</a></li>
+            <li><a href="https://www.csdn.net/">社区</a></li>
             <li><a href="https://www.icourse163.org/">学习</a></li>
             <div class="dropdown">
               <a href="#/category" class="dropbtn">文章分类</a>
@@ -70,7 +70,7 @@
   import { Upload } from '@element-plus/icons-vue'
   import { Search} from '@element-plus/icons-vue'
 
-  import { searchPassage,deleteUserByID,logOutUser,getUserInfo } from '../http/api.js';
+  import { searchPassage,deleteUserByID,logOutUser,getUserInfo, getToken } from '../http/api.js';
   import login from '@/components/login'
   import register from '@/components/register'
   import tagSelector from '@/components/tagSelector'
@@ -168,20 +168,36 @@
       // 获取用户信息
       fetchUserInfo() {
         console.log('用户信息加载中...');
-        let IDForm= {
-          id: localStorage.getItem('ID')
+        let userID = localStorage.getItem('ID')
+        let token = localStorage.getItem('token')
+
+        if (userID == null || token == null)
+          return;
+
+        let IDForm = {
+          id: userID
         }
-        // 发送GET请求获取用户信息
-        getUserInfo(IDForm)
-            .then(result => {
-              console.log('获取用户信息...', result);
-                this.user = result.data.data.userId;
-                console.log('获取用户信息成功', this.user);   
-            })
-            .catch(error => {
-                console.error('获取用户信息失败:', error);
-            });
-        return
+        //token核验
+        getToken(IDForm).then(res => {
+          if (res.data.code == 200 && res.data.message == token) {
+            //token核验成功
+            // 发送GET请求获取用户信息
+            let NewIDForm = {
+              id: userID
+            }
+            getUserInfo(NewIDForm)
+                .then(result => {
+                  console.log('获取用户信息...', result);
+                    this.user = result.data.data.userId;
+                    console.log('获取用户信息成功', this.user);   
+                })
+                .catch(error => {
+                    console.error('获取用户信息失败:', error);
+                });
+            } else { //token核验失败，无权限!
+                console.log("token核验失败,无权限获取用户信息!")
+            }
+          }).catch(_ => {})
       },
         // 注销用户
         deleteUser(){

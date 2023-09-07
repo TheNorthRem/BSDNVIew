@@ -70,7 +70,7 @@
 
 <style>
     .viewSettings11{
-        width: 100%;
+        width: 100vw;
         height: 100%;
         min-width: 1400px;/* 最小宽度 控制缩放时的布局不变形 */
         /* background: rgb(214, 209, 209); */

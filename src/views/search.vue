@@ -113,7 +113,7 @@ export default {
     
 <style>
 .viewSettings {
-    width: 100%;
+    width: 100vw;
     min-width: 1400px;
     /* 最小宽度 控制缩放时的布局不变形 */
 }
