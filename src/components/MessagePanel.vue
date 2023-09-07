@@ -4,7 +4,7 @@
             <keep-alive>
                 <ul v-infinite-scroll="load" class="infinite-list1" style="overflow: auto;height: 500px;">
                 <li v-for="i in messageLen" :key="i" class="infinite-list-item1">
-                    <MessageDetail  :username= this.messages[i-1].nickName :Message= this.messages[i-1].content :time= this.messages[i-1].time srcs="http://localhost:8081/image/al.png"/>
+                    <MessageDetail  :username= this.messages[i-1].nickName :Message= this.messages[i-1].content :time= this.messages[i-1].time :srcs= this.messages[i-1].avatar />
                 </li>
                 </ul>
             </keep-alive>

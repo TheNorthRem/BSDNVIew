@@ -8,7 +8,7 @@
                     :username= this.users[i-1].nickName 
                     :userId="i"
                     lastMessage= "n" 
-                    srcs="http://localhost:8081/image/al.png"
+                    :srcs=this.users[i-1].avatar
                     :curId="curId"
                     v-on:changeUserId="UserIdChanged($event)"
                     />
