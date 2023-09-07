@@ -141,7 +141,6 @@
             .then(result => {
                 // 将搜索结果文章存储到searchResults中 并将其转换为JSON格式
                 this.searchResults = JSON.stringify(result.data.data.records);
-                console.log("Result: " + this.searchResults)
                 // 跳转到搜索结果页面 并将搜索结果传递过去
                 this.$router.push({
                   path: '/search',
@@ -240,18 +239,18 @@
         getByCategoryFunction() {
             getByCategory(this.getByCategoryForm) // 发送GET请求，传递搜索查询参数
                 .then(result => {
-                    console.log("搜索分类成功！")
+                    console.log("导航栏搜索分类成功！")
                     console.log(result)
                     // 将搜索结果文章存储到searchResults中
-                    this.searchResults = JSON.stringify(result.data.data.records);              
+                    this.searchResults = JSON.stringify(result.data.data.records);           
                     this.$router.push({
-                        path: '/search',
-                        query: { searchResults: this.searchResults }
+                        path: '/categorySearch',
+                        query: { Articles: this.searchResults }
                     })
                 })
                 .catch(error => {
                     console.log(this.getByCategoryForm);
-                    console.error('搜索失败:', error);
+                    console.error('导航栏搜索失败:', error);
                 });
         },
       }

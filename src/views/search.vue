@@ -72,6 +72,8 @@ export default {
        },
     },
     created() {
+        console.log("加载搜索页面数据");
+        console.log(this.Input)
         searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
             .then(result => {
                  this.Articles = result.data.data.records;
@@ -82,7 +84,7 @@ export default {
                 console.log("Input Content: " + this.Input.content)
             })
             .catch(error => {
-                console.log(this.Input);
+                console.log('搜索失败input:',this.Input);
                 console.error('搜索失败:', error);
             });
 
