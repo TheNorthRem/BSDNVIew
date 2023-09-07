@@ -210,7 +210,7 @@
         getArticlesByUser({
           'userId': localStorage.getItem('ID')
         }).then(res=>{
-          console.log(res)
+          console.log("获取用户本人的文章",res)
           this.articles=res.data.data
         })
         
