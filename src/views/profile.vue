@@ -118,7 +118,10 @@
                 <!-- 面板三 -->
                 <div class="three"
                     v-show="index===3 && isShow">
-                    <Message/>
+                    <div class="getMessagePage">
+                      <Message/>
+                    </div>
+                    
                 </div>
               </div>
           </div>
@@ -269,7 +272,10 @@
   </script>
   
   <style>
-
+.getMessagePage{
+  width:70%;
+  overflow: hidden;
+}
     .avatars{
       width: 60px;
       height: 60px;
