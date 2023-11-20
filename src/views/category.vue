@@ -209,23 +209,17 @@ export default {
                 });
         },
         getAllArticlesFunction() {
-            getAllArticles() // 发送GET请求，传递搜索查询参数
-                .then(result => {
+            //发送GET请求传递搜索查询参数
+                
                     // 将搜索结果文章存储到searchResults中
-                    console.log("搜索全部文章成功！")
-                    console.log(result)
-                    this.searchResults = JSON.stringify(result.data.data);
-                    // console.log("searchResult",this.searchResults);
-                    // console.log("searchResult",this.searchResults[0].title);
-                    // 获取信息成功后跳转到搜索结果页面               
-                    this.$router.push({
-                        path: '/search',
-                        query: { searchResults: this.searchResults }
-                    })
+                 
+                this.$router.push({
+                    path: '/search',
+                    query: { 
+                        inputContent: ""
+                    }
                 })
-                .catch(error => {
-                    console.error('搜索失败:', error);
-                });
+               
         },
     }
 }

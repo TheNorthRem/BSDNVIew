@@ -59,7 +59,6 @@ export function searchPassage(params) {
     return request({
         url: "/bsArticle/searchContent",
         method: 'get',
-        
         params
     })
 }

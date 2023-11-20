@@ -3,26 +3,29 @@
     <el-backtop :right="100" :bottom="100" />
     <div class="viewSettings">
         <keep-alive>
-        <div class="grid-item">
-           
+            <div class="grid-item">
+
                 <div class="articleBox">
-                    
-                        <span v-for="i in Articles.length" v-bind:key="i" style="padding-bottom: 5%;">
-                            <showEditor_brief :uploaderId=this.Articles[i-1].uploaderId
-                                :uploaderNickName=this.Articles[i-1].nickName :brief=this.Articles[i-1].brief
-                                :title=this.Articles[i-1].title :uploadTime=this.Articles[i-1].uploadTime
-                                :nickName=this.Articles[i-1].nickName :articleId=this.Articles[i-1].articleId></showEditor_brief>
-                        </span>
-                    
+
+                    <span v-for="i in Articles.length" v-bind:key="i" style="padding-bottom: 5%;">
+                        <showEditor_brief :uploaderId=this.Articles[i-1].uploaderId
+                            :uploaderNickName=this.Articles[i-1].nickName :brief=this.Articles[i-1].brief
+                            :title=this.Articles[i-1].title :uploadTime=this.Articles[i-1].uploadTime
+                            :nickName=this.Articles[i-1].nickName :articleId=this.Articles[i-1].articleId
+                            :avatar=this.Articles[i-1].avatar
+                            >
+                        </showEditor_brief>
+                    </span>
+
                 </div>
-           
-            <!-- 分页 -->
-            <div class="paginationBlock">
-                <el-pagination layout="prev, pager, next" :page-count= this.total v-model:current-page="currentPage" 
-                @current-change="PassRouter" />
+
+                <!-- 分页 -->
+                <div class="paginationBlock">
+                    <el-pagination layout="prev, pager, next" :page-count= this.total v-model:current-page="currentPage"
+                        @current-change="PassRouter" />
+                </div>
+
             </div>
-        
-        </div>
         </keep-alive>
     </div>
 </template>
@@ -48,66 +51,71 @@ export default {
             Input: {
                 content: '',
                 page: 1,
-                total:''
+                userId: localStorage.getItem('ID'),
+                token: localStorage.getItem('token')
             },
-            total:''
+            total:'',
         }
     },
     methods: {
-       PassRouter() {
+        PassRouter() {
             console.log(3455)
-            this.Input.page=this.currentPage;
+            this.Input.page = this.currentPage;
             console.log(this.currentPage)
             searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
-            .then(result => {
-                console.log("Result: " + this.searchResults)
-                // 获取信息成功后跳转到搜索结果页面
-                console.log("Input Content: " + this.Input.content)
-                this.Articles = result.data.data.records;
-            })
-            .catch(error => {
-                console.log(this.Input);
-                console.error('搜索失败:', error);
-            }); 
-       },
-    },
-    created() {
-        console.log("加载搜索页面数据");
-        console.log(this.Input)
-        searchPassage(this.Input) // 发送GET请求，传递搜索查询参数
-            .then(result => {
-                 this.Articles = result.data.data.records;
-                 console.log(result.data.data)
-                 this.total=result.data.data.pages
-                 console.log(this.total)
-                // 获取信息成功后跳转到搜索结果页面
-                console.log("Input Content: " + this.Input.content)
-            })
-            .catch(error => {
-                console.log('搜索失败input:',this.Input);
-                console.error('搜索失败:', error);
-            });
+                .then(result => {
+                    console.log("Result: " + this.searchResults)
+                    // 获取信息成功后跳转到搜索结果页面
+                    console.log("Input Content: " + this.Input.content)
+                    this.Articles = result.data.data.records;
+                })
+                .catch(error => {
+                    console.log(this.Input);
+                    console.error('搜索失败:', error);
+                });
+        },
+        update(){
+        
+        console.log("111",this.$route.query.inputContent)
 
-    
+        searchPassage({
+            'content': this.$route.query.inputContent,
+            'page':1,
+            'userId':localStorage.getItem("ID"),
+            'token':localStorage.getItem("token")
+        }).then(result=>{
+            this.Articles = result.data.data.records;
+            this.total =result.data.data.pages;
+            console.log(result)
+        })
+
+
         // console.log(this.$route.query.searchResults);
         // 传参 将路由参数转换为json格式并赋给本地变量
 
-        
+
         for (let i = 0; i < this.Articles.length; i++) {
             this.Articles[i].brief = "简介：".concat(this.Articles[i].brief).concat("......")
             // console.log(this.Articles[i].brief)
         }
+    }
     },
+    
+    
+    created(){
+        this.update()
+    },
+   
+    
     watch: {
         currentPage: {
             handler() {
 
             }
         },
-        $route(to, from) {console.info("加载页面数据");
-            if (this.$route.query.id) {
-                
-            }
+        $route(to, from) {
+            console.info("加载页面数据");
+            this.update()
         }
     }
 }

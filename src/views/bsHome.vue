@@ -29,6 +29,7 @@
                         :uploadTime= this.TopArticles[i-1].uploadTime
                         :nickName= this.TopArticles[i-1].nickName
                         :articleId=this.TopArticles[i-1].articleId
+                        :avatar=this.TopArticles[i-1].avatar
                         ></showEditor_brief>
                     </span>
                 </div>
@@ -105,9 +106,9 @@ export default {
 
                     //修改简介格式
                     for(let i = 0; i < this.TopArticles.length; i++) {
-                        this.TopArticles[i].brief = "简介：".concat(this.TopArticles[i].brief).concat("......")
                         console.log(this.TopArticles[i].brief)
-                        this.TopArticles[i].brief = "<h3>简介：".concat(this.TopArticles[i].brief).concat("......</h3>")
+                        this.TopArticles[i].brief = "简介：".concat(this.TopArticles[i].brief).concat("......")
+                       
                         //console.log(this.TopArticles[i].brief)
                     }
                 } else {

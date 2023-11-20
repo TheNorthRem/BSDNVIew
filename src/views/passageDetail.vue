@@ -110,7 +110,7 @@ export default {
                 placeholder: '文章...',
                 MENU_CONF: {
                     uploadImage: {
-                        server: "http://localhost:8081/ImageUpload",
+                        server: "http://82.157.75.213:8081/ImageUpload",
                         fieldName: 'image',
                         maxFileSize: 100 * 1024 * 1024, // 1M
                     }
