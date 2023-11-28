@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="topBar">
-      <img src="../assets/logo.png" style="padding-left:2%; width: 11%;height: 50%;">
+      <img src="../assets/logo.png" style="padding-left:1%; width: 11%;height: 50%;">
       <div class="menuBox">
         <ul>
           <li><a href="#/">🏠首页</a></li>

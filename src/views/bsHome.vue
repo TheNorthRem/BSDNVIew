@@ -247,7 +247,6 @@ div footer{
     display: flex; /* 块级元素转换为行内元素 */
     align-items: center;/* 垂直居中 */
     flex-direction: column;/* 垂直排列 */
-    justify-items: space-between;/* 两端对齐 */
     padding: 3% 5% 0% 0%;
 }
 .iconBox{
