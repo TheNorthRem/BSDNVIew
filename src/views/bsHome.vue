@@ -93,8 +93,12 @@ export default {
             profilePhotoPath: [],
             TopArticles:[],
             articleArrayLength:0,
-            avatar:'../assets/avatar/avatar0.png'
+            // avatar:'../assets/avatar/avatar0.png'
         }
+    },
+    created() {
+        this.Reload();
+        this.getRecommendArticles();
     },
     methods:{
         Reload() {
@@ -140,6 +144,7 @@ export default {
                         //修改简介格式
                         for(let i = 0; i < this.TopArticles.length; i++) {
                             console.log(this.TopArticles[i].brief)
+                            this.TopArticles[i].title=res.data.data[i].archiveBook.bookTitle;
                             this.TopArticles[i].brief = "简介：".concat(this.TopArticles[i].brief).concat("......")
                         
                             //console.log(this.TopArticles[i].brief)
@@ -160,7 +165,7 @@ export default {
     //     await this.getTopArticlesFunction()
     // },
     mounted(){
-        this.$on('loginSuccess', this.getRecommendArticles);
+        // this.$on('loginSuccess', this.getRecommendArticles);
     }
     // async created() {
     //     await this.getTopArticlesFunction()

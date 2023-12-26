@@ -261,7 +261,7 @@ export function getToken(params) {
 
 export function getRecommend(params) {
     return request({
-        url: "/bsUser/getRecommend",
+        url: "/bsUser/recommend",
         method: 'get',
         params
     })
