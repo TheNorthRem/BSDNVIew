@@ -266,3 +266,11 @@ export function getRecommend(params) {
         params
     })
 }
+
+export function recommendVisualization(params) {
+    return request({
+        url: "/bsUser/recommendVisualization",
+        method: 'get',
+        params
+    })
+}

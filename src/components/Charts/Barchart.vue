@@ -19,15 +19,13 @@
         type: String,
         default: ''
       },
-      barColor: {
-        type: String,
-        default: 'rgba(66, 150, 253,${index * 0.09 + 0.6})' // Default color
-      }
+      // barColor: {
+      //   default: 'rgba(66, 150, 253,${index * 0.09 + 0.6})' // Default color
+      // }
     },
     watch: {
       barData: {
         handler(newVal) {
-          console.log('Received bar data:', newVal);
           if (newVal && newVal.length > 0) {
             this.initChart(); // Trigger chart initialization when barData changes
           }
@@ -39,9 +37,10 @@
       initChart() {
         const chartDom = this.$refs.roundedBarChart;
         const chart = echarts.init(chartDom);
-  
+        console.log('this.barData:', this.barData);
         const categories = this.barData.map(item => item.category);
-        const values = this.barData.map(item => item.cnt);
+      const values = this.barData.map(item => item.article_count);
+        console.log('categories:', categories);
   
         const options = {
           xAxis: {
@@ -72,7 +71,6 @@
             }
           ]
         };
-  
         chart.setOption(options);
       }
     }
