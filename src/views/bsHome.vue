@@ -65,7 +65,7 @@
 import { ElCarousel, ElCarouselItem, ElBacktop} from '@/../node_modules/element-plus';
 import showEditor_brief from '@/components/showEditor_brief.vue';
 import { getUserInfo, getToken } from '../http/api.js';
-import { getTopArticles } from "@/http/api"
+import { getRecommend } from "@/http/api"
 
 export default { 
     name: 'bsHome',
@@ -74,13 +74,15 @@ export default {
         ElCarouselItem,
         ElBacktop,
         showEditor_brief,
-        getTopArticles
+        getRecommend,
     },
     data(){
         return{
             getTopArticlesFunctionSuccessFlag: false,
             nickName:"🤖🤖🤖🤖🤖",
             userName:'请先登录！',
+            LoginState: 0,
+            userId:0,
             intro: "👽👽👽👽👽",
             items: [
                         require('../assets/carousel/test1.jpg'),
@@ -93,30 +95,6 @@ export default {
             articleArrayLength:0,
             avatar:'../assets/avatar/avatar0.png'
         }
-    },
-    created() {
-        this.Reload();
-        
-        getTopArticles().then(res => {
-                if (res.data.code == 200) {
-                    console.log("获取热门文章成功！")
-                    // console.log(res.data.data)
-                    this.articleArrayLength = res.data.data.length
-                    this.TopArticles = res.data.data
-
-                    //修改简介格式
-                    for(let i = 0; i < this.TopArticles.length; i++) {
-                        console.log(this.TopArticles[i].brief)
-                        this.TopArticles[i].brief = "简介：".concat(this.TopArticles[i].brief).concat("......")
-                       
-                        //console.log(this.TopArticles[i].brief)
-                    }
-                } else {
-                    console.log("获取热门文章失败！")
-                }
-            }
-        )
-        
     },
     methods:{
         Reload() {
@@ -151,12 +129,38 @@ export default {
                 }
             })
         },
+        getRecommendArticles() {
+            getRecommend({userId:localStorage.getItem("ID")}).then(res => {
+                    if (res.data.code == 200) {
+                        // console.log("获取热门文章成功！")
+                        console.log(res)
+                        this.articleArrayLength = res.data.data.length
+                        this.TopArticles = res.data.data
+
+                        //修改简介格式
+                        for(let i = 0; i < this.TopArticles.length; i++) {
+                            console.log(this.TopArticles[i].brief)
+                            this.TopArticles[i].brief = "简介：".concat(this.TopArticles[i].brief).concat("......")
+                        
+                            //console.log(this.TopArticles[i].brief)
+                        }
+                    } else {
+                        // console.log("获取热门文章失败！")
+                    }
+                }
+            )
+        },
+    },
+    watch: {
+        // LoginState() {
+        //     this.getRecommendArticles()
+        // },
     },
     // async beforeMount() {
     //     await this.getTopArticlesFunction()
     // },
     mounted(){
-        
+        this.$on('loginSuccess', this.getRecommendArticles);
     }
     // async created() {
     //     await this.getTopArticlesFunction()

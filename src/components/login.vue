@@ -23,7 +23,7 @@ import { ElDialog, ElForm, ElFormItem, ElButton, ElInput, ElMessage } from '@/..
 export default {
   props: ["hideLogin"],
   components: {
-    ElDialog, ElForm, ElFormItem, ElButton, ElInput
+    ElDialog, ElForm, ElFormItem, ElButton, ElInput,
   },
   data() {
     var username = (rule, value, callback) => {
@@ -73,11 +73,14 @@ export default {
             if (res.data.code == 200) {
               localStorage.setItem('token', res.data.data.token)
               localStorage.setItem('ID', res.data.data.userId)
-              
+
               console.log("token: " + localStorage.getItem('token'))
               console.log("ID: " + localStorage.getItem('ID'))
               this.dialogVisible = false
               this.$emit('loginSuccess', true)
+            
+              // eventBus.$emit('loginSuccess', true);
+
               ElMessage({
                 showClose: true,
                 message: '登陆成功！',

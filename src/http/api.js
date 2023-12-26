@@ -258,3 +258,11 @@ export function getToken(params) {
         params
     })
 }
+
+export function getRecommend(params) {
+    return request({
+        url: "/bsUser/getRecommend",
+        method: 'get',
+        params
+    })
+}

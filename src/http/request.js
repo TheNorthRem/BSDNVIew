@@ -1,11 +1,13 @@
 import axios from 'axios';
 import router from '@/router/router';
 import { ElMessage } from '@/../node_modules/element-plus';
-axios.defaults.baseURL = 'http://82.157.75.213:8081'
+// axios.defaults.baseURL = 'http://82.157.75.213:8081'
+axios.defaults.baseURL = 'http://localhost:8082'
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';//配置请求头
 axios.defaults.headers.post['Authorization'] =  localStorage.getItem('token')
 const request = axios.create({
-    baseURL: 'http://82.157.75.213:8081/',
+    // baseURL: 'http://82.157.75.213:8081/',
+    baseURL: 'http://localhost:8082/',
     timeout: 5000, // 请求超时时间
     headers: {
     }
