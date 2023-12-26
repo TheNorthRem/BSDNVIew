@@ -145,6 +145,7 @@ export default {
                         for(let i = 0; i < this.TopArticles.length; i++) {
                             console.log(this.TopArticles[i].brief)
                             this.TopArticles[i].title=res.data.data[i].archiveBook.bookTitle;
+                            this.TopArticles[i].uploaderId=res.data.data[i].archiveBook.bookAuthor;
                             this.TopArticles[i].brief = "简介：".concat(this.TopArticles[i].brief).concat("......")
                         
                             //console.log(this.TopArticles[i].brief)

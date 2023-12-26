@@ -149,8 +149,8 @@ export default {
 }
 
 .articleInfo{
-    width: 100%;
-    height: 350px;
+    width: 53vw;
+    height: 200px;
     border-radius: 12px;
     border: 2px solid #F6F5F4;
     background: #FBFBFA;
