@@ -13,7 +13,9 @@
     props: {
       barData: {
         type: Array,
-        default: () => []
+        default: () => [],
+        chartTitle:'各文章分类的累积点击量'
+
       },
       chartTitle: {
         type: String,
@@ -39,7 +41,7 @@
         const chart = echarts.init(chartDom);
         console.log('this.barData:', this.barData);
         const categories = this.barData.map(item => item.category);
-      const values = this.barData.map(item => item.article_count);
+      const values = this.barData.map(item => item.clickCount);
         console.log('categories:', categories);
   
         const options = {
