@@ -4,7 +4,8 @@ import { ElMessage } from '@/../node_modules/element-plus';
 // axios.defaults.baseURL = 'http://82.157.75.213:8081'
 axios.defaults.baseURL = 'http://localhost:8082'
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';//配置请求头
-axios.defaults.headers.post['Authorization'] =  localStorage.getItem('token')
+// axios.defaults.headers.common['Authorization'] =  'Bearer'+ localStorage.getItem('token')
+axios.defaults.headers.common['X-token'] =   localStorage.getItem('token')
 const request = axios.create({
     // baseURL: 'http://82.157.75.213:8081/',
     baseURL: 'http://localhost:8082/',
@@ -19,10 +20,10 @@ request.interceptors.request.use(
     // 在发送请求之前做些什么
     const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
-    console.log(token)
+    console.log('axios_token',token)
     console.log(userId)
     if (token) {
-        config.headers.token = token; // 请求头部添加token
+        config.headers['X-token'] = token; // 请求头部添加token
         config.headers.userId = userId; // 请求头部添加userId
     }
     return config;
@@ -41,16 +42,23 @@ request.interceptors.response.use(
     // 对响应数据做点什么
     return response;
 },
-({response}) => {
-    const {status, data} = response; // 获取状态码
-    const{ message } = data; 
+// ({response}) => {
+//     const {status, data} = response; // 获取状态码
+//     const{ message } = data; 
+//     ElMessage.error(message); // 提示错误信息
+//     if (status === 401) router.push('/'); // 跳转到首页
+// },
+// (error) => {  
+//     // 对响应错误做点什么
+//     console.dir(error);
+//     return Promise.reject( error );
+//   }
+(error) => {
+    const { status, data } = error.response; // 获取状态码和响应数据
+    const { message } = data;
     ElMessage.error(message); // 提示错误信息
     if (status === 401) router.push('/'); // 跳转到首页
-},
-(error) => {  
-    // 对响应错误做点什么
-    console.dir(error);
-    return Promise.reject( error );
+    return Promise.reject(error);
   }
 
 );

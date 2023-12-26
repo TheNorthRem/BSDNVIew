@@ -12,6 +12,10 @@ const routes = [
         meta: { authRequired: true },
     },
     {
+        path: '/visualization',
+        component: () => import('../views/visualization')
+    },
+    {
         path: '/category',
         component: () => import('../views/category')
     },
