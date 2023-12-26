@@ -6,8 +6,7 @@
         <ul>
           <li><a href="#/">🏠首页</a></li>
           <li><a href="#">博客</a></li>
-          <li><a href="https://www.csdn.net/">社区</a></li>
-          <li><a href="https://www.icourse163.org/">学习</a></li>
+          <li><a href="#/visualization">可视化分析</a></li>
           <div class="dropdown">
             <a href="#/category" class="dropbtn">文章分类</a>
           </div>
